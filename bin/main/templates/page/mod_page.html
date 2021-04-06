@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<head>
+		<title>BOARD LIST</title>
+		
+		<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+	</head>
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content">
+			MOD PAGE
+		</section>
+		<!-- FOOTER -->
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>

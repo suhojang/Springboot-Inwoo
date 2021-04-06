@@ -1,0 +1,687 @@
+@charset "utf-8";
+
+.dv-conts-wrap{max-width:1200px;width:100%;margin:0 auto;overflow:hidden}
+.panel{margin:0 !important; border:none !important; background:none !important;box-shadow: none !important;}
+/*인우코퍼레이션*/
+#inwoo_c{position:relative;font-size:1.8rem;color:#666}
+#inwoo_c .cont .txt h3{font-size:4rem;color:#222;letter-spacing:-2px;line-height: 1.4;margin-bottom: 25px;}
+#inwoo_c .cont1{position:relative;overflow:hidden;padding:100px 0px;max-width:1200px;width:100%;margin:0 auto;}
+#inwoo_c .cont1 img{float:left;margin-left: 40px;}
+#inwoo_c .cont1 .txt{float:right;width:45%;padding: 120px 0 0 0;margin-right: 80px;font-size:1.8rem;line-height: 26px;}
+#inwoo_c .bg_txt{position:absolute;top:270px;left:-5px;font-size:14rem;color:rgba(34,34,34,.1);font-family: 'Roboto';font-weight:700;}
+#inwoo_c .cont2{width: 100%; background:url('../../images/sub/inwoo_bg.jpg') no-repeat}
+#inwoo_c .cont2 .txt{max-width:1200px;width:100%;margin:0 auto;padding: 216px 0;}
+#inwoo_c .cont3{margin-top:100px;padding-top: 492px;background:url('../../images/sub/inwoo_bg2.jpg') top center no-repeat}
+#inwoo_c .cont3 .s_txt{max-width: 1200px;width: 100%;margin: 0 auto;line-height:26px;background: #fff;}
+#inwoo_c .cont3 .s_txt > div{padding: 60px 40px 150px;font-size: 1.7rem;word-wrap: break-word;word-break: keep-all;}
+
+/*대표인사말*/
+#Greeting{position:relative;font-size:1.8rem;color:#666}
+#Greeting:before{position:absolute;display:block;content:"";width:428px;height:317px;background:url('../../images/sub/greeting_logo.png') no-repeat;right:0;top: 25px}
+#Greeting:after{display:block;content:"";width:100%;height:100%;background:#f8f8f8;top:513px;0;z-index: -1;position:absolute;}
+#Greeting .gr_tit{position:relative;overflow:hidden;padding:100px 0px;max-width:1200px;width:100%;margin:0 auto;font-size:3.6rem;color:#222;font-weight: 300;letter-spacing:-2px;line-height: 1.5;}
+#Greeting .gr_tit span{font-weight:700}
+#Greeting .wrap{max-width:1400px;width:100%;margin:0 auto;}
+#Greeting .s_txt{width:100%;max-width:1200px;margin:80px auto 150px;line-height: 26px;}
+#Greeting .bg{position:relative;width:100%;height:350px;background:url('../../images/sub/greeting_bg.jpg') top center no-repeat}
+#Greeting .bg span{position:absolute;left:150px;top:-50px;display:block;width:2px;height:98px;background:#00a0df}
+
+/*연혁*/
+#History{position:relative;font-size:1.8rem;padding-bottom:150px;}
+#History .cont_wrap{position: relative}
+#History .tab{overflow:hidden;max-width:700px;margin:100px auto 80px;}
+#History .tab li{width:50%;line-height: 50px;box-sizing: border-box;float:left;background:#fff;border:1px solid #ddd;;text-align:center;transition:all .3s}
+#History .tab li:hover{background:#00a0df;}
+#History .tab li:hover a{color:#fff}
+#History .tab li:nth-child(2){margin-left:-1px;}
+#History .tab li a{display:block;font-size:1.8rem;color:#999}
+#History .tab > li a.selected{color:#fff;font-weight: 500;cursor:default;background:#00a0df}
+#History .panel li > div:before{display:block;position:absolute;content:"HISTORY";color:#f0f0f0;font-size:15rem;font-family: 'Roboto';font-weight:700;top: 0;
+z-index: -1;letter-spacing: 10px;left: 50%;margin-left: -330px}
+#History img{display:block;width:150px;margin:0 auto;box-shadow: 6px 8px 9px #c3c3c3;border-radius: 100%;}
+#History span.line{position:absolute;right:50%;display:block;content:"";width:1px;height:100%;background:#ddd;}
+#History dl{position:relative;width:45%;text-align:right;padding-top:5%;}
+#History dl.left{padding-top: 200px;}
+#History dl.right{float:right;text-align:left;}
+#History dl.right:before{display:block;position:absolute;left:-12%;top:80px;width:8px;height:8px;border-radius:100%;content:"";background:#00a0df}
+#History dl.left:after{display:block;position:absolute;right: -12%;top: 215px;;width:8px;height:8px;border-radius:100%;content:"";background:#00a0df}
+#History dl dt{margin-bottom:15px;font-size:3.5rem;color:#222;font-family: 'Roboto';font-weight:700;letter-spacing:-1.4px;}
+#History dl.right dd:before{display:inline-block;content:"";width:5px;height:5px;margin:0 5px 5px 0;background:#bebebe}
+#History dl.left dd:after{display:inline-block;content:"";width:5px;height:5px;margin:0 0 5px 5px;background:#bebebe}
+
+/*찾아오시는길*/
+#location{margin-top:90px;font-size:1.8rem;}
+#location ul{overflow:hidden;width:100%;margin: 50px auto 100px;}
+#location ul li{float:left;width:23.5%;height:319px;margin-right:2%;background:#f0f0f0;transition:all .3s;color:#222;text-align:center;padding: 0 10px;}
+#location ul li:hover{color:#fff;background:#0074c8}
+#location ul li:last-child{margin-right:0}
+#location ul li p{padding:15px 0;font-size:2rem;font-weight:700}
+#location ul li img{margin-top:35px}
+
+/*인재구인*/
+#Joboffer{width:100%;margin:0 auto;}
+#Joboffer .tab{overflow:hidden;max-width:1200px;margin:100px auto 80px;}
+#Joboffer .tab li{width:24.85%;line-height: 50px;float:left;background:#fff;border:1px solid #ddd;;text-align:center;transition:all .3s}
+#Joboffer .tab li:hover{background:#00a0df;}
+#Joboffer .tab li:hover a{color:#fff}
+#Joboffer .tab li:nth-child(2),#Joboffer .tab li:nth-child(3),#Joboffer .tab li:nth-child(4),#Joboffer .tab li:nth-child(5){margin-left:-1px;}
+#Joboffer .tab li a{display:block;font-size:1.8rem;color:#999}
+#Joboffer .tab > li a.selected{color:#fff;font-weight: 500;cursor:default;background:#00a0df}
+#Joboffer .e_tit{font-size:1.8rem;letter-spacing:2px;color:#0074c8;text-transform:uppercase;font-family: 'Roboto';font-weight:500;padding-bottom: 27px;}
+#Joboffer .b_tit{font-size:4rem;color:#222;letter-spacing:-1.4px;font-weight:700;}
+#Joboffer #tab1 .vision{width:100%;position:relative;z-index:2}
+#Joboffer #tab1 .vision:after{position:absolute;right:0;top:0;z-index:-1;display:block;content:"";width:1254px;height:350px;background:url('../../images/sub/vision_img.jpg') no-repeat right top}
+#Joboffer #tab1 .vision .txt{padding-top: 60px;max-width:1200px;margin:0 auto;z-index:100;}
+#Joboffer #tab1 .vision_2{padding: 175px 0;margin-top: 55px;width:100%;position:relative;background:#f8f8f8}
+#Joboffer #tab1 .vision_2 .div_wrap{max-width:1200px;width:100%;margin:0 auto;}
+#Joboffer #tab1 .vision_2 .div_wrap{overflow:hidden;}
+#Joboffer #tab1 .vision_2 .div_wrap > div{position:relative;height: 400px;font-size:1.8rem;padding:90px 25px;box-sizing: border-box;float:left;width:32%;background:#fff;margin-right:20px;text-align:center;}
+#Joboffer #tab1 .vision_2 .div_wrap > div:last-child{margin-right:0}
+#Joboffer #tab1 .vision_2 .div_wrap > div h4{margin-bottom: 87px;font-size:3rem;color:#222;line-height: 40px;}
+#Joboffer #tab1 .vision_2 .div_wrap > div:first-child:before{top: 10px;left:33%;letter-spacing: -5.5px;position:absolute;z-index:0;color:#00a0df;opacity:.1;display:block;content:"01";font-family: 'Roboto';font-size:13rem;font-weight:700;}
+#Joboffer #tab1 .vision_2 .div_wrap > div:nth-child(2):before{top: 10px;left:33%;letter-spacing: -5.5px;position:absolute;z-index:0;color:#00a0df;opacity:.1;display:block;content:"02";font-family: 'Roboto';font-size:13rem;font-weight:700;}
+#Joboffer #tab1 .vision_2 .div_wrap > div:nth-child(3):before{top: 10px;left:33%;letter-spacing: -5.5px;position:absolute;z-index:0;color:#00a0df;opacity:.1;display:block;content:"03";font-family: 'Roboto';font-size:13rem;font-weight:700;}
+#Joboffer #tab1 .vision_2 .div_wrap > div:nth-child(3) h4{margin-bottom:45px}
+#Joboffer #tab2{position:relative;width:100%;margin:0 auto;font-size:1.8rem}
+#Joboffer #tab2 .talent{max-width: 1400px;width: 100%;margin: 0 auto}
+#Joboffer #tab2 .talent .e_tit{padding-left:100px;}
+#Joboffer #tab2 .talent .b_tit{padding-left:100px;}
+#Joboffer #tab2 .talent img{margin-top:50px;}
+#Joboffer #tab2 .talent_wrap{margin-top:120px}
+#Joboffer #tab2 .talent_wrap .talent_list{overflow:hidden;max-width:1200px;margin:0 auto;padding-bottom: 70px;}
+#Joboffer #tab2 .talent_wrap .talent_list img{float:left;margin-right: 70px;}
+#Joboffer #tab2 .talent_wrap .talent_list .txt{float:left;width:40%;}
+#Joboffer #tab2 .talent_wrap .talent_list .txt .num{font-size:9rem;color:rgba(0,160,223,.2);font-family: 'Roboto';font-style: italic;letter-spacing: -1.4px;}
+#Joboffer #tab2 .talent_wrap .talent_list .txt .tit{font-size:3.6rem;color:#222;font-weight:700;letter-spacing: -1.4px;}
+#Joboffer #tab2 .talent_wrap .talent_list .txt .tit:after{display:block;content:"";width:2px;height:45px;background:#ddd;margin: 18px 0;}
+#Joboffer #tab2 .talent_wrap .talent_list .txt .s_tit{padding-bottom:20px;font-size:2.4rem;font-weight:500;line-height: 32px;color:#222;letter-spacing: -1.4px;}
+#Joboffer #tab2 .talent_wrap .right{text-align:right}
+#Joboffer #tab2 .talent_wrap .right img{float:right;}
+#Joboffer #tab2 .talent_wrap .right .txt{float:left}
+#Joboffer #tab2 .talent_wrap .right .txt .tit:after{display:block;content:"";width:2px;height:45px;background:#ddd;margin: 18px 0 18px 475px;}
+#Joboffer #tab3{position:relative;width:100%;margin:0 auto;}
+#Joboffer #tab3 .benefit{position:relative;width:100%;padding-bottom: 155px;background:url('../../images/sub/benefit_logo.png') no-repeat 41% 120px;}
+#Joboffer #tab3 .benefit:after{position:absolute;content:"";right:0;top:50px;display:block;width:44%;z-index:-1;height:430px;background:#f8f8f8}
+#Joboffer #tab3 .benefit > div{overflow:hidden;max-width:1200px;margin:0 auto}
+#Joboffer #tab3 .benefit .txt{float:left;padding-top: 75px;}
+#Joboffer #tab3 .benefit img{float:right;}
+#Joboffer #tab3 .benefit_list{overflow:hidden;max-width:1200px;margin:0 auto 100px;}
+#Joboffer #tab3 .benefit_list > div{float:left;width:386px;margin-right:20px;font-size:1.8rem;color:#666;margin-bottom: 55px;}
+#Joboffer #tab3 .benefit_list > div.last{margin-right:0}
+#Joboffer #tab3 .benefit_list .img_box{height:270px;text-align:center;margin-bottom: 15px;}
+#Joboffer #tab3 .benefit_list .img_box p{color:#fff;font-size:2.6rem;font-weight:700;}
+#Joboffer #tab3 .benefit_list .img_box img{margin: 61px 0 10px 0}
+#Joboffer #tab3 .benefit_list .b1{background:url('../../images/sub/benefit_list1.jpg') no-repeat}
+#Joboffer #tab3 .benefit_list .b2{background:url('../../images/sub/benefit_list2.jpg') no-repeat}
+#Joboffer #tab3 .benefit_list .b3{background:url('../../images/sub/benefit_list3.jpg') no-repeat}
+#Joboffer #tab3 .benefit_list .b4{background:url('../../images/sub/benefit_list4.jpg') no-repeat}
+#Joboffer #tab3 .benefit_list .b5{background:url('../../images/sub/benefit_list5.jpg') no-repeat}
+#Joboffer #tab3 .benefit_list .b6{background:url('../../images/sub/benefit_list6.jpg') no-repeat}
+#Joboffer #tab4{text-align:center;font-size:2rem;color:#666}
+#Joboffer #tab4 .b_tit{padding-bottom:20px;font-size:3.2rem;color:#222;letter-spacing:-1.4px;font-weight:700;}
+#Joboffer #tab4 .s_txt{font-size:1.8rem;}
+#Joboffer #tab4 .s_txt span{color:#0074c8}
+#Joboffer #tab4 .img_wrap{overflow:hidden;max-width:1072px;width:100%;margin: 80px auto 30px;}
+#Joboffer #tab4 .img_wrap > div{float:left;position: relative;max-width:200px;max-height:200px;width:100%;height:100%;border: 1px solid #ddd;line-height:58px;border-radius: 100%;margin-right:8%}
+#Joboffer #tab4 .img_wrap > div:after{position:absolute;top:50%;left:220px;display:inline-block;width:50px;height:13px;content:"";background:url('../../images/sub/job_arr.png') no-repeat}
+#Joboffer #tab4 .img_wrap > div p{font-size:1.8rem;color:#222;font-weight:600;}
+#Joboffer #tab4 .img_wrap > div .num{margin-top:13px;color:#0074c8;font-weight:400;}
+#Joboffer #tab4 .img_wrap > div:last-child{margin-right:0;background:#0074c8;}
+#Joboffer #tab4 .img_wrap > div:last-child:after{display:none;}
+#Joboffer #tab4 .img_wrap > div:last-child p{color:#fff;}
+#Joboffer #tab4 .img_wrap_m, #Joboffer #tab4 .img_wrap_m2{display:none;}
+#Joboffer #tab4 .txt{width: 43%;margin: 0 auto;}
+#Joboffer #tab4 a{display:block;width:18%;margin: 100px auto;border:1px solid #0074c8;border-radius:80px;color:#0074c8;font-size:1.8rem;transition:all .3s;line-height: 51px;}
+#Joboffer #tab4 a:hover{color:#fff;background:#0074c8}
+#Joboffer #tab5 #Notice{margin-bottom:65px}
+
+/*rnd-부설연구소*/
+#Rnd_institue{position:relative;font-size:1.8rem;margin-top:100px;}
+#Rnd_institue .wrap{width:100%;position:relative;margin:0 auto}
+#Rnd_institue .wrap:after{display:block;content:"";top:0;z-index:-1;position:absolute;width:49%;height:600px;background:url('../../images/sub/institute_img.jpg')no-repeat;right:0}
+#Rnd_institue .wrap .txt{position: relative;padding-top: 60px;max-width:1200px;margin:0 auto 250px}
+#Rnd_institue .wrap .txt .dot{top:20px;left:-42px;width:80px;height:80px;background:#00a0df;border-radius:100%;line-height: 40px;opacity:.2;position:absolute;}
+#Rnd_institue .wrap h3{width:46%;font-size:3.2rem;color:#222;letter-spacing: -1.4px;line-height: 42px}
+#Rnd_institue .wrap span{width:60%;height:2px;display:block;margin:35px 0;background:#0074c8}
+#Rnd_institue .wrap p{width:45%;line-height: 29px;}
+#Rnd_institue .wrap2{max-width:1200px;width:100%;margin:0 auto;}
+#Rnd_institue .wrap2 h4{margin-bottom:15px;font-size:2.4rem;letter-spacing: -1.1px;line-height: 32px;color:#222;font-weight:600}
+#Rnd_institue .wrap2 table{margin-bottom:80px;width:100%;text-align:center;}
+#Rnd_institue .wrap2 table tr th{font-size:1.8rem;font-weight: 500;padding: 15px;border-right:1px solid #ddd;padding:10px;background:#0074c8;color:#fff;vertical-align: middle;text-align: center;}
+#Rnd_institue .wrap2 table tr td{font-size:1.6rem;padding: 15px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;vertical-align: middle;}
+#Rnd_institue .wrap2 table tr td:last-child{border-right:none}
+#Rnd_institue ul{overflow:hidden;margin: 50px auto 100px;width:100%}
+#Rnd_institue ul li{float:left;width:23.5%;height:319px;padding:0 15px;margin-right:2%;background:#f0f0f0;transition:all .3s;color:#222;text-align:center;}
+#Rnd_institue ul li:hover{color:#fff;background:#0074c8}
+#Rnd_institue ul li:last-child{margin-right:0}
+#Rnd_institue ul li p{padding:15px 0;font-size:2rem;font-weight:700}
+#Rnd_institue ul li img{margin-top:35px}
+
+/*rnd-bio*/
+#Rnd_bio{position:relative;font-size:1.8rem;margin-top:100px;}
+#Rnd_bio .wrap{width:100%;position:relative;text-align:right;}
+#Rnd_bio .wrap:after{display:block;content:"";top:0;z-index:-1;position:absolute;width:49%;height:600px;background:url('../../images/sub/bio_img.jpg')no-repeat;left:0}
+#Rnd_bio .wrap .txt{position: relative;padding-top: 60px;max-width:1200px;width:30%;margin:0 auto 350px;margin-left:53%;}
+#Rnd_bio .wrap .txt .dot{display:none;top:20px;right:-42px;width:80px;height:80px;background:#00a0df;border-radius:100%;line-height: 38px;opacity:.2;position:absolute;}
+#Rnd_bio .wrap h3{font-size:3.2rem;color:#222;letter-spacing: -1.4px;line-height: 42px;}
+#Rnd_bio .wrap span{float:right;width:131%;height:2px;display:block;margin:35px 0;background:#0074c8}
+#Rnd_bio .wrap p{clear:both;line-height: 29px;float:right}
+#Rnd_bio .wrap2{max-width:1200px;width:100%;margin:0 auto;padding-top:7%;}
+#Rnd_bio .wrap2 h4{margin-bottom:15px;font-size:2.4rem;color:#222;font-weight:600}
+#Rnd_bio .wrap2 table{margin-bottom:110px;border-collapse:collapse;width:100%;text-align:center;}
+#Rnd_bio .wrap2 table tr th{font-size:1.8rem;font-weight: 500;padding: 15px;border-right:1px solid #ddd;padding:10px;text-align:center;vertical-align: middle;background:#0074c8;color:#fff;}
+#Rnd_bio .wrap2 table tr td{font-size:1.6rem;padding: 15px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;}
+#Rnd_bio .wrap2 table tr td:last-child{border-right:none}
+#Rnd_bio #propan{padding:100px 0 120px;background:#f8f8f8}
+#Rnd_bio #propan > div{max-width:1200px;width:100%;margin:0 auto;text-align:center;}
+#Rnd_bio #propan .tab{overflow:hidden;max-width:700px;margin:0 auto 80px;}
+#Rnd_bio #propan .tab li{width:50%;line-height: 50px;box-sizing: border-box;float:left;background:#fff;border:1px solid #ddd;;text-align:center;transition:all .3s}
+#Rnd_bio #propan .tab li:hover{background:#00a0df;}
+#Rnd_bio #propan .tab li:hover a{color:#fff}
+#Rnd_bio #propan .tab li:nth-child(2){margin-left:-1px;}
+#Rnd_bio #propan .tab li a{display:block;font-size:1.8rem;color:#999}
+#Rnd_bio #propan .tab > li a.selected{color:#fff;font-weight: 500;cursor:default;background:#00a0df}
+#Rnd_bio #propan .tit{padding-bottom:35px;font-size:3.2rem;line-height:42px;color:#222;font-weight:700;letter-spacing: -1.2px;}
+#Rnd_bio #propan .s_tit{padding: 15px 0;font-size:2rem;color:#0074c8;font-weight:500;}
+#Rnd_bio #propan p{font-size:1.8rem;color:#666;line-height: 27px;}
+#Rnd_bio #propan .box_wrap{overflow:hidden;margin: 50px auto 0;width: 100%;}
+#Rnd_bio #propan .box_wrap1 > div{float:left;width:49%;height:320px;padding: 40px 20px;border:1px solid #ddd;}
+#Rnd_bio #propan .box_wrap1 > div:first-child{margin-right:2%;}
+#Rnd_bio #propan table{width:100%;margin-bottom:80px;border-top:2px solid #0074c8}
+#Rnd_bio #propan table tr{border-bottom:1px solid #ddd}
+#Rnd_bio #propan table tr th{border-right:1px solid #ddd;padding:15px;border-left:1px solid #ddd}
+#Rnd_bio #propan table tr th:first-child{border-left:none;}
+#Rnd_bio #propan table tr td{text-align:left;background:#fff;padding:15px}
+#Rnd_bio #propan .s_txt{padding: 0 115px 0}
+#Rnd_bio #propan .s_txt span{display:block;margin-top:5px;color:#999;font-size:1.6rem;}
+#Rnd_bio #propan .img_wrap{margin-top:70px;width:100%;overflow:hidden;border:none !important}
+#Rnd_bio #propan .img_wrap > div{float:left;width:49% ;margin:0 2% 30px 0;text-align:center;}
+#Rnd_bio #propan .img_wrap > div.last{margin-right: 0}
+#Rnd_bio #propan .img_wrap > div p{margin-top:15px;font-size:2rem;color:#222;font-family: 'Roboto';}
+#Rnd_bio #propan .box{margin-top:80px}
+#Rnd_bio #propan .box1{margin-top:0}
+#Rnd_bio #propan .box1 img{margin-bottom:30px}
+
+/*eco*/
+#Eco{position:relative;font-size:1.8rem;margin-top:100px;}
+#Eco .wrap{width:100%;position:relative}
+#Eco .wrap:after{display:block;content:"";top:0;z-index:-1;position:absolute;width:49%;height:600px;background:url('../../images/sub/eco_img.jpg')no-repeat;left:0;background-position: center 0;}
+#Eco .wrap .txt{position: relative;padding-top: 60px;max-width:1200px;margin:0 auto 350px;text-align:left;}
+#Eco .wrap .txt .dot{display:none;top:27px;right:23%;width:80px;height:80px;background:#00a0df;border-radius:100%;line-height: 40px;opacity:.2;position:absolute;}
+#Eco .wrap h3{margin-left:54%;font-size:3.2rem;color:#222;letter-spacing: -1.4px;line-height:40px;}
+#Eco .wrap span{float:right;width:60%;height:2px;display:block;margin:35px 0;background:#0074c8}
+#Eco .wrap p{margin-left:54%;clear:both;line-height: 29px;}
+#Eco .wrap2{max-width:1200px;width:100%;margin:0 auto;}
+#Eco .wrap2 h4{margin-bottom:15px;font-size:2.4rem;color:#222;font-weight:600}
+#Eco .wrap2 table{margin-bottom:110px;border-collapse:collapse;width:100%;text-align:center;}
+#Eco .wrap2 table tr th{font-size:1.8rem;font-weight: 500;padding: 15px;border-right:1px solid #ddd;padding:10px;vertical-align:middle;background:#0074c8;color:#fff;text-align: center;}
+#Eco .wrap2 table tr td{font-size:1.6rem;padding: 15px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;vertical-align: middle;}
+#Eco .wrap2 table tr td:last-child{border-right:none}
+#Eco #ozon{padding:100px 0 120px;background:#f8f8f8}
+#Eco #ozon > div{max-width:1200px;width:100%;margin:0 auto;text-align:center;}
+#Eco #ozon .tab{overflow:hidden;margin:0 auto 80px;}
+#Eco #ozon .tab li{width:33%;line-height: 50px;box-sizing: border-box;float:left;background:#fff;border:1px solid #ddd;;text-align:center;transition:all .3s}
+#Eco #ozon .tab li:hover{background:#00a0df;}
+#Eco #ozon .tab li:hover a{color:#fff}
+#Eco #ozon .tab li:nth-child(2),#Eco #ozon .tab li:nth-child(3){margin-left:-1px;}
+#Eco #ozon .tab li a{display:block;font-size:1.7rem;color:#999}
+#Eco #ozon .tab > li a.selected{color:#fff;font-weight: 500;cursor:default;background:#00a0df}
+#Eco #ozon .tit{padding-bottom:25px;font-size:3.2rem;line-height:40px;letter-spacing:-1.2px;color:#222;font-weight:700;}
+#Eco #ozon .s_tit{padding: 15px 0;font-size:2rem;color:#0074c8;font-weight:500;}
+#Eco #ozon p{font-size:1.8rem;color:#666;line-height: 27px;}
+#Eco #ozon .pri_wrap p{text-align: center;}
+#Eco #ozon .box{margin-bottom:80px;}
+#Eco #ozon .img_wrap{width:100%;overflow:hidden;text-align:left}
+#Eco #ozon .img_wrap > div{float:left;width:49% ;margin:0 2% 50px 0 !important;}
+#Eco #ozon .img_wrap .ri{margin-right:0 !important}
+#Eco #ozon .img_wrap > div p{margin-top:15px;font-size:2.5rem;color:#222;line-height: 32px;font-weight:500}
+#Eco #ozon .img_wrap > div p:after{display:block;content:"";margin:15px 0;width:20px;height:2px;background:#0074c8}
+#Eco .Thum{overflow:hidden;padding-top:30px;font-size:1.6rem;}
+#Eco .Thum .thum_wrap{float:left;width:23.5%;margin-right:22px;text-align:left;}
+#Eco .Thum .thum_wrap .thum{position:relative;height:200px;margin-bottom:20px;}
+#Eco .Thum .thum_wrap p{font-size:1.6rem !important;margin-bottom: 3px;}
+#Eco .Thum .thum_wrap p:before{display:inline-block;width:3px;height:3px;background:#666;content:"";margin:0 5px 5px 0;}
+#Eco .Thum .thum_wrap .thum p{left:9%;top:-29px;position:absolute;color:#fff !important;font-size:1.8rem !important;display: block;background:#0074c8;width: 80%;margin: 0 auto 0;padding: 15px; text-align:center;border-radius: 50px;}
+#Eco .Thum .thum_wrap .thum p:before{display:none;}
+#Eco .Thum .thum_wrap:nth-child(1) .thum{background:url('../../images/sub/eco_th1.jpg') no-repeat;}
+#Eco .Thum .thum_wrap:nth-child(2) .thum{background:url('../../images/sub/eco_th2.jpg') no-repeat;}
+#Eco .Thum .thum_wrap:nth-child(3) .thum{background:url('../../images/sub/eco_th3.jpg') no-repeat;}
+#Eco .Thum .thum_wrap:nth-child(4) .thum{background:url('../../images/sub/eco_th4.jpg') no-repeat;}
+#Eco .Thum .thum_wrap:last-child{margin-right:0;}
+#Eco .pri_wrap{width: 100%;overflow:hidden;margin:50px 0 10px 0}
+#Eco .pri_wrap > div{position:relative;float:left;width:32%;height:352px;padding:40px 35px;margin-right:2%;border:1px solid #0074c8;line-height: 32px;background:url('../../images/sub/bg_logo.png') 119% 115% #fff no-repeat}
+#Eco .pri_wrap > div h4{font-size:2.4rem;line-height:32px;text-align:center;color:#222;font-weight:400;margin-bottom: 35px;}
+#Eco .pri_wrap > div p{text-align:left;margin-bottom:3px;}
+#Eco .pri_wrap > div p:before{display:inline-block;width:3px;height:3px;background:#666;content:"";margin:0 5px 5px 0;}
+#Eco .pri_wrap > div span{color:#0074c8;font-weight:600}
+#Eco .pri_wrap > div:before{top: 42%;left: 95.5%;z-index: 1;display:block;position:absolute;width:60px;height:60px;content:"";background:url('../../images/sub/eco_arr.png')  no-repeat }
+#Eco .pri_wrap .sec p {}
+#Eco .pri_wrap .last{background:#0074c8;padding: 110px 35px;margin-right: 0;}
+#Eco .pri_wrap .last:before{display:none;}
+#Eco .pri_wrap .last h4{color:#fff;}
+#Eco .principleimg{max-widht:1200px;width:100%;background:#fff;}
+#Eco .ss_tit{color:#222 !important;text-align:left;font-weight:500;}
+#Eco .ss_tit span{color:#666;font-size:1.6rem;display:block;font-weight:400;}
+.ma{margin-bottom:0 !important}
+#Eco #tab2 .circle_wrap{overflow:hidden;width: 100%;margin: 0 auto;margin: 70px 0;font-size:1.6rem;}
+#Eco #tab2 .circle_wrap_t, #Eco #tab2 .circle_wrap_m{display:none;}
+#Eco #tab2 .kist {overflow:hidden;}
+#Eco #tab2 .kist .tit{text-align:left;font-size:2.4rem;font-weight:500;}
+#Eco #tab2 .kist .s_tit{color:#666;font-size:1.8rem;}
+#Eco #tab2 .kist .s_tit:before{display:none;}
+#Eco #tab2 .kist > div{float:left;border:1px solid #ddd;width:49%;height:380px;margin-right:2%;background:#fff;}
+#Eco #tab2 .kist > div.la{margin-right:0}
+#Eco #tab2 .kist > div img{margin-top:57px}
+#Eco #tab2 .kist > div:last-child img{margin-top:76px}
+#Eco #tab2  h4{margin-bottom:15px;font-size:2.4rem;color:#222;font-weight:600;text-align:left;}
+#Eco #tab3 .box_wrap{overflow:hidden;margin:50px 0 80px;width: 100%;}
+#Eco #tab3 .box_wrap1 > div{float:left;width:49%;height:320px;font-weight:400;padding: 40px 10px;border:1px solid #ddd;line-height: 25px;}
+#Eco #tab3 .box_wrap1 > div:first-child{margin-right:2%}
+#Eco #tab3  h4{margin-bottom:15px;font-size:2.4rem;color:#222;font-weight:600;text-align:left;}
+#Eco table.ta {width:100%;margin-bottom:80px;text-align:center;font-size:1.6rem;font-weight:400;}
+#Eco table.ta tr{border-bottom:1px solid #ddd}
+#Eco table.ta tr:last-child{border-bottom:none;}
+#Eco table.ta tr th{border-right:1px solid #ddd;padding:15px;color:#fff;font-size:1.8rem;font-weight: 500; background:#0074c8;text-align: center;vertical-align: middle;}
+#Eco table.ta tr th:first-child{border-left:none;}
+#Eco table.ta tr td{border-right:1px solid #ddd;background:#fff;padding:15px;vertical-align: middle;}
+#Eco table.ta tr td:last-child{border-right:none}
+
+/*월드 파트너*/
+#World{position:relative;font-size:1.8rem;margin-top:100px;}
+#World .tit_wrap{text-align:center;font-size: 2rem;color: #666;}
+#World .tit_wrap h3{width:41%;font-size:3.6rem;color: #222;font-weight: 400;letter-spacing: -1.4px;margin: 100px auto 30px;line-height: 41px;}
+#World .tit_wrap h3 span{color:#0074c8;font-weight: 600;}
+#World .tit_wrap:after{position: relative;z-index: -1;display:block;content: "WORLD PARTNER";color:rgba(0,116,200,.05);letter-spacing:-2px;font-size:15rem;font-family: 'Roboto';font-weight:700;}
+.partner-1 {background:#e0e0e0; padding:100px 0;  text-align:center;margin-top: -70px;}
+.partner-1 h2 {font-size:42px; color:#fff; font-weight:500;padding-bottom:20px;}
+.partner-1 p {font-size:18px; color:#fff; }
+.map-img {width:100%; max-width:1200px; margin:0 auto; position:relative; }
+.map-img img {display:block; max-width:100%; margin:0 auto;}
+.map-img:before {position:absolute; content:''; width:100%; height:100%; opacity:0; top:0; left:0; display:block; filter: alpha(opacity=0); -webkit-transition: 500ms ease; -moz-transition: 500ms ease;
+    -o-transition: 500ms ease;  transition: 500ms ease;  visibility: hidden;background:rgba(0,0,0,0);		}
+.map-img.img-1:before { width:100%; height:100%;  visibility: visible; filter: alpha(opacity=100); opacity:1; background:url(../../images/sub/partner-img-2.png) no-repeat;background-size:cover;}
+.map-img.img-2:before { width:100%; height:100%;  visibility: visible; filter: alpha(opacity=100); opacity:1; background:url(../../images/sub/partner-img-3.png) no-repeat;background-size:cover;}
+.map-img.img-3:before { width:100%; height:100%;  visibility: visible; filter: alpha(opacity=100); opacity:1; background:url(../../images/sub/partner-img-4.png) no-repeat;background-size:cover;}
+.map-img.img-4:before { width:100%; height:100%;  visibility: visible; filter: alpha(opacity=100); opacity:1; background:url(../../images/sub/partner-img-5.png) no-repeat;background-size:cover;}
+.map-img.img-5:before { width:100%; height:100%;  visibility: visible; filter: alpha(opacity=100); opacity:1; background:url(../../images/sub/partner-img-6.png) no-repeat;background-size:cover;}
+.map-img.img-6:before { width:100%; height:100%;  visibility: visible; filter: alpha(opacity=100); opacity:1; background:url(../../images/sub/partner-img-7.png) no-repeat;background-size:cover;}
+.map-img.img-7:before { width:100%; height:100%;  visibility: visible; filter: alpha(opacity=100); opacity:1; background:url(../../images/sub/partner-img-8.png) no-repeat;background-size:cover;}
+.partner-tab {display:none;}
+.m-menu {list-style:none;}
+.m-title {display:none; position:relative;}
+.m-title.tt-1, .m-title.tt-2, .m-title.tt-3, .m-title.tt-4, .m-title.tt-5, .m-title.tt-6 {font-size:0;}
+.m-title:after {position:absolute; width:100%; height:100%; top:0; left:0; box-sizing:border-box; padding:0 20px; line-height:30px; color:#000; font-size:15px;}
+.m-title.tt-1:after {content:'유럽';}
+.m-title.tt-2:after {content:'아시아';}
+.m-title.tt-3:after {content:'북아메리카';}
+.m-title.tt-4:after {content:'중동';}
+.m-title.tt-5:after {content:'아프리카';}
+.m-title.tt-6:after {content:'오세아니아';}
+.m-title.tt-7:after {content:'남아메리카';}
+.tabs-2 {width:100%; height:100%; top:0; left:0; position:absolute;}
+.tabs-2 li { position:absolute; width:80px; height:80px; color:#fff; font-size:17px; text-align:center; font-weight:300; border-radius:50%; background:rgba(0,75,144,0.9); display:flex; align-items: center; }
+.tabs-2 li p {width:100%; line-height:1.5;}
+.tabs-2 li p span {display:block;}
+.map-img p {color:#a5adb8; font-size:17px; font-weight:500;}
+.over-box {width:100%; height:100%; display:block; position:absolute; top:0; left:0;}
+.over-box li {position:absolute; display:inline-block; border-radius:30px; background:#fff; border:2px solid #c1cad6; box-shadow: 4px 4px 8px 3px rgba(0,0,0,0.1);-webkit-transition:all 0.4s ease;transition:all 0.4s ease;-moz-transition:all 0.4s ease;}
+.over-box li a{display:block; padding:10px 15px; }
+.over-box li:hover, .over-box li.active { border-color:#004b90;}
+.over-box li:hover p, .over-box li.active p{color:#004b90; }
+.over-box li.mark-1 {top:20%; left:12%;}
+.over-box li.mark-2 {top:35%; left:28%;}
+.over-box li.mark-3 {top:25%; left:70%;}
+.over-box li.mark-4 {top:42%; left:18%;}
+.over-box li.mark-5 {top:56%; left:8%;}
+.over-box li.mark-6 {top:80%; left:36%;}
+.over-box li.mark-7 {top:72%; left:78%;}
+
+
+.logo-boxc{box-shadow: 2px 2px 5px rgba(0,0,0,.15);}
+.mark1-logo-box{z-index:10;display:none;position:absolute;width:180px;left: -62px;top: 46px;background: #ffff;}
+.over-box .mark-1:hover .mark1-logo-box{display:block}
+
+.mark2-logo-box{z-index:10;display:none;position:absolute;width:180px;left: -53px;top: 46px;background: #ffff;}
+.over-box .mark-2:hover .mark2-logo-box{display:block;opacity:1}
+
+.mark3-logo-box{z-index:10;display:none;position:absolute;width:180px;left: -37px;top: 46px;background: #ffff;}
+.over-box .mark-3:hover .mark3-logo-box{display:block}
+
+.mark4-logo-box{z-index:10;display:none;position:absolute;width:180px;left:-59px;top: 46px;background: #ffff;}
+.over-box .mark-4:hover .mark4-logo-box{display:block}
+
+.mark5-logo-box{z-index:10;display:none;position:absolute;width:180px;left:-48px;top: 46px;background: #ffff;}
+.over-box .mark-5:hover .mark5-logo-box{display:block}
+
+.mark6-logo-box{z-index:10;display:none;position:absolute;width:180px;left:-48px;top: 46px;background: #ffff;}
+.over-box .mark-6:hover .mark6-logo-box{display:block}
+
+.mark7-logo-box{z-index:10;display:none;position:absolute;width:180px;left:-35px;top: 46px;background: #ffff;}
+.over-box .mark-7:hover .mark7-logo-box{display:block}
+
+.tabs-2 .active {background:rgba(0,150,255,0.9);}
+.tabs-2 li input {background:none; border:0; display:none;}
+.partner-2 {position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+    z-index: 100000;
+    width: 100%;
+    height: 100%;
+}
+
+.partner-2.active {
+    opacity: 1;
+    visibility: visible;
+}
+.partner-2:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.country-cont {width:100%; max-width:1200px; height:90%; max-height:800px; position:absolute;  top:50%; left:50%; transform:translate(-50%, -50%); overflow:hidden;  background:#fff; padding:50px 40px 50px 50px; box-sizing:border-box;border:2px solid #000;}
+.country-cont ul {height:90%; overflow:hidden;}
+.pop-title {font-size:4rem; color:#000; font-weight:400; padding-bottom:40px; line-height:1; text-align:center; padding-right:10px;}
+.box-body {width:100%; height:calc(100% - 130px); overflow-Y:auto; box-sizing:border-box; padding-right:10px;    max-height: 550px;}
+.partner-box {width:23.5%; float:left; margin-right:2%; margin-bottom:2%; }
+.partner-box img {display:block; max-width:100%;box-sizing:border-box; border:1px solid #eaeaea;}
+.partner-box:nth-child(4n) {margin-right:0;}
+.partner-box:nth-last-child(-n+3) {margin-bottom:0;}
+.partner-box p {font-size:15px; color:#404040; text-align:center; padding-top:15px; line-height:24px; height:48px; }
+.pop_close a{
+	position: absolute;
+	top:30px;
+	right:30px;
+	width: 30px;
+	height: 30px;
+	background: #fff;
+	color: #00548a;
+	text-align: center;
+	cursor: pointer;
+}
+.pop_close a:after {content:''; width:35px; height:1px; top:15px; background:#231f20; display:block; transform:rotate(45deg); }
+.pop_close a:before {content:''; width:35px; height:1px; margin-top:15px; background:#231f20; display:block; transform:rotate(-45deg); }
+.pop_close a:hover{}
+
+
+
+ul.country-tabs {
+	width:100%; max-width:1200px; margin:0 auto;
+	padding-bottom: 50px;
+	overflow:hidden;
+	display:block;
+	clear:both;
+}
+ul.country-tabs li{
+   float:left;
+   border-top:1px solid #ddd;
+   border-left:1px solid #ddd;
+   border-bottom:1px solid #ddd;
+   display:inline-block;
+   box-sizing:border-box;
+   text-align:center;
+    line-height:1.5;
+
+}
+ul.country-tabs li:only-child { width: 100%; }                          /* 메뉴가 하나일 때 선택 */
+ul.country-tabs li:first-child:nth-last-child(2),                       /* 메뉴가 둘 일 때, 1번 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(2)+li { width: 50%;  }     /* 메뉴가 둘 일 때, 2번 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(3),                       /* 메뉴가 셋 일 때, 1번 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(3)~li { width: 33.33%; }  /* 메뉴가 셋 일 때, 2~3번째 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(4),                       /* 메뉴가 넷 일 때, 1번 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(4)~li { width: 25%; }     /* 메뉴가 넷 일 때, 2~4번째 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(5),                       /* 메뉴가 넷 일 때, 1번 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(5)~li { width: 20%; }     /* 메뉴가 넷 일 때, 2~4번째 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(6),                       /* 메뉴가 넷 일 때, 1번 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(6)~li { width: 16.666%; }     /* 메뉴가 넷 일 때, 2~4번째 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(7),                       /* 메뉴가 넷 일 때, 1번 메뉴 선택 */
+ul.country-tabs li:first-child:nth-last-child(7)~li { width: 14.285%; }     /* 메뉴가 넷 일 때, 2~4번째 메뉴 선택 */
+ul.country-tabs li a {width:100%; height:100%; padding:19px; font-size:20px;  color:#404040; display:block;box-sizing:border-box; line-height:1.5; }
+ul.country-tabs li a span {display:inline; line-height:1.5; }
+ul.country-tabs li:last-child {border-right:1px solid #ddd;}
+ul.country-tabs li.active a { color:#fff;background:#004b90;}
+.partner-2 .tab{width:100%;border-bottom: 1px solid #222;margin-bottom: 40px;}
+.partner-2 .tab li{float:left;width: 25%;text-align: center;border:1px solid #ddd;border-bottom: none;border-right:none}
+.partner-2 .tab li a{display:block;font-size: 1.8rem;color:#222;line-height: 54px;}
+.partner-2 .tab li a.selected{border:1px solid #222;border-bottom: none;}
+.partner-2 .tab li:last-child{border-right: 1px solid #ddd;}
+.partner-2 .panel li{overflow:hidden}
+.partner-2 .panel li .logo{float:left;width:49%;margin:0 2% 2% 0;border:1px solid #ddd;text-align: center;}
+.partner-2 .panel li > div p{display:block;background:#f8f8f8;padding: 15px;font-size: 1.6rem;}
+.partner-2 .panel li > div p span{display:block;font-size: 1.5rem;color:#222;font-weight:600;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-family: 'Roboto';}
+.partner-2 .panel li > div .img{line-height: 155px;text-align: center;display: inline-block;height: 155px;}
+.partner-2 .panel li > div .img img{vertical-align: middle;}
+.partner-2 .last{margin-right:0 !important}
+.panel_wrap{height: calc(100% - 130px);overflow-Y: auto;box-sizing: border-box;padding-right: 10px;max-height: 550px;}
+
+/* prevent Print */
+@media print {
+  .cer-pop.active { display: none; }
+  .cer-box { display:none; }
+}
+
+/* media size setting start */
+@media screen and (max-width:1430px) {		
+    #World .tit_wrap h3{width: 61%;}
+    #Rnd_bio .wrap .txt{margin-bottom:450px;}
+}
+
+@media screen and (max-width:1200px) {	
+	#Rnd_institue .wrap2, #Rnd_bio .wrap2{width:90%;}
+	#Rnd_institue .wrap2 .over, #Rnd_bio .wrap2 > div ,#Eco .wrap2{overflow: hidden;overflow-x: scroll;}
+	#Greeting .gr_tit{width:95%;font-size:2.8rem}
+	#Greeting .s_txt{width:95%}
+	#inwoo_c .cont1 img{float: none}
+	#inwoo_c .bg_txt{left:40%}
+	#inwoo_c .cont1 .txt{float:none;width:unset;margin-right: 0}
+	#inwoo_c .cont2{background-position:center}
+	#inwoo_c .cont3 .s_txt > div{padding: 60px 20px 90px}
+	.dv-conts-wrap, #inwoo_c .cont1, #inwoo_c .cont2 .txt, #Joboffer .tab, #Rnd_institue .wrap, #Joboffer #tab1 .vision .txt, #Joboffer #tab1 .vision_2 .div_wrap, #Rnd_bio #propan .box_wrap1, #Eco .wrap2, #Eco #ozon > div{width:90%}
+	#Joboffer #tab1 .vision_2 .div_wrap > div{margin-right:2%;font-size: 1.6rem;}
+	#Joboffer #tab1 .vision_2 .div_wrap > div h4{font-size:2.5rem}
+	#Joboffer #tab2 .talent_wrap .talent_list img{width:50%}
+	#Joboffer #tab2 .talent_wrap .talent_list .txt .tit{font-size:3.2rem;margin-bottom: 20px;}
+	#Joboffer #tab2 .talent_wrap .talent_list .txt .tit::after{display:none}
+	#Joboffer #tab2 .talent_wrap .talent_list .txt .num{font-size:5rem}
+	#Joboffer #tab2 .talent_wrap .talent_list .txt, #Eco #ozon p{font-size:1.6rem}
+	#Joboffer #tab3 .benefit_list{width:95%}
+	#Joboffer #tab3 .benefit_list > div{width:32%;margin-right:2%}
+	#Joboffer #tab4 .img_wrap{width:100%;}
+	#Rnd_institue{font-size: 1.6rem}
+	#Rnd_institue .wrap p{line-height: 26px;}
+	#Rnd_institue .wrap::after{background-position:center;background-size: cover;}
+	#Rnd_institue .wrap .txt .dot, #Rnd_bio .wrap .txt .dot{display:none}
+    #Rnd_institue .wrap2 table tr th, #Rnd_institue .wrap2 table tr td{font-size:1.5rem;}
+	#Rnd_bio .wrap .txt{width:39%;}
+	#Rnd_bio #propan .img_wrap > div p{font-size:1.6rem;margin-top:8px}
+	#Rnd_bio #propan .box_wrap1 > div{font-size:1.6rem}
+	#Eco .wrap .txt .dot{display:none;}
+	#Eco .Thum .thum_wrap{width:48%;height:374px;margin:0 4% 6% 0}
+	#Eco .Thum .thum_wrap .thum{background-size: cover !important;}
+	#Eco .Thum .la{margin-right:0}
+	#Eco table.ta{margin:0px auto 0}
+	#Eco #ozon .tab{width: 100%}
+    #Eco .ta_wrap{overflow: hidden;overflow-x: scroll;}
+	#Eco #ozon .tab li a{font-size:1.6rem}
+	#Eco .pri_wrap > div h4{font-size:2rem}
+	#Product_list .list_wrap{padding-top:0}
+	#Product_list .list_wrap .tab li{width:50%}
+	#Product_list .list_wrap .tab li a.selected{border-bottom: none;}
+	#Joboffer #tab4{font-size: 1.6rem;}
+	#Joboffer #tab4 .img_wrap{display: none;}
+	#Joboffer #tab4 .img_wrap_m{display:block;width: 90%;margin: 50px auto 20px}
+	#Joboffer #tab4 .txt{width: 60%}
+	#World .tit_wrap{margin-bottom: 105px}
+	#World .tit_wrap:after{display: none}
+	.partner-1 h2 {font-size:36px;}
+	.tabs-2 li{width:60px; height:60px; font-size:13px;}
+	.tabs-2 li p{font-size:13px;}
+	.partner-box p{font-size:13px;}
+	.over-box {display:none;}
+	.partner-tab {width:100%; display:block;  text-align:left; top:-50px; left:0;border:1px solid #bbb; position:absolute;width:100%; max-width:300px; left:50%; margin-lefT:-150px;  }
+	.partner-tab li {list-style:none;}
+	.partner-tab li.h-menu p { border-bottom:1px solid #bbb; }
+	.partner-tab>li>p {height:30px; font-size:15px; color: #000;box-sizing:border-box; line-height:30px; padding:0 20px; display:block;}
+	.m-title {background:url(../../images/sub/arrow-3.png) center right 20px no-repeat, #fff; }
+	.tabs-2 { display:none; position:relative; width:100%; }
+	.tabs-2 li {position:relative; width:100%; background:#fff; height:30px; border-radius:0; color:#000; display:block;}
+	.tabs-2 li.active {background:#fff; border-radius:0;}
+	.tabs-2 li p {line-height:30px;color:#000; text-align:left;box-sizing:border-box; padding:0 20px; }
+	.tabs-2 li p span {display:inline;line-height:30px;}
+	.tabs-2 li.mark-1, .tabs-2 li.mark-2, .tabs-2 li.mark-3, .tabs-2 li.mark-4, .tabs-2 li.mark-5, .tabs-2 li.mark-6 {top:auto; left:auto;}
+	.pop-title {font-size:34px;}
+	.partner-box {width:48%; margin-bottom:4%;}
+	.partner-box img {margin:0 auto;}
+	.partner-box:nth-child(2n) {margin-right:0;}
+	.partner-box:nth-last-child(3) {margin-bottom:4%;}
+	.partner-box:nth-last-child(-n+2) {margin-bottom:0;}
+	ul.country-tabs li a, #Joboffer #tab4 .s_txt {font-size:16px;}
+	.country-cont{width: 95%;}
+}
+
+@media screen and (max-width:1027px) {	
+	#Eco #ozon .tab li{width:unset;float:none;border:none;border-bottom:1px solid #ddd}
+	#Eco #ozon .tab li:last-child{border-bottom: none;}
+}
+@media screen and (max-width:927px) {
+	#Greeting .gr_tit{width:95%;font-size:2.5rem}
+	#inwoo_c .bg_txt{left:45%}
+	#Joboffer #tab1 .vision_2 .div_wrap > div h4{font-size:2.2rem}
+	#Joboffer #tab1 .vision_2 .div_wrap > div{float:none;height:200px;width:unset;padding: 40px 25px;margin-bottom:15px;margin-right:0}
+	#Joboffer #tab1 .vision_2 .div_wrap > div:before{left: 41% !important}
+	#Joboffer #tab1 .vision_2 .div_wrap > div h4{margin-bottom:10px}
+	#Joboffer #tab1 .vision_2 .div_wrap > div:last-child{height:250px}
+	#Joboffer #tab2 .talent_wrap .talent_list img{width:unset;float:none;margin-right:0}
+	#Joboffer #tab2 .talent_wrap .talent_list .txt{margin: 30px auto 0;width:90%;float:none;text-align:right}
+	#Joboffer #tab2 .talent_wrap .right .txt{text-align:left}
+	#Joboffer #tab3 .benefit_list > div{font-size: 1.6rem;}
+	#Joboffer #tab4 a{width: 31%;font-size:1.6rem}
+    #Eco .Thum .thum_wrap{width:100%;margin-bottom:50px}
+    #Rnd_bio .wrap .txt{}
+    #Rnd_bio .wrap h3{font-size:2.6rem;line-height: 37px;}
+	.ta_common .wrap .txt{margin-bottom:100px}
+	.ta_common ul li{font-size:1.5rem}
+	#Eco #tab2 .circle_wrap_t{display:block}
+	#Eco #tab2 .circle_wrap, #Eco #tab2 .circle_wrap_m{display:none;}
+	#Eco .pri_wrap .last{padding:90px 35px}
+	#Eco .pri_wrap > div h4{font-size:2rem}
+	#Eco #ozon p{font-size:1.5rem;line-height: 23px;}
+	#Eco #ozon .img_wrap > div p{font-size: 2rem;}
+    #Eco .pri_wrap > div{float:none;width:100%;height: 260px;margin-bottom: 20px}
+    #Eco .pri_wrap > div.sec{height:303px}
+    #Eco .pri_wrap > div:before, #Eco .wrap .txt .dot{display:none}    
+    #Eco #tab3 > div{overflow: hidden;overflow-x: scroll;}
+	#Rnd_institue ul li, #location ul li{width: 49%;margin-bottom: 15px;}
+	#Rnd_institue ul li:nth-child(2), #Rnd_institue ul li:nth-child(4),#location ul li:nth-child(2), #location ul li:nth-child(4){margin-right: 0;}
+}
+@media screen and (max-width:824px) {
+	#Greeting .gr_tit{width:95%;font-size:2.5rem}
+	#inwoo_c .cont1 img, #Eco .wrap h3, #Eco .wrap p{margin-left:0}
+	#Joboffer .b_tit{font-size:3rem}
+	#Joboffer #tab2 .talent .e_tit, #Joboffer #tab2 .talent .b_tit{padding-left: 0;width: 90%;margin: 0 auto;}
+	#Joboffer #tab3 .benefit .txt{padding:0 0 30px 7%}
+	#Joboffer #tab3 .benefit::after{display:none}
+	#Rnd_bio .wrap .txt{padding:70% 20px 0;width:100%;margin-left:0;margin-bottom: 140px;}
+	#Rnd_bio .wrap::after{width:100%; background-size: contain;}
+	#Rnd_bio #propan .box_wrap1 > div{height: 337px;}
+	#Eco .wrap .txt{padding-top: 72%;width: 90%;margin: 0 auto 80px;}
+    #Eco .wrap span{float:none;}
+	#Eco .Thum .thum_wrap:last-child{margin-bottom:0}
+	#Eco .wrap:after{width:100%;background-size: contain;}
+	#Eco table.ta tr th{font-size:1.6rem}
+}
+@media screen and (max-width:779px) {
+	
+}	
+@media screen and (max-width:768px) {
+	#inwoo_c .bg_txt{display: none}
+	#inwoo_c .cont .txt h3{font-size:3.2rem}
+	#History .tab{width:80%}
+	#Joboffer #tab3 .benefit_list > div{width:48%;margin-right:0}
+	#Joboffer #tab3 .benefit_list > div:nth-child(1), #Joboffer #tab3 .benefit_list > div:nth-child(3), #Joboffer #tab3 .benefit_list > div:nth-child(5){margin-right:14px}
+	#Rnd_institue .wrap p {width:100%;line-height: 26px}
+	#Rnd_bio, #Rnd_bio #propan .tab li a{font-size: 1.6rem;}
+	#Rnd_bio .wrap p, #Rnd_bio #propan p, #Eco .wrap p{font-size: 1.6rem;width:100%;float:none}
+	#Rnd_bio .wrap2 table tr th, #Rnd_bio .wrap2 table tr td, #Eco .wrap2 table tr th, #Eco .wrap2 table tr td, #Eco table.ta tr th, #Eco table.ta tr td{font-size: 1.4rem;}
+	#Rnd_bio #propan .tab{width: 90%;margin: 0 auto 50px;}
+	#Rnd_bio #propan .box_wrap1 > div, #Eco .wrap2 table tr td{font-size: 1.4rem;}
+	#Rnd_bio #propan .s_txt{padding: 0 50px 0;}		
+	#Eco #tab3 .box_wrap1 > div{width: 100%; font-size:1.5rem;height:350px}
+	#Eco #tab3 .box_wrap1 > div:first-child{margin: 0 0 2% 0}
+	#Eco .pri_wrap .sec p{margin-left: 0;}
+	#Eco .pri_wrap > div h4{margin-bottom: 20px;}
+	#Eco .pri_wrap .last{padding:89px 35px}	
+	#World .tit_wrap{width: 90%;margin: 0 auto 105px;font-size: 1.6rem;}
+	#World .tit_wrap h3, #Rnd_institue .wrap h3{font-size: 3rem;width:100%}
+	#Rnd_institue .wrap::after{width:100%;height: 300px}
+	#Rnd_institue .wrap .txt{padding-top: 340px;margin: 0 auto 80px;}
+	#Joboffer #tab4, #Joboffer #tab4 .s_txt{font-size:1.5rem}
+	#Joboffer #tab4 .txt{width: 80%;}
+	#History dl{padding-top:9%}
+}
+
+@media screen and (max-width:623px) {
+	#inwoo_c .bg_txt{display: none}
+	#Rnd_bio #propan .img_wrap > div{width:100%;margin:0 0 15px 0;}
+	#Rnd_institue .wrap2 table tr th, #Rnd_institue .wrap2 table tr td{font-size:1.5rem}
+	#Rnd_bio #propan .img_wrap > div.ma{margin-bottom: 15px !important;}
+	#inwoo_c, #Eco #ozon .tab li a, #Eco .ss_tit span{font-size:1.5rem}
+	#Eco #ozon .img_wrap > div{width:100%}
+    #World .tit_wrap h3, #Eco .wrap h3, #Rnd_bio #propan .tit, #Eco #ozon .tit, #Eco #tab2 .kist .tit, #Eco #tab2 h4{font-size: 2.4rem;line-height: 30px;}
+    #Eco .wrap h3{font-size:2.6rem;line-height:36px}
+	#Rnd_bio .wrap p, #Rnd_bio #propan p, #Eco .wrap p{font-size: 1.5rem;line-height: 24px}
+	#Joboffer #tab4 .b_tit{font-size: 2.8rem;}
+	#Joboffer .tab li a{font-size: 1.6rem;}
+}
+
+@media screen and (max-width:480px) {	
+	#inwoo_c .cont .txt h3, #Rnd_bio .wrap h3, #Rnd_institue .wrap h3, #Eco #tab2 h5, #Joboffer .b_tit, #History dl dt, #Joboffer #tab2 .talent_wrap .talent_list .txt .tit
+	, #Joboffer #tab3 .benefit_list .img_box p, #Eco .wrap h3{font-size:2.5rem;line-height:32px}
+	#inwoo_c .bg_txt{display:none}
+	#inwoo_c .cont3 .s_txt > div{padding:60px 10px 50px}
+	#inwoo_c .cont3 .s_txt > div{font-size: 1.5rem;line-height: 23px;}
+    #History, #Eco #tab2 .kist .s_tit, #inwoo_c .cont1 .txt, #Rnd_institue, #History dl, #Joboffer #tab2 .talent_wrap .talent_list .txt, #Eco #ozon p{font-size:1.5rem;line-height: 23px;}
+	#Greeting .s_txt{margin: 50px auto 150px;font-size:1.5rem;line-height: 23px;}
+	#location ul li{height:275px}
+	#History .panel li > div:before{display:none}
+	#History dl{margin-top:5%}
+	#History dl.right:before{top:31px;left:-14%}
+	#History dl.left:after{right:-14%;}
+	#Joboffer #tab1 .vision_2 .div_wrap > div:before{left:33% !important}
+	#Joboffer #tab1 .vision_2 .div_wrap > div{height: 250px;}
+	#Joboffer #tab1 .vision_2 .div_wrap > div:last-child{height:300px}
+	#Joboffer #tab2 .talent img{display: none;}
+	#Joboffer #tab2 .talent_wrap{margin-top:50px}
+	#Joboffer #tab2 .talent_wrap .talent_list img{margin-bottom:10px}
+	#Joboffer #tab3 .benefit_list > div, #Rnd_bio #propan .box_wrap1 > div, #Eco #tab2 .kist > div{width:100%;margin:0 0 2.5% 0 !important}
+	#Joboffer #tab3 .benefit_list .img_box{background-size: cover;margin-bottom: 5px;}
+	#Joboffer #tab3 .benefit{padding-bottom:50px}
+	#Joboffer #tab4 .txt{line-height: 22px;}
+	#Joboffer #tab4 .img_wrap_m{display:none}
+	#Joboffer #tab4 .img_wrap_m2{display:block;margin: 25px 0;}
+	#Rnd_bio .wrap p{letter-spacing:-1.2px;}
+	#Rnd_bio #propan .s_txt{padding: 0 10px 0;}
+	#Rnd_bio #propan table tr td, #Rnd_bio #propan table tr th{font-size:1.3rem}
+	#Rnd_bio #propan .s_txt span{font-size:1.4rem;line-height:22px;}
+	#Rnd_institue .wrap p{line-height: 24px;}
+	#Rnd_institue ul li, #location ul li{width:100%;height:275px}
+	#Eco #tab2 h5{font-size: 1.8rem;line-height:28px}
+	#Eco #ozon .tab li{width: 100%;border:none;border-bottom: 1px solid #ddd}
+	#Eco #ozon .tab li:last-child{border-bottom: none}
+	#Eco .pri_wrap > div{padding:40px 23px}
+	#Eco .Thum .thum_wrap{height:433px}
+	#Rnd_bio #propan .tit{width: 90%;margin: 0 auto}
+	#Eco #tab2 .circle_wrap_m{display:block}
+	#Eco #tab2 .circle_wrap, #Eco #tab2 .circle_wrap_t{display:none;}
+	#Eco #tab2 .kist .tit, #Joboffer #tab4 .b_tit, #Joboffer #tab2 .talent_wrap .talent_list .txt .s_tit{font-size: 2rem}
+	#Joboffer #tab4 a{width: 50%;font-size:1.5rem}
+	.partner-2 .panel li .logo{width:100%;float:none;}
+	.country-cont{height:100%}
+	
+	
+}

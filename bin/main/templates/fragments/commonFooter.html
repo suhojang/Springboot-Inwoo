@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<footer th:fragment="commonFooter">
+		<!-- LAYOUT FOOTER -->
+		<ul id="ft-cont">
+			<div th:each="footerProvider, f:${footerProvider}" th:remove="tag">
+				<li><a th:href="${footerProvider.pvHomepage}" target="_blank"><img th:src="'/image/' + ${footerProvider.pvLogoImg}"></a></li>
+			</div>
+		</ul>
+		<!-- 탑 버튼 { -->
+		<div id="scroll_top">
+			<a href="#"><img src="/static/images/arr-up-w.png"/></a>
+		</div>
+		<script>
+			$(function(){$(window).scroll(function(){
+				if ($(this).scrollTop() > 580) {$('#scroll_top').fadeIn()} 
+				else { $('#scroll_top').fadeOut()};});
+			});
+			$('#scroll_top').click(function() {
+				$('html, body').animate({scrollTop:0});
+			});
+		</script>
+		<div class="address">
+			<div class="wrap">
+				<ul class="ft_txt">
+					<li><a href="/page/privacy" th:text="#{footer.privacy}" style="color: #fff; opacity: 1; font-size: 1.7rem;">개인정보 처리방침</a></li>
+					<li><a href="/product/ozone/list" th:text="#{footer.product}">제품소개</a></li>
+					<li><a href="/board/notice" th:text="#{footer.customer}">고객센터</a></li>
+					<li><a href="/admin" th:text="#{footer.admin}">ADMIN</a>
+				</ul>
+				<p th:utext="#{footer.addr}">인우코퍼레이션<span></span>본점.  서울특별시 송파구 오금로 11길 63-9 (방이동, 위당B/D 2층)<span></span>T.  02-2202-7028<span></span>F. 02-2202-7029<br>
+				하남사무실.  경기도 하남시 하남대로 947, 하남테크노밸리 U1센터 A동 1105호<span></span>연구소/공장.  경기도 안성시 금광면 금광오산로 137(오산리 23-8)</p>
+				<p class="copyright">COPYRIGHT © inwoocorp 2019 ALL RIGHTS RESERVED.</p>
+				
+				<div class="family-site">
+					<h3>Family Site</h3>
+					<ul>
+						<li>
+							<a href="http://www.inwooeco.co.kr/" th:if="${i18n} == 'ko'">㈜인우에코</a>
+							<a href="http://www.inwooeco.co.kr/eng/" th:if="${i18n} == 'en'">INWOO ECO Corporation</a>
+						</li> 
+					</ul>
+				</div>	
+			</div>
+		</div>
+	</footer>
+</html>

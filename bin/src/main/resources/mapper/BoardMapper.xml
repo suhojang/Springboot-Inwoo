@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.BoardRepository">
+	<resultMap type="com.soroweb.board.dto.BoardDto" id="boardMap" autoMapping="true">
+		<result column="BO_IDX" property="boIdx" />
+		<result column="BC_DBNAME" property="bcDbname" />
+		<result column="BO_DEVICE" property="bcDevice" />
+		<result column="BO_CATEGORY" property="boCategory" />
+		<result column="BO_TITLE" property="boTitle" />
+		<result column="BO_READ_CNT" property="boReadCnt" />
+		<result column="BO_CONTENT" property="boContent" />
+		<result column="MB_USER_ID" property="mbUserId" />
+		<result column="BO_ENROL_DT" property="boEnrolDt" />
+		<result column="BO_MOD_DT" property="boModDt" />
+		<result column="BO_VISIBLE" property="boVisible" />
+		<result column="BO_PASSWORD" property="boPassword" />
+		<result column="BO_IS_NOTICE" property="boIsNotice" />
+		<result column="BO_FILE1" property="boFile1" />
+		<result column="BO_FILE2" property="boFile2" />
+		<result column="BO_D1" property="boD1" />
+		<result column="BO_D2" property="boD2" />
+		<result column="BO_D3" property="boD3" />
+		<result column="BO_D4" property="boD4" />
+		<result column="BO_D5" property="boD5" />
+		<result column="BO_TEL" property="boTel" />
+		<result column="BO_EMAIL" property="boEmail" />
+		<result column="PD_IDX" property="pdIdx" />
+		<result column="BO_REPLY_REQ" property="boReplyReq" />
+		<association property="memberDto" javaType="com.soroweb.board.dto.MemberDto">
+			<result column="MB_ID" property="mbId" />
+			<result column="MB_USER_ID" property="mbUserId" />
+			<result column="MB_USER_PW" property="mbUserPw" />
+			<result column="MB_NAME" property="mbName" />
+			<result column="MB_EMAIL" property="mbEmail" />
+			<result column="MB_TEL" property="mbTel" />
+		</association>
+		<association property="boardConfigDto" javaType="com.soroweb.board.dto.BoardConfigDto">
+			<result column="BC_IDX" property="bcIdx" />
+			<result column="BC_DBNAME" property="bcDbname" />
+			<result column="BC_BOARD_NAME" property="bcBoardName" />
+			<result column="BC_BOARD_TYPE" property="bcBoardType" />
+			<result column="BC_PAGE_ROWS" property="bcPageRows" />
+			<result column="BC_PAGE_BLOCK" property="bcPageBlock" />
+			<result column="BC_USE_SECRET" property="bcUseSecret" />
+			<result column="BC_USE_REPLY" property="bcUseReply" />
+			<result column="BC_USE_CATEGORY" property="bcUseCategory" />
+			<result column="BC_USE_PAGEABLE" property="bcUsePageable" />
+			<result column="BC_IS_USE" property="bcIsUse" />
+			<result column="BC_ENROL_DT" property="bcEnrolDt" />
+			<result column="BC_MOD_DT" property="bcModDt" />
+			<result column="CT_IDX" property="ctIdx" />
+		</association>
+		<association property="productDto" javaType="com.soroweb.board.dto.ProductDto">
+			<result column="PD_IDX" property="pdIdx" />
+			<result column="PD_NAME" property="pdName" />
+			<result column="PD_CATEGORY" property="pdCategory" />
+			<result column="PD_TYPE" property="pdType" />
+			<result column="PD_MANUFACTURER" property="pdManufacturer" />
+			<result column="PD_D1" property="pdD1" />
+			<result column="PD_D2" property="pdD2" />
+			<result column="PD_D3" property="pdD3" />
+			<result column="PD_D4" property="pdD4" />
+			<result column="PD_D5" property="pdD5" />
+			<result column="PD_ENROL_DT" property="pdEnrolDt" />
+			<result column="PD_MOD_DT" property="pdModDt" />
+			<result column="PD_DETAIL" property="pdDetail" />
+			<result column="PD_IS_USE" property="pdIsUse" />
+			<result column="BC_DBNAME" property="bcDbname" />
+			<result column="PD_IMG1" property="pdImg1" />
+			<result column="PD_IMG2" property="pdImg2" />
+			<result column="PD_IMG3" property="pdImg3" />
+			<result column="PD_IMG4" property="pdImg4" />
+			<result column="PD_IMG5" property="pdImg5" />
+			<result column="PD_TEL" property="pdTel" />
+			<result column="PCAT_IDX" property="pcatIdx" />
+		</association>
+	</resultMap>
+	
+	<select id="findBoardListByBcDbname" parameterType="com.soroweb.board.dto.BoardDto" resultMap="boardMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD as bo LEFT OUTER JOIN
+				MEMBER as m ON bo.MB_USER_ID = m.MB_USER_ID
+			WHERE
+				bo.BO_VISIBLE > 0
+		]]>
+		<if test='findWord != null and findWord != ""'>
+			<if test='findType == null or findType == ""'>
+				<![CDATA[
+					AND ( bo.BO_TITLE LIKE '%${findWord}%' OR bo.BO_CONTENT LIKE '%${findWord}%' ) 
+				]]>
+			</if>
+			<if test='findType != ""'>
+				<![CDATA[
+					AND bo.${findType} LIKE '%${findWord}%'
+				]]>
+			</if>
+		</if>
+		<![CDATA[
+			ORDER BY ${boOrderField} ${boOrderType}
+		]]>
+	</select>
+
+	<select id="findBoardListPageByBcDbname" parameterType="com.soroweb.board.dto.BoardDto" resultMap="boardMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD as bo LEFT OUTER JOIN
+				MEMBER as m ON bo.MB_USER_ID = m.MB_USER_ID
+			WHERE
+				bo.BO_VISIBLE > 0
+		]]>
+		<if test='findWord != null and findWord != ""'>
+			<if test='findType == null or findType == ""'>
+				<![CDATA[
+					AND ( bo.BO_TITLE LIKE '%${findWord}%' OR bo.BO_CONTENT LIKE '%${findWord}%' ) 
+				]]>
+			</if>
+			<if test='findType != null and findType != ""'>
+				<![CDATA[
+					AND bo.${findType} LIKE '%${findWord}%'
+				]]>
+			</if>
+		</if>
+		<![CDATA[
+			ORDER BY ${boOrderField} ${boOrderType} 
+			LIMIT ${pageNumber * pageSize}, ${pageSize}
+		]]>
+	</select>
+	
+	<select id="findBoardCountPageByBcDbname" parameterType="com.soroweb.board.dto.BoardDto" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT
+				COUNT(*) CNT
+			FROM
+				BOARD
+			WHERE
+				BO_VISIBLE > 0 
+		]]>
+		<if test='findWord != null and findWord != ""'>
+			<if test='findType == null or findType == ""'>
+				<![CDATA[
+					AND ( BO_TITLE LIKE '%${findWord}%' OR BO_CONTENT LIKE '%${findWord}%' ) 
+				]]>
+			</if>
+			<if test='findType != null and findType != ""'>
+				<![CDATA[
+					AND ${findType} LIKE '%${findWord}%'
+				]]>
+			</if>
+		</if>
+	</select>
+	
+	<select id="findBoardOneByBoIdx" parameterType="com.soroweb.board.dto.BoardDto" resultMap="boardMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD BO LEFT OUTER JOIN MEMBER MB ON BO.MB_USER_ID = MB.MB_USER_ID,
+				BOARD_CONFIG BC
+			WHERE
+				1=1
+				AND UPPER( BO.BC_DBNAME ) = UPPER( BC.BC_DBNAME )
+				AND BO.BO_IDX = #{boIdx}
+		]]>
+	</select>
+
+	<insert id="insertBoardOne" parameterType="com.soroweb.board.dto.BoardDto" useGeneratedKeys="true" keyProperty="boIdx">
+		<![CDATA[
+			insert
+				into
+				BOARD (
+					BC_DBNAME,
+					BO_DEVICE,
+					BO_CATEGORY,
+					BO_TITLE,
+					BO_READ_CNT,
+					BO_CONTENT,
+					BO_ENROL_DT,
+					BO_MOD_DT,
+					MB_USER_ID,
+					BO_VISIBLE,
+					BO_PASSWORD,
+					BO_IS_NOTICE,
+					BO_FILE1,
+					BO_FILE2,
+					BO_D1,
+					BO_D2,
+					BO_D3,
+					BO_D4,
+					BO_D5,
+					BO_TEL,
+					BO_EMAIL,
+					PD_IDX,
+					BO_REPLY_REQ
+				)
+				values(
+					#{bcDbname},
+					#{boDevice},
+					#{boCategory},
+					#{boTitle},
+					0,
+					#{boContent},
+					NOW(),
+					null,
+					#{mbUserId},
+					#{boVisible},
+					#{boPassword},
+					#{boIsNotice},
+					#{boFile1},
+					#{boFile2},
+					#{boD1},
+					#{boD2},
+					#{boD3},
+					#{boD4},
+					#{boD5},
+					#{boTel},
+					#{boEmail},
+					#{pdIdx},
+					#{boReplyReq}
+				)		
+		]]>
+	</insert>
+	
+	<update id="updateBoardOneByBoIdx" parameterType="com.soroweb.board.dto.BoardDto" useGeneratedKeys="true" keyProperty="boIdx">
+		<![CDATA[
+			UPDATE
+				BOARD
+			SET
+				BO_DEVICE = #{boDevice},
+				BO_CATEGORY = #{boCategory},
+				BO_TITLE = #{boTitle},
+				BO_READ_CNT = #{boReadCnt},
+				BO_CONTENT = #{boContent},
+				BO_ENROL_DT = #{boEnrolDt},
+				BO_MOD_DT = NOW(),
+				MB_USER_ID = #{mbUserId},
+				BO_VISIBLE = #{boVisible},
+				BO_PASSWORD = #{boPassword},
+				BO_IS_NOTICe = #{boIsNotice},
+				BO_FILE1 = #{boFile1},
+				BO_FILE2 = #{boFile2},
+				BO_D1 = #{boD1},
+				BO_D2 = #{boD2},
+				BO_D3 = #{boD3},
+				BO_D4 = #{boD4},
+				BO_D5 = #{boD5},
+				BO_TEL = #{boTel},
+				PD_IDX = #{pdIdx},
+				BO_REPLY_REQ = #{boReplyReq}
+			WHERE
+				BO_IDX = #{boIdx}
+		]]>
+	</update>
+	
+	<update id="deleteBoardOne" parameterType="com.soroweb.board.dto.BoardDto" useGeneratedKeys="true" keyProperty="boIdx">
+		<![CDATA[
+			UPDATE
+				BOARD
+			SET
+				BO_VISIBLE = 0,
+				BO_MOD_DT = NOW()
+			WHERE
+				BO_IDX = #{boIdx}
+		]]>
+	</update>
+	
+	<delete id="removeBoardOne" parameterType="com.soroweb.board.dto.BoardDto">
+		<![CDATA[
+			DELETE FROM BOARD WHERE BO_IDX = #{boIdx}
+		]]>
+	</delete>
+	
+	<select id="findPageBoardListByBcDbname" parameterType="com.soroweb.board.dto.BoardDto" resultMap="boardMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD BO LEFT OUTER JOIN
+				MEMBER MB ON BO.MB_USER_ID = MB.MB_USER_ID
+			WHERE
+				1=1
+				AND BO.BC_DBNAME = #{bcDbname}
+				AND BO.BO_VISIBLE > 0
+		]]>
+		<if test='findWord != null and findWord != ""'>
+			<if test='findType == null or findType == ""'>
+				<![CDATA[
+					AND ( BO.BO_TITLE LIKE '%${findWord}%' OR BO_CONTENT LIKE '%${findWord}%' ) 
+				]]>
+			</if>
+			<if test='findType != null and findType != ""'>
+				<![CDATA[
+					AND BO.${findType} LIKE '%${findWord}%'
+				]]>
+			</if>
+		</if>
+		<![CDATA[
+			ORDER BY 
+				BO.BO_ENROL_DT DESC
+			LIMIT ${pageNumber * pageSize}, ${pageSize}
+		]]>
+	</select>
+	
+	<select id="findPageBoardListByBcDbnameCount" parameterType="com.soroweb.board.dto.BoardDto" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT
+				COUNT(*)
+			FROM
+				BOARD
+			WHERE
+				BC_DBNAME = #{bcDbname}
+				AND BO_VISIBLE > 0
+		]]>
+		<if test='findWord != null and findWord != ""'>
+			<if test='findType == null or findType == ""'>
+				<![CDATA[
+					AND ( BO_TITLE LIKE '%${findWord}%' OR BO_CONTENT LIKE '%${findWord}%' ) 
+				]]>
+			</if>
+			<if test='findType != null and findType != ""'>
+				<![CDATA[
+					AND ${findType} LIKE '%${findWord}%'
+				]]>
+			</if>
+		</if>
+	</select>
+	
+	<select id="findBoardNoticeListByBcDbname" parameterType="com.soroweb.board.dto.BoardDto" resultMap="boardMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD
+			WHERE
+				BC_DBNAME = #{bcDbname}
+				AND BO_VISIBLE > 0
+				AND BO_IS_NOTICE > 0
+		]]>
+	</select>
+	
+	<select id="findBoardLatest" parameterType="com.soroweb.board.dto.BoardDto" resultMap="boardMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD
+			WHERE
+				BO_VISIBLE > 0
+				AND BC_DBNAME = #{bcDbname}
+			ORDER BY
+				BO_ENROL_DT DESC
+			LIMIT 4
+		]]>
+	</select>
+</mapper>

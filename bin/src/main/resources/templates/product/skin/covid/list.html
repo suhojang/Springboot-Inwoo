@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content">
+			<div class="sub-visual subv-3">
+				<h1>inwoo<br><span></span>product</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active" style="color: #fff;"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<a class="active" th:utext="${currentSubMenuOne.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2 th:text="${boardConfig.bcBoardName}"></h2> 
+			</div>
+
+			<div id="Product_list">
+				<div class="page_wrap">
+					<div>
+						<a href="/product/inwoo-usa/list" class="active">Apllex 2019-nCov Assay</a>
+					</div>
+					<div>
+						<a href="/board/estimate/write">Request Quotation</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="covid19">
+				<div class="covid-txt">
+					<div>
+						<p class="btit">INWOO U.S.A</p>
+						<p class="stxt">
+							<span>Welcome to visit INWOO U.S.A homepage and Thank you for visiting.</span>
+							<span>INWOO U.S.A is a distributor of Seegene which is a leading manufacturer of diagnostic kits.</span>
+							<span>This kit was reported on ABC News on April 21 and approved for emergency use authorization from U.S Food and Drug(FDA).</span>
+						</p>
+						<p>
+							<span>INWOO U.S.A was established to support the COVID-19 affected areas in U.S.A. INWOO U.S.A strives to recover </span>
+							<span>all these regions by responding to their needs in a timely manner. </span>
+							<span>INWOO U.S.A is located in Detroit. Please feel free to leave us an enquiry about products and we will respond soon.</span>
+						</p>
+					</div>
+				</div>
+		
+				<div class="covid-img">
+					<div class="stitle">
+						<p class="stit">Allplex™</p>
+						<p>The Next Generation Real-time PCR Assay</p>
+					</div>
+		
+					<img src="/static/images/sub/covid-img.png" alt="">
+					<div class="downBtn">
+						<a href="/static/pdf/Allplex 2019-nCoV Assay.pdf" download>Allplex 2019-nCoV Assay Download <img src="/static/images/sub/down-img.png" alt=""></a>
+						<a href="/static/pdf/Seegene Product Brochure.pdf"  download>Seegene Product Brochure Download <img src="/static/images/sub/down-img.png" alt=""></a>
+					</div>
+				</div>
+			</div>
+
+	<style> 
+		.covid19{margin-top:55px}
+		.covid19 .covid-txt{position:relative;width:100%;height:650px;margin-bottom:115px;background: #000 url(/static/images/sub/covid-bg.png) center no-repeat;}
+		.covid19 .covid-txt > div{position:absolute;right:0;left:0;top:50%;transform: translateY(-50%);width:100%;max-width:1200px;margin:0 auto;text-align:center;font-family: 'Roboto';}	
+		.covid19 .covid-txt p{font-size:18px;color:#fff}
+		.covid19 .covid-txt p span{display:block}
+		.covid19 .covid-txt .btit{font-size:50px;font-weight:500;}
+		.covid19 .covid-txt .btit:after{display:block;content:"";width:60px;height:1px;margin:40px auto;background:rgba(255,255,255,.2);}
+		.covid19 .covid-txt .stxt{margin-bottom:20px}
+
+		.covid-img{width:100%;max-width:1200px;margin:0 auto;text-align:center}
+		.covid-img .stitle{margin-bottom:30px;}
+		.covid-img .stitle .stit{margin:0;font-size:45px;color:#333;font-weight:500;font-family: 'Roboto';}
+		.covid-img .stitle p{font-size:18px;color:#333}
+		.covid-img .downBtn{margin: 85px 0;text-align:center;}
+		.covid-img .downBtn a{padding: 15px;border:1px solid #0074c8;font-size:18px;color:#0074c8;}
+		.covid-img .downBtn a img{margin-left:7px;vertical-align: initial;}
+
+		@media screen and (max-width:1200px) {
+			.covid-img{width:95%}
+		}
+
+		@media screen and (max-width:768px) {
+			.covid19 .covid-txt > div{padding:0 10px}
+			.covid19 .covid-txt .btit{font-size:35px;}
+			.covid19 .covid-txt p{font-size:17px}
+			.covid19 .covid-txt p span{display:contents}
+			.covid-img .stitle .stit{font-size:30px}
+			.covid-img .downBtn a{display:block;width:95%;margin:0 auto 10px;font-size:15px}
+		}
+	</style>
+	</section>		
+		<!-- FOOTER -->
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>

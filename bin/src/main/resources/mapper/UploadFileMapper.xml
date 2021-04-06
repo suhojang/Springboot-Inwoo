@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.UploadFileRepository">
+	<select id="findAll" parameterType="com.soroweb.board.dto.UploadFileDto" resultType="com.soroweb.board.dto.UploadFileDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				UPLOAD_FILE
+		]]>
+	</select>
+	
+	<select id="findOne" parameterType="com.soroweb.board.dto.UploadFileDto" resultType="com.soroweb.board.dto.UploadFileDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				UPLOAD_FILE
+			WHERE
+				UF_IDX = #{ufIdx}
+		]]>
+	</select>
+	
+	<insert id="save" parameterType="com.soroweb.board.dto.UploadFileDto" useGeneratedKeys="true" keyProperty="ufIdx">
+		<![CDATA[
+			INSERT INTO 
+				UPLOAD_FILE( 
+					UF_FILE_NAME, 
+					UF_SAVE_FILE_NAME, 
+					UF_FILE_PATH, 
+					UF_CONTENT_TYPE, 
+					UF_FILE_SIZE, 
+					UF_ENROL_DT 
+				) VALUES(
+					#{ufFileName},
+					#{ufSaveFileName},
+					#{ufFilePath},
+					#{ufContentType},
+					#{ufFileSize},
+					#{ufEnrolDt}
+				)
+		]]>
+	</insert>
+</mapper>

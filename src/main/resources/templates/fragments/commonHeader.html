@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<header th:fragment="commonHeader">
+		<div class="header_wrap">
+			<h1 class="logo">
+				<a href="/"><img src="/static/images/logo.png" alt="로고" /></a>
+			</h1>
+			<div id="main_nav">
+				<ul th:class="'menu_list ' + ${i18n}">
+					<div th:each="main, i:${menu.mainMenu}" th:remove="tag">
+						<li th:class="'dep_1 ' + 'main'+ ( ${i.index} + 1 ) + ' ' + ( ${currentSubMenuOne} != null and ${currentSubMenuOne.mcIdx} == ${main.mcIdx} ? 'active current' : '')"><a th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a></li>
+					</div>
+				</ul>
+				<div th:class="'sub_menu ' + ( ${i18n} == 'en' ? 'sub_en' : '')">
+					<ul th:each="sub, i:${menu.subMenu}" th:class="'sub'+( ${i.index} + 1 )">
+						<li class="dep_2" th:each="submenu, s:${sub}">
+							<a th:href="@{'/' + ${submenu.smcCategory} + '/' + ${submenu.smcUrl}}" th:text="${submenu.smcName}"></a>
+						</li>
+					</ul>
+				</div>
+				
+				<script type="text/javascript">
+					$(function() {
+						$(".sub_menu ul").hover(function() {
+							$( $(".menu_list .dep_1")[$(".sub_menu ul").index(this)] ).addClass("active");
+							$( $(".menu_list .dep_1")[$(".sub_menu ul").index(this)] ).addClass("active-dot");
+						}, function() {
+							if( !$( $(".menu_list .dep_1")[$(".sub_menu ul").index(this)]).hasClass("current") ) {
+								$( $(".menu_list .dep_1")[$(".sub_menu ul").index(this)] ).removeClass("active");
+							}
+							$( $(".menu_list .dep_1")[$(".sub_menu ul").index(this)] ).removeClass("active-dot");
+						})
+					});
+				</script>
+			</div>
+			<!-- 모바일 토글버튼 -->
+			<div class="area_r">		
+				<div class="toggle">
+					<button class="toggle_menu">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+			</div><!-- area_r -->
+			<!-- 모바일 토글 메뉴 -->
+			<div class="allmenu">
+				<div class="innerwrap">
+					<div class="menubox" th:each="main, i:${menu.mainMenu}">
+						<h2 class="slideM" th:text="${main.mcName}"></h2>
+						<ul>
+							<div th:each="sub, j:${menu.subMenu}" th:remove="tag">
+								<a style="color: #666;" th:if="${main.mcIdx} == ${submenu.mcIdx}" th:each="submenu, s:${sub}" th:utext="'<li>' + ${submenu.smcName} + '</li>'" th:href="@{'/' + ${submenu.smcCategory} + '/' + ${submenu.smcUrl}}" th:text="${submenu.smcName}"></a>
+							</div>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="lan">
+				<li><a href="/lang?lang=en">ENG</a></li>
+				<li><a href="/lang?lang=ko">KOR</a></li>
+				<img src="/static/images/lan_icon.png" alt="언어선택">
+			</ul> 
+			<script>
+				$('.lan_m').click(function(){
+				$('.lan_m ul').slideToggle();
+			});
+			</script>
+		</div><!-- header_wrap -->
+	</header>
+</html>

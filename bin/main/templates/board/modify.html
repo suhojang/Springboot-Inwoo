@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<head>
+		<title>BOARD LIST</title>
+		
+		<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+		
+		<style>
+			.ck-editor__editable {
+				min-height: 500px;
+				max-height: 700px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content">
+			<h3>게시판 이름</h3>
+			
+			<hr/>
+			
+			<form action="/board/modify/proc" enctype="multipart/form-data" method="POST">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+				<input type="hidden" th:name="boIdx" th:value="${board.boIdx}">
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h4>Board</h4>
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-9" th:text="${board.boardConfigDto.bcBoardName}">
+						<input type="hidden" name="bcDbname" th:value="${board.bcDbname}">
+					</div>
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h4>Writer</h4>
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-9">
+						<p th:text="${board.memberDto.mbName}"></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h4>Title</h4>
+					</div>
+					<div class="col-lg-11 col-md-11 col-sm-9">
+						<input type="text" id="title" name="boTitle" class="form-control" th:value="${board.boTitle}">	
+					</div>
+				</div>
+				
+				<hr/>
+				
+				<h4>Content</h4>
+				
+				<textarea name="boContent" id="editor" th:text="${board.boContent}">
+				</textarea>
+				
+				<hr/>
+				
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h4>Attachment</h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h5>File</h5>
+					</div>
+					<div class="col-lg-11 col-md-11 col-sm-9">
+						<input type="file" name="files" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h5>File</h5>
+					</div>
+					<div class="col-lg-11 col-md-11 col-sm-9">
+						<input type="file" name="files" class="form-control">
+					</div>
+				</div>
+				
+				<hr/>
+				
+				<p style="text-align: right;">
+					<input type="submit" value="Submit">
+					<a th:href="@{/}"><button type="button">Cancel</button></a>
+				</p>
+			</form>
+			<script type="text/javascript">
+				$(function() {
+					
+					$("#dbname").select2();
+					
+					ClassicEditor
+						.create( document.querySelector( "#editor" ) )
+						.catch( error => {
+							console.log( error );
+						})
+					;
+				});
+			</script>
+		</section>
+		<!-- FOOTER -->
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>

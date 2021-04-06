@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html 
+	xmlns:sec="http://"
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/defaultLayout">
+	<head>
+		<title>SIGN IN</title>
+		<style>
+			.login-container {
+				margin-top: 165px;
+				margin-bottom: 165px;
+			}
+			
+			.login-container input {
+				width: 460px;
+				max-width: 100%;
+				height: 60px;
+				font-size: 1.5rem;
+				padding-left: 15px;
+			}
+			
+			.btn-submit {
+				width: 460px;
+				max-width: 100%;
+				height: 60px;
+				font-size: 1.5rem;
+				text-align: center;
+				color: white;
+				background-color: #0074c8;
+				border: 0;
+				margin-top: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content" style="text-align: center;">
+			<div class="sub-visual subv-5">
+				<h1>inwoo<br><span></span>cs center</h1> 		
+			</div>
+			<div class="sub-tit">
+				<h2 th:text="'로그인'"></h2> 
+			</div>
+			<div class="login-container">
+				<form name="signInForm" method="POST" action="/member/signIn">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+					<div class="form-group">
+						<input type="text" name="username" th:placeholder="'아이디'">
+					</div>
+					<div class="form-group">
+						<input type="password" name="password" th:placeholder="'비밀번호'">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn-submit" th:text="'로그인'"></button>
+					</div>
+				</form>
+			</div>
+		</section>		
+		<!-- FOOTER -->
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>

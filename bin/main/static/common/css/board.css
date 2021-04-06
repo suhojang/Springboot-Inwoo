@@ -1,0 +1,255 @@
+
+@charset "utf-8";
+
+/*paging*/
+select{background: #fff;}
+.paging{padding:50px 0 0;text-align:center;font-size:1.8rem}
+.paging a{display:inline-block;width:30px;height:10px;margin-top: -11px;vertical-align:middle;color: #999;}
+.paging a:hover{text-decoration:underline;}
+.paging .btn_arr{text-decoration:none;}
+.paging .btn_arr, .paging .on{margin:0 3px;padding-top:0}
+.paging .on{padding-top:1px;height:22px;color:#fff;font-weight:bold;color:#0074c8}
+.paging .on:hover{text-decoration:none;}
+.paging .hide{}
+
+/* 게시판 */
+.search_wrap {display:block;width:100%;max-width:1200px;margin:60px auto 0;height: 90px;background:#eee;}
+.search_wrap .form{width:47.5%;margin:0 auto;padding-top: 20px;}
+.search_wrap div.dv-select {display:inline-block;width:26%;height:50px;float:left;}
+.search_wrap div.dv-select select{width:100%;height:100%;font-size: 1.6rem;color: #999;padding-left: 5px;}
+.search_wrap span.input input[type=text]{width:53%;height:50px;padding-left:10px;margin-left:2%;font-size:1.6rem;color:#999;;font-family: 'Noto Sans KR'}
+.search_wrap .search input[type=submit]{width:17%;height: 50px;border:none;background: #666666;font-size:1.6rem;color:#fff;float: right;cursor:pointer;font-family: 'Noto Sans KR'}
+
+.board_wrap{max-width:1200px;width:100%;margin:80px auto 0;border-top:2px solid #0074c8}
+.board_wrap > div{border-bottom: 1px solid #ddd;}
+.board_wrap > div ul{overflow:hidden}
+.board_wrap > div ul a{display:block;width:100%:}
+.board_wrap > div ul li{display: block !important;width:12%;float:left;text-align:center; font-size:1.5rem; color:#666; padding:15px; box-sizing:border-box;min-height:57px; line-height:30px; position:relative;}
+.board_wrap > div ul li span{width:48%;display:inline-block;background:#0074c8;font-size:1.5rem;color:#fff;border-radius:2px;}
+.board_wrap > div ul li.tit b{color:#222;font-weight:500;}
+.board_wrap .board_tit{text-align:center;background:#f8f8f8}
+.board_wrap .num{width:15%;display: block !important;}
+.board_wrap .tit{width:60%;text-align:left;display: block !important;}
+
+.write_box{max-width:1200px;width:100%;margin:50px auto 0;font-size:1.6rem;}
+.write_box table{width: 100%;border-top:2px solid #0074c8;margin: 0 auto;}
+.write_box table tr{border-bottom:1px solid #ddd}
+.write_box table tr th{padding-left: 10px;color:#222;font-weight:600;vertical-align: middle;}
+.write_box table tr td{padding:18px;line-height: 43px;}
+.write_box input[type=text]{width:50%;height:45px;border: 1px solid #ddd;padding-left:10px;font-size:1.6rem;color:#999;background: #fff;font-family: 'Noto Sans KR'}
+.write_box .phone input{width:17.2%}
+#str_email01, #str_email02, #selectEmail, #selectproduct{width: 15%;}
+#txtMobile1{width:15%;height:45px;padding-left: 10px;font-size:1.6rem;color:#666;border: 1px solid #ddd;}
+#selectEmail, .product_maker select, .bowrite_select{height:45px;border: 1px solid #ddd;color: #999;font-size: 1.6rem;}
+#selectEmail{width:17.5%}
+.email_ch{display: block;font-size: 1.4rem;color:#999;font-weight: 400;}
+.email_ch input{margin: 16px 5px 0 0;}
+.essential{margin-bottom: 5px;/* padding-left: 8px; */}
+.esse{color:#ff0000;display: inline-block;margin: 4px 5px 0 0;}
+.findBtn{display: none;}
+
+#Product_list{font-size:1.8rem;color:#666;}
+#Product_list .page_wrap{overflow:hidden;max-width:1200px;width:100%;margin:100px auto 30px;text-align: center;}
+#Product_list .page_wrap > div{display: inline-block;width: 19.2%;margin-bottom:5px;text-align:center;border:1px solid #ddd;margin-left: -5px;}
+#Product_list .page_wrap > div:last-child{border-right:1px solid #ddd;border-left:none}
+#Product_list .page_wrap > div a{display:block;line-height:55px;font-size:1.7rem;color:#999}
+#Product_list .page_wrap > div a.active{background:#00a0df;color:#fff}
+#Product_list .title{max-width:1400px;width:100%;margin:0 auto;padding-top:155px;text-align:center;}
+#Product_list .title h3{font-size:4.5rem;color:#fff;font-weight:500;}
+#Product_list .title .s_tit{width:100%;max-width:1200px;padding: 65px 40px;margin:80px auto 0;background:#fff}
+#Product_list .title .s_tit p{width:90%;margin:30px auto 0}
+#Product_list .title .s_tit p span{font-family: 'Noto Sans KR','Roboto','굴림',Sans-serif !important;}
+#Product_list .product_img_list{width:100%;padding-bottom:100px;background:#f8f8f8;}
+#Product_list .list_wrap{width:100%;max-width:1200px;margin:0 auto;padding-top: 80px}
+#Product_list .list_wrap .tab{overflow:hidden;border-bottom:1px solid #ddd;margin-bottom: 70px;}
+#Product_list .list_wrap .tab li{float:left;width:20%;text-align:center;}
+#Product_list .list_wrap .tab li a{display:block;width:100%;font-size:1.6rem;letter-spacing:-.8px;color:#666;line-height: 58px;}
+#Product_list .list_wrap .tab li a.selected{color:#0074c8;border-bottom:3px solid #0074c8}
+#Product_list .img_table{overflow:hidden;text-align:center;width: 98%;margin:0 auto}
+#Product_list .img_table > div{float:left;width:31%;margin:0 1% 50px 1%;transition: all .3s;}
+#Product_list .img_table > div h5{margin-bottom:5px;color:#222;font-size:2rem;font-weight:500;letter-spacing: -1px;font-family: 'Noto Sans KR','Roboto';}
+#Product_list .img_table > div a{display:block;color:#999;font-size: 1.6rem;transition: all .3s}
+#Product_list .img_table > div a:hover img{box-shadow: 5px 5px 5px rgba(0,0,0,.15);transition: all .3s}
+#Product_list .img_table > div a:hover h5{color:#0074c8}
+#Product_list .img_table > div a img{margin-bottom:20px}
+#Product_list .img_table > div a p{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+#Product_list .img_table .la{margin-right:0}
+#Product_list .tit4{background:url('../../images/sub_pro/title_bg4.jpg') no-repeat}
+
+/* 윤활유첨가제 */
+.addlub .s_tit{margin-bottom:40px !important;border: 5px solid #ddd;}
+.addlub .page_wrap{margin: 30px auto !important}
+.addlub .page_wrap > div{width:33% !important; margin-left:0 !important}
+.addlub .page_wrap > div:last-child{border-left:1px solid #ddd !important}
+.addlub-txt{width:100%;max-width: 1200px;margin: 0 auto;}
+.addlub-txt h4{padding-bottom: 20px;font-size:2.4rem;color:#222;font-weight:600;letter-spacing:-.5px;text-align:left;}
+.addlub-txt th{padding: 7px 0;font-size:1.8rem;color:#222;font-weight:500}
+.addlub-txt th:before{display:inline-block;content:"";width:10px;height:10px;margin: 0 5px 2px 0;border:3px solid #00a0df;border-radius: 50%;background:#fff}
+.addlub-txt td{padding-bottom:20px}
+.addlub-txt tr.supplied td{padding-right:10px}
+.addlub-txt td{text-align:left;}
+.addlub-txt tr.supplied .logo{ width: 16%; }
+
+/* 염료&식별제 */
+.dye .tit4{background:none !important}
+.dye .title .s_tit{margin: 40px auto !important}
+.dye .s_tit{border:5px solid #ddd}
+
+#Product_view{width:100%;position:relarive;font-size:1.8rem;}
+#Product_view .tit_wrap{text-align:center;margin: 80px 0 50px;}
+#Product_view .tit_wrap .s_tit{color:#0074c8;font-weight:500;}
+#Product_view .tit_wrap h3{font-size:4.5rem;color:#222;font-weight:600;padding:10px 0 3px;font-family: 'Roboto';}
+#Product_view .tit_wrap p{font-weight: 300;}
+#Product_view .detail_wrap{width:100%;background:#f8f8f8;padding:100px 0}
+#Product_view .detail_wrap > div{max-width:1200px;width:100%;margin:0 auto;}
+#Product_view .detail_wrap > div table{width:100%;border-top:2px solid #0074c8;font-size:1.8rem;margin-bottom: 80px;}
+#Product_view .detail_wrap > div table tr{border-bottom:1px solid #ddd;}
+#Product_view .detail_wrap > div table tr:last-child{border-bottom:none;}
+#Product_view .detail_wrap > div table tr th{color:#222;font-weight:500}
+#Product_view .detail_wrap > div table tr th,#Product_view .detail_wrap > div table tr td{padding: 18px 3px;}
+#Product_view .detail_wrap > div table tr td p img{width: auto !important}
+#Product_view .detail_wrap > div a{display:block;width:17%;margin:0 auto;border:1px solid #0074c8;line-height:50px;transition:all .3s;text-align:center;font-size:1.8rem;color:#0074c8;font-weight:500;}
+#Product_view .detail_wrap > div a:hover{background:#0074c8;color:#fff;}
+
+#Notice .paging{margin-bottom:80px}
+.b_common{width:100%;position:relative;font-size:1.8rem;margin:0 auto;}
+.b_common .inquiry_box{max-width:1200px;width:100%;margin:100px auto 0;}
+.b_common .inquiry_box .inquiry_cont{width:100%;height:200px;background:#f8f8f8;overflow-y: scroll;border:1px solid #ddd;padding:25px;font-size:1.6rem;}
+.b_common .check{margin-top:10px;font-size:1.8rem;color:#222;line-height: 29px;}
+.b_common .check span{font-weight:400;}
+.b_common .check>label input[type="checkbox"] {display:none;}
+.b_common .check>label input[type="checkbox"] + em {display:inline-block;width:20px;height:20px;margin:5px 10px 0 0;background:url('../../images/check.png') 0 no-repeat;}
+.b_common .inquiry_box h4{font-size:2.4rem;color:#222;font-weight:500;margin-bottom: 13px;letter-spacing: -1.1px;}
+.b_common .btn_wrap{overflow:hidden;text-align:center;margin:60px auto 85px;}
+.b_common .btn_wrap a{width:26%;height:60px;text-align:center;color:#fff;display:inline-block;line-height:60px;background:#999}
+.b_common .btn_wrap a.upload{background:#0074c8;}
+.check>label input[type="checkbox"]:checked + em {background-position:-20px 0;}
+#selectproduct{height:45px;border:1px solid #ddd;color:#999}
+.inq-button {width:250px; height:50px; background:#8c6728; margin:0 auto; margin-top:50px; color:#fff; line-height:50px; font-size:16px;}
+.inq-button a{color:#fff;  display:block; text-align:center; }
+#find1{line-height:27px;line-height:27px;font-weight: 400;}
+.file-upload{margin-top:15px}
+#amount{width:20% !important;padding:0 0 0 10px;border:1px solid #ddd}
+#amountType{width:10%}
+#pdIdx{width:30%}
+#maker{width:20%}
+
+@media screen and (max-width:1200px) {	    
+	.write_box{width:90%}
+    .board_wrap > div ul li{font-size: 1.5rem;}
+    .board_wrap > div ul li span{width:55%;font-size:1.4rem;}
+    .paging a{font-size: 1.5rem;}
+    .board_wrap .tit{width: 55%;}
+    .board_wrap > div ul li{width: 15%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+	
+	#Inquiry .btn_wrap a.upload{width:46%}
+    #Product_list .list_wrap{width:}
+    #Product_list .img_table, .b_common .inquiry_box{width:90%}
+    #Product_list .img_table > div{width: 31%;}
+    #Product_list .list_wrap .tab li a{font-size: 1.5rem;}
+    #Product_view .detail_wrap > div, .board_wrap, #Product_list .title .s_tit p{width:90%}
+	#Product_list .title .s_tit p{line-height: 26px;}
+	    
+    #str_email01, #str_email02, #selectEmail{width: 15.8%;font-size: 1.5rem;}	
+    .b_common .inquiry_box .inquiry_cont, .b_common .check{font-size:1.5rem;}
+	#amount{width:17.5% !important}
+}
+
+@media screen and (max-width:1108px) {
+	.write_box table tr th{width:22%}
+	#Product_list .page_wrap > div{width:35%;margin-bottom: 5px;margin-left:0;border-right: 1px solid #ddd}
+	#Product_list .page_wrap > div:last-child{border-left: 1px solid #ddd}
+}
+
+@media screen and (max-width:900px) {
+    .board_wrap > div ul li span{width:62%;font-size:1.3rem}
+}
+
+@media screen and (max-width:768px) {
+    .write_box{font-size: 1.5rem;}
+    .write_box table tr th{width:25%;padding-left:0}
+	.write_box input[type=text]{width:100%}
+	.write_box input[type=text], #selectEmail, .product_maker select, .bowrite_select{font-size:1.3rem}
+    .write_box table tr td p{line-height: 18px;}
+			
+    #Product_list .page_wrap > div a{font-size:1.5rem;}
+    #Product_list .img_table > div a h5{width: 100%;font-size: 1.6rem;}
+    #Product_list .img_table > div a{font-size: 1.4rem;}
+	#Product_list .title .s_tit{padding: 65px 20px;}
+	#Product_list .title .s_tit p{width:100%;font-size:1.6rem;word-break:normal;}
+    #Product_list .title h3, #Product_view .tit_wrap h3{font-size: 3.5rem;}
+    #Product_view .tit_wrap{font-size: 1.6rem;}
+    #Product_view .detail_wrap > div table tr th{width:25%}
+    #Product_view .detail_wrap > div table tr th, #Product_view .detail_wrap > div table tr td{font-size: 1.5rem;}
+    #Product_view .detail_wrap > div a{font-size: 1.6rem;width: 25%;}    
+	
+    .search_wrap .form{width: 90%;}
+    .search_wrap div.dv-select{width: 100%;}
+    .search_wrap span.input input[type=text]{width: 100%;margin: 5px 0 5px 0 ;}
+    .search_wrap .search input[type=submit]{width: 100%}
+    .search_wrap{height: unset;background: none;}    
+	.board_wrap > div ul li{font-size: 1.4rem;}
+    .board_wrap .num, .board_wrap > div ul li.wi{display: none !important;}
+    .board_wrap .tit{width: 76%;}
+    .board_wrap > div ul li{width: 23%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .b_common .inquiry_box h4{font-size: 1.8rem;line-height: 24px;}
+	.b_common  .check{font-size: 1.6rem}
+    .b_common  .inquiry_box .inquiry_cont, .write_box input[type=text], #txtMobile1, .write_box table tr td{font-size: 1.4rem;} 
+	.b_common  .inquiry_box{margin: 70px auto 0;}
+    .b_common  .btn_wrap{width: 100%;}
+	
+	#selectproduct{width:100%}	
+    #txtMobile1, .write_box .phone input{width: 22%}        
+    #txtMobile2, #txtMobile3{width:37.5%}
+	#str_email01, #str_email02{width:28%}
+	#str_email01, #str_email02, #selectEmail,{width: 25%;font-size: 1.4rem;}
+	#selectEmail{width:35%;margin-right: 0 !important}
+	#amountType{width:20%}
+	#amount{width:40% !important}
+	#maker{width:35%;}
+	#pdIdx{width:39%}
+   .addlub-txt tr.supplied .logo{ width: 35%; }
+}
+
+@media screen and (max-width:480px) {	
+	.search_wrap span.input input[type=text]{width:100%;font-size: 1.4rem;}
+    .write_box table tr th{width:25%}
+    .write_box table tr th{width: 22%;font-size: 1.3rem;text-align: left;line-height: 22px;font-weight: 600;}
+	.write_box input[type=text]{width:100%;font-size: 1.2rem;}   
+	.search_wrap div.dv-select select, #Inquiry .check{font-size: 1.4rem;}
+	.b_common .inquiry_box .inquiry_cont, .write_box input[type=text], #txtMobile1, .write_box table tr td{font-size:1.2rem}
+	.b_common .check span{font-size:1.4rem}
+		
+	#Product_list .page_wrap > div{width: 48%;margin-left: 0}
+	#Product_list .img_table > div{width:100%;margin-right:0}
+	#Product_list .title .s_tit p{font-size: 1.5rem}
+	#Product_list .page_wrap > div a{font-size: 1.4rem}
+	
+    #Product_view .detail_wrap > div table tr th, #Product_view .detail_wrap > div table tr td, 
+    #str_email01, #str_email02, #selectEmail{width: 30%;font-size: 1.2rem;}
+	#Product_view .detail_wrap > div table tr th{width:26%}
+
+	#Product_view .detail_wrap > div table tr td{width:100%;}
+
+    #txtMobile2, #txtMobile3{width:37%}
+    #selectEmail, .product_maker select, .bowrite_select{font-size:1.2rem}    
+    #txtMobile1{padding-left:5px}
+    #maker{width:100%;margin-bottom: 5px;}
+    #maker, #pdIdx{width:100%}
+    .addlub-txt td{font-size:1.5rem}
+	
+	
+}
+@media screen and (max-width:357px) {	
+    .write_box table tr th{font-size:1.2rem}
+    .write_box table tr td{padding:13px 0;}    
+    .write_box{width: 90%;}
+    .write_box input[type=text]{width:95%}
+    #txtMobile2, #txtMobile3{width:35%}
+    #str_email02{width:28.5%}
+    #selectproduct{width:96%}
+    #selectEmail{width:28.3%}
+    #maker, #pdIdx{width:95%}
+    #Estimate textarea{width:95% !important}
+}
+

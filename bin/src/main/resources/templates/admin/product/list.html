@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/adminLayout">
+	<body>
+		<section layout:fragment="content">
+			<section id="main-content">
+				<section class="wrapper">
+			        <h3 th:utext="'<i class=\'fa fa-angle-right\'></i> ' + ${boardConfig.bcBoardName}"></h3>
+			        <!-- BASIC FORM ELELEMNTS -->
+			        <div class="row mt">
+			          <div class="col-lg-12">
+			            <div class="form-panel">
+			              <h4 class="mb"><i class="fa fa-angle-right"></i> 기본설정</h4>
+			              <form class="form-horizontal style-form" id="form">
+			              	<input type="hidden" name="bcIdx" th:value="${boardConfig.bcIdx}">
+			              	<input type="hidden" name="bcDbname" th:value="${boardConfig.bcDbname}">
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">게시판 이름</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" name="bcBoardName" class="form-control" th:value="${boardConfig.bcBoardName}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">페이지당 게시물 수</label>
+			                  <div class="col-sm-10">
+			                    <input type="number" class="form-control" name="bcPageRows" th:value="${boardConfig.bcPageRows}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">페이지 표시 개수</label>
+			                  <div class="col-sm-10">
+			                    <input type="number" class="form-control" name="bcPageBlock" th:value="${boardConfig.bcPageBlock}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">페이징 사용여부</label>
+			                  <div class="col-sm-2">
+			                    <input class="form-control" data-toggle="switch" type="checkbox" name="bcUsePageable" value="1" th:checked="${boardConfig.bcUsePageable} > 0 ? 'true'">
+			                  </div> 
+			                  <!-- 
+			                  <label class="col-sm-2 col-sm-2 control-label">비밀글 사용여부</label>
+			                  <div class="col-sm-2">
+			                    <input class="form-control" data-toggle="switch" type="checkbox" name="bcUseSecret" th:checked="${boardConfig.bcUseSecret} > 0 ? 'true'" disabled>
+			                  </div>
+			                  
+			                  <label class="col-sm-2 col-sm-2 control-label">댓글 사용여부</label>
+			                  <div class="col-sm-2">
+			                    <input class="form-control" data-toggle="switch" type="checkbox" name="bcUseReply" th:checked="${boardConfig.bcUseReply} > 0 ? 'true'" disabled>
+			                  </div>
+			                   -->
+			                </div>
+			                
+			                <!-- 
+			                <div class="form-group">
+			                	<label class="col-sm-2 col-sm-2 control-label">스킨 설정</label>
+								<div class="col-sm-10">
+									<input class="form-control" type="text" name="bcSkinName" th:value="${boardConfig.bcSkinName}" disabled>
+								</div>
+			                </div>
+			                 -->
+			                <input type="hidden" name="bcBoardType" value="product">
+			                <input type="hidden" name="bcSkinName" th:value="${boardConfig.bcSkinName}">
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">게시판 사용여부</label>
+			                  <div class="col-sm-10">
+			                    <input class="form-control" type="checkbox" name="bcIsUse" data-toggle="switch" value="1" th:checked="${boardConfig.bcIsUse} > 0 ? 'true'">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                	<div class="col-lg-offset-2 col-lg-10">
+			                		<button class="btn btn-theme pull-right" type="button" id="saveBtn">저장</button>
+			                	</div>
+			                </div>
+			              </form>
+			            </div>
+			          </div>
+			          <!-- col-lg-12-->
+			        </div>
+			        
+			        
+			        
+			        <div class="row mt">
+			          <div class="col-lg-12">
+			            <div class="form-panel">
+			              <section id="unseen">
+			              	<div class="row">
+			              	<div class="col-lg-6">
+				              	<h4><i class="fa fa-angle-right"></i> 카테고리 추가</h4>
+				              	<form class="form-horizontal style-form"  id="pcatForm">
+				              		<input type="hidden" name="bcDbname" th:value="${boardConfig.bcDbname}">
+				              		<input type="hidden" name="pcatIdx" id="pcatIdx">
+					              	<div class="form-group">
+					              		<label class="col-sm-2 control-label">카테고리명</label>
+					              		<div class="col-sm-10">
+					              			<input class="form-control" type="text" id="pcatName" name="pcatName" placeholder="카테고리명을 입력해주세요.">
+					              		</div>
+					              	</div>
+					              	<div class="form-group">
+					              		<label class="col-sm-2 control-label">카테고리명(영문)</label>
+					              		<div class="col-sm-10">
+					              			<input class="form-control" type="text" id="pcatNameEn" name="pcatNameEn" placeholder="카테고리명(영문)을 입력해주세요.">
+					              		</div>
+					              	</div>
+					              	<div class="form-group">
+					              		<label class="col-sm-2 control-label">정렬순서</label>
+					              		<div class="col-sm-4">
+					              			<input class="form-control" type="number" id="pcatOrder" name="pcatOrder" value="1">
+					              		</div>
+					                	
+					                </div>
+					                <div class="form-group">
+					                	<label class="col-sm-2 control-label">설명<br/>(윤활유첨가제, 염료&식별제 용)</label>
+					                	<div class="col-sm-10">
+					                		<textarea class="form-control" id="pcatDesc" name="pcatDesc" style="min-height: 250px; resize: none;"></textarea>
+					                	</div>
+					                </div>
+					                <div class="form-group">
+					                	<label class="col-sm-2 control-label">종류<br/>(윤활유첨가제, 염료&식별제 용)</label>
+					                	<div class="col-sm-10">
+					                		<input class="form-control" type="text" id="pcatType" name="pcatType">
+					                	</div>
+					                </div>
+					                <div class="form-group">
+					                	<label class="col-sm-2 control-label">적용<br/>(윤활유첨가제, 염료&식별제 용)</label>
+					                	<div class="col-sm-8">
+					                		<input class="form-control" type="text" id="pcatAddative" name="pcatAddative">
+					                	</div>
+					                	<div class="col-lg-2">
+					                		<button class="btn btn-theme pull-right" type="button" id="pcatSaveBtn">저장</button>
+					                	</div>
+					                </div>
+				              	</form>
+			              	</div>
+			              	<div class="col-lg-6">
+			              	<h4><i class="fa fa-angle-right"></i> 카테고리 목록</h4>
+				                <table class="table table-bordered table-striped table-condensed">
+				                  <thead>
+				                    <tr>
+				                      <th>카테고리명</th>
+				                      <th>카테고리명(영문)</th>
+				                      <th>정렬순서</th>
+				                      <th>관리</th>
+				                    </tr>
+				                  </thead>
+				                  <tbody>
+				                    <tr th:each="category, c:${productCategoryList}">
+				                    	<td th:text="${category.pcatName}"></td>
+				                    	<td th:text="${category.pcatNameEn}"></td>
+				                    	<td th:text="${category.pcatOrder}"></td>
+				                    	<td>
+				                    		<a th:href="@{'/admin/product/category/modify'(pcatIdx=${category.pcatIdx})}"><button class="btn btn-theme04 btn-sm">수정</button></a>
+				                    		<a th:onclick="javascript:pcatDelete([[${category.pcatIdx}]])"><button class="btn btn-theme02 btn-sm">삭제</button></a>
+				                    	</td>
+				                    </tr>
+				                  </tbody>
+				                </table>
+			                </div>
+			                </div>
+			              </section>
+			            </div>
+			            <!-- /content-panel -->
+			          </div>
+			          <!-- /col-lg-4 -->
+			        </div>
+			        
+			        <div class="row mt">
+			          <div class="col-lg-12">
+			            <div class="form-panel">
+			              <h4><i class="fa fa-angle-right"></i> 상품 설정<a th:href="@{'/admin/product/' + ${boardConfig.bcDbname} + '/add'}"><button class="btn btn-theme pull-right">추가</button></a></h4>
+			              <section id="unseen">
+			                <table class="table table-bordered table-striped table-condensed">
+			                  <thead>
+			                    <tr>
+			                    	<th>순번</th>
+			                      	<th>상품명</th>
+			                      	<th>카테고리</th>
+			                      	<th>제조사</th>
+			                      	<th>종류</th>
+			                      	<th>기능 및 성분</th>
+			                      	<th>담당자</th>
+			                      	<th>연락처</th>
+			                      	<th>정렬순서</th>
+			                      	<th>노출언어</th>
+			                      	<th>수정</th>
+			                    </tr>
+			                  </thead>
+			                  <tbody>
+			                    <tr th:each="product, c:${productList}">
+			                    	<td th:text="${c.index}+1"></td>
+			                    	<td th:text="${product.pdName}"></td>
+			                    	<td th:text="${product.productCategoryDto.pcatName}"></td>
+			                    	<td th:text="${product.pdManufacturer}"></td>
+			                    	<td th:text="${product.pdCategory}"></td>
+			                    	<td th:text="${product.pdD1}"></td>
+			                    	<td th:text="${product.pdD2}"></td>
+			                    	<td th:text="${product.pdTel}"></td>
+			                    	<td th:text="${product.pdOrder}"></td>
+			                    	<td th:text="${product.pdLang} == 'ko' ? '한국어' : '영어'"></td>
+			                    	<td style="text-align: center;">
+			                    		<a th:href="@{'/admin/product/modify'(pdIdx=${product.pdIdx})}"><button class="btn btn-sm btn-theme">수정</button></a>
+			                    		<a th:onclick="javascript:productDelete([[${product.pdIdx}]])"><button class="btn btn-theme04 btn-sm">삭제</button></a>
+			                    	</td>
+			                    </tr>
+			                  </tbody>
+			                </table>
+			              </section>
+			            </div>
+			            <!-- /content-panel -->
+			          </div>
+			          <!-- /col-lg-4 -->
+			        </div>
+			        
+			        <script type="text/javascript">
+		        		$("#saveBtn").click(function() {
+		        			send('/admin/board/save', $("#form").serializeObject(), function(d) {
+	        					alert( d.msg );
+	        					if( d.code == 200 ) {
+	        						location.reload();
+	        					}
+	        				});
+		        		});
+		        		
+		        		$("#pcatSaveBtn").click(function() {
+		        			send( '/admin/product/category/save', $("#pcatForm").serializeObject(), function(d) {
+		        				alert( d.msg );
+		        				if( d.code == 200 ) {
+		        					location.reload();
+		        				}
+		        			})
+		        		});
+		        		
+		        		function pcatDelete( pcatIdx ) {
+		        			if( confirm( '삭제하시겠습니까? 하위 상품도 함께 삭제됩니다.' ) ) {
+		        				send( '/admin/product/category/delete', {
+		        					'pcatIdx': pcatIdx
+		        				}, function(d) {
+		        					alert( d.msg );
+			        				if( d.code == 200 ) {
+			        					location.reload();
+			        				}
+		        				});
+		        			}
+		        		}
+		        		
+		        		function productDelete( pdIdx ) {
+		        			if( confirm( '삭제하시겠습니까?' ) ) {
+		        				send('/admin/product/delete', {
+		        					'pdIdx': pdIdx
+		        				}, function(d) {
+		        					alert( d.msg );
+		        					if( d.code == 200 ) {
+		        						location.reload();
+		        					}
+		        				});
+		        			}
+		        		}
+			        </script>
+				</section>
+			</section>
+		</section>
+	</body>
+</html>

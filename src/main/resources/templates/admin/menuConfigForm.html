@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/adminLayout">
+	<body>
+		<section layout:fragment="content">
+			<section id="main-content">
+				<section class="wrapper">
+			        <h3 th:utext="'<i class=\'fa fa-angle-right\'></i> 메뉴설정'"></h3>
+			        <!-- BASIC FORM ELELEMNTS -->
+			        <div class="row mt">
+			          <div class="col-lg-12">
+			            <div class="form-panel">
+			              <h4 class="mb"><i class="fa fa-angle-right"></i> 메뉴설정</h4>
+			              <form class="form-horizontal style-form" id="form" enctype="multipart/form-data" method="POST" action="/admin/product/save">
+			              	<input type="hidden" name="smcIdx" th:value="${subMenuConfig} == null ? '' : ${subMenuConfig.smcIdx}">
+			              	<input type="hidden" name="smcCategory" value="product">
+			              	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">DB명</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" name="smcUrl" class="form-control" th:value="${subMenuConfig} == null ? '' : ${subMenuConfig.smcUrl}" th:readonly="${subMenuConfig} != null and ${subMenuConfig.smcUrl} != null ? 'true' : 'false'">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">메뉴명</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" name="smcName" class="form-control" th:value="${subMenuConfig} == null ? '' : ${subMenuConfig.smcName}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">적용언어</label>
+			                  <div class="col-sm-10">
+			                    <select name="smcLang" class="form-control">
+			                    	<option value="ko" th:checked="${subMenuConfig} != null and ${subMenuConfig.smcLang} == 'ko' ? 'true' : 'false'">한국어</option>
+			                    	<option value="en" th:checked="${subMenuConfig} != null and ${subMenuConfig.smcLang} == 'en' ? 'true' : 'false'">영어</option>
+			                    </select>
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">정렬순서</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" class="form-control" name="smcOrder" th:value="${subMenuConfig} == null ? '' : ${subMenuConfig.smcOrder}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">사용여부</label>
+			                  <div class="col-sm-10">
+			                    <input class="form-control" data-toggle="switch" type="checkbox" name="smcIsUse" value="1" th:checked="${subMenuConfig} != null and ${subMenuConfig.smcIsUse} == '1' ? 'true'">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                	<div class="col-lg-offset-2 col-lg-10">
+			                		<button th:if="${subMenuConfig} != null and ${subMenuConfig.smcIdx} != null" class="btn btn-theme pull-right" type="button" id="deleteBtn">삭제</button>
+			                		<button class="btn btn-theme pull-right" type="button" id="saveBtn">저장</button>
+			                	</div>
+			                </div>
+			              </form>
+			            </div>
+			          </div>
+			          <!-- col-lg-12-->
+			        </div>
+			        
+			        <script type="text/javascript">
+			        	
+			        	$("#saveBtn").click(function() {
+			        		var f = $("#form").serializeObject();
+			        		
+			        		if( f.smcUrl == null || f.smcUrl.trim().length == 0 ) {
+			        			alert( "DB명을 입력해주세요." );
+			        		} else if( f.smcName == null || f.smcName.trim().length == 0 ) {
+			        			alert( "메뉴명을 입력해주세요." );
+			        		} else if( f.smcOrder == null ) {
+			        			alert( "정렬순서를 입력해주세요." );
+			        		} else {
+			        			
+			        			var form_data = new FormData( document.getElementById("form") );
+			        			form_data.append( '[[${_csrf.parameterName}]]', '[[${_csrf.token}]]' );
+			        			if( form_data.get('smcIsUse') == null ) {
+			        				form_data.set('smcIsUse', 0 );
+			        			}
+			        			
+			        			$.ajax({
+			        				data: form_data,
+			        				type: 'POST',
+			        				url: '/admin/menuConfig/save',
+			        				cache: false,
+			        				contentType: false,
+			        				encType: 'multipart/form-data',
+			        				processData: false,
+			        				success: function(d) {
+			        					console.log(d);
+			        					alert(d.msg);
+				        				if( d.code == 200 ) {
+				        					location.href='/admin/menuConfig';
+				        				}	
+			        				}
+			        			});
+			        		}
+			        	});
+			        	
+			        	
+			        </script>
+			        
+			        <script type="text/javascript" th:if="${subMenuConfig} != null">
+			        $("#deleteBtn").click(function() {
+		        		if( confirm( "삭제하시겠습니까? 하위 데이터까지 모두 삭제됩니다." ) ) {
+		        			$.ajax({
+		        				type: 'post',
+		        				url: '/admin/menuConfig/delete.ajax',
+		        				data: {
+		        					'[[${_csrf.parameterName}]]': '[[${_csrf.token}]]',
+		        					'smcIdx': '[[${subMenuConfig.smcIdx}]]',
+		        					'smcOrder': 0,
+		        					'smcIsUse': 0
+		        				},
+		        				success: function( d ) {
+		        					console.log(d);
+		        					alert(d.msg);
+			        				if( d.code == 200 ) {
+			        					location.href='/admin/menuConfig';
+			        				}	
+		        				}
+		        			});
+		        		}
+		        	})
+			        </script>
+				</section>
+			</section>
+		</section>
+	</body>
+</html>

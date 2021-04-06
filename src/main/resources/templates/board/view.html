@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content">
+			<div class="sub-visual subv-5">
+				<h1>inwoo<br><span></span>cs center</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<a class="active" th:utext="${currentSubMenuOne.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2 th:text="${boardConfig.bcBoardName}"></h2> 
+			</div>
+			
+			<div id="Inquiry"  class="b_common">
+				<form id="form" name="boardForm" method="POST">
+					<input type="hidden" name="bcDbname" th:value="${boardConfig.bcDbname}">
+					<input type="hidden" name="boVisible" value="1">
+					<div class="write_box">
+						<table>
+							<colgroup>
+								<col style="width:15%;">
+								<col style="width: auto;">
+							</colgroup>
+							<tr>
+								<th scope="row"><label for="title" th:text="#{board.title}">제목</label></th>
+								<td th:text="${board.boTitle}"></td>
+							</tr>
+							<tr>
+								<th scope="row"><label for="name" th:text="#{board.writer}">작성자</label></th>
+								<td th:text="${board.memberDto.mbName}"></td>
+							</tr>
+							<tr>
+								<th scope="row"><label for="enrolDt" th:text="#{board.enrol}">작성일시</label>
+								<td th:text="${#strings.replace( board.boEnrolDt, 'T', ' ')}"></td>
+							</tr>
+							<tr>
+								<th scope="row"><label for="content" th:text="#{board.content}">내용</label></th>
+								<td th:utext="${board.boContent}"></td>
+							</tr>
+							<tr th:if="${uploadFileList} != null" th:each="uploadFile, u:${uploadFileList}">
+								<th th:if="${u.index} == 0" scope="row" th:rowspan="${uploadFileList} == null ? 1 : ( #lists.size(uploadFileList) )" th:text="#{board.attach}">첨부파일</th>
+								<td>
+									<a th:href="@{'/file/' + ${board.boFile1}}" download th:text="${uploadFile.ufFileName}"></a>
+								</td>
+							</tr>
+						</table>
+						<div class="btn_wrap" style="text-align: center;">
+							<a th:unless="${boardConfig.bcDbname} == 'recruit'" th:href="@{'/board/' + ${boardConfig.bcDbname} + '/list' ( page=${ #httpServletRequest.getParameter('page') } ) } " th:text="#{board.list}">목록</a>
+							<a th:if="${boardConfig.bcDbname} == 'recruit'" th:href="@{'/page/company/joboffer'}" th:text="#{board.list}">목록</a>
+						</div>
+						<div class="btn_wrap" style="text-align: center; margin-bottom: 0;">
+							<a style="width: 24%" sec:authorize="hasAnyRole('ADMIN', 'DEVELOPER')" th:href="@{'/board/' + ${boardConfig.bcDbname} + '/modify' (boIdx=${board.boIdx},page=${ #httpServletRequest.getParameter('page') })}">수정</a>
+							<a style="width: 24%" sec:authorize="hasAnyRole('ADMIN', 'DEVELOPER')" th:onclick="javascript:del([[${board.boIdx}]])">삭제</a>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+			<script sec:authorize="hasAnyRole('ADMIN', 'DEVELOPER')">
+				function del( boIdx ) {
+					if( confirm( '삭제하시겠습니까?' ) ) {
+						send( '/board/delete.ajax', {
+							'boIdx': boIdx
+						}, function(d) {
+							alert( d.msg );
+							if( d.code == 200 ) {
+								location.href = '/board/' + '[[${boardConfig.bcDbname}]]' + '/list?page=' + '[[${#httpServletRequest.getParameter("page")}]]'
+							}
+						})
+					}
+				}
+			</script>
+			
+			<script>
+				$('.tab-ul_1').click(function(){
+					$('.tab-ul_1 ul').slideToggle();
+				});
+				
+				$('.tab-ul_2').click(function(){
+					$('.tab-ul_2 ul').slideToggle();
+				});
+			
+				$("#editor").summernote({
+	        		height: 500,
+	        		maxHeight: 500,
+	        		callbacks: {
+	        			onImageUpload: function( files, editor, welEditable ) {
+	        				for( var i = files.length - 1; i>=0; i-- ) {
+	        					sendFile( files[i], this );
+	        				}
+	        			}
+	        		}
+	        	});
+	        	
+	        	function sendFile( file, el ) {
+	        		var form_data = new FormData();
+	        		form_data.append( 'file', file );
+	        		form_data.append( '[[${_csrf.parameterName}]]', '[[${_csrf.token}]]' )
+	        		$.ajax({
+	        			data: form_data,
+	        			type: 'POST',
+	        			url: '/admin/product/image',
+	        			cache: false,
+	        			contentType: false,
+	        			encType: 'multipart/form-data',
+	        			processData: false,
+	        			success: function( url ) {
+	        				$(el).summernote( 'editor.insertImage', url );
+	        				$( "#imageBoard > ul").append( "<li><img src='" + url + "' height='auto'/></li>" );
+	        			}
+	        		});
+	        	}
+	        	
+	        	function check() {
+	        		var f = $("#form").serializeObject();
+	        		if( f.boTitle == null || f.boTitle.trim().length == 0 ) {
+	        			alert( '제목을 입력해주세요.' );
+	        		} else if( f.boContent == null || f.boContent.trim().length == 0 ) {
+	        			alert( '내용을 입력해주세요.' );
+	        		} else {
+	        			var form_data = new FormData(document.getElementById("form"));
+	        			form_data.append( '[[${_csrf.parameterName}]]', '[[${_csrf.token}]]' );
+	        			$.ajax({
+	        				data: form_data,
+	        				type: 'POST',
+	        				url: '/board/write/proc.ajax',
+	        				cache: false,
+	        				contentType: false,
+	        				encType: 'multipart/form-data',
+	        				processData: false,
+	        				success: function( d ) {
+	        					alert( d.msg );
+	        					if( d.code == 200 ) {
+	        						location.href = '/board/' + '[[${boardConfig.bcDbname}]]' + '/view?boIdx=' + d.boIdx;
+	        					}
+	        				}
+	        			});
+	        		}
+	        	}
+			</script>
+		</section>		
+		<!-- FOOTER -->
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>

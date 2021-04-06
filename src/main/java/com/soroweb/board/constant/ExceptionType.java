@@ -1,0 +1,21 @@
+package com.soroweb.board.constant;
+
+public enum ExceptionType {
+
+	NOT_EXIST_PAGE_EXCEPTION("NOT_EXIST_PAGE_EXCEPTION"), 
+	NOT_EXIST_BOARD_TABLE_EXCEPTION("NOT_EXIST_BOARD_TABLE_EXCEPTION"),
+	NOT_MATCH_USERNAME_EXCEPTION("NOT_MATCH_USERNAME_EXCEPTION"), 
+	NOT_EXIST_BOARD_DATA_EXCEPTION("NOT_EXIST_BOARD_DATA_EXCEPTION"), 
+	UPDATE_FAILURE_EXCEPTION("UPDATE_FAILURE_EXCEPTION"), 
+	UNUSING_BOARD_ACCESS_EXCEPTION("UNUSING_BOARD_ACCESS_EXCEPTION");
+	
+	final private String name;
+	
+	ExceptionType( String name ) {
+		this.name = name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+}

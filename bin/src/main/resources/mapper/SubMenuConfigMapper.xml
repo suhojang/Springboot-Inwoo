@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.SubMenuConfigRepository">
+	<resultMap id="subMenuConfigMap" type="com.soroweb.board.dto.SubMenuConfigDto">
+		<result column="SMC_IDX" property="smcIdx" />
+		<result column="MC_IDX" property="smcIdx" />
+		<result column="SMC_NAME" property="smcName" />
+		<result column="SMC_CATEGORY" property="smcCategory" />
+		<result column="SMC_URL" property="smcUrl" />
+		<result column="SMC_ORDER" property="smcOrder" />
+		<result column="SMC_IS_USE" property="smcIsUse" />
+		<result column="SMC_LANG" property="smcLang" />
+	</resultMap>
+	
+	<select id="findSubmenuConfigListByMcIdxAndSmcIsUseOrderBySmcOrderAsc" parameterType="com.soroweb.board.dto.SubMenuConfigDto" resultType="com.soroweb.board.dto.SubMenuConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				SUB_MENU_CONFIG
+			WHERE
+				MC_IDX = #{mcIdx}
+				AND SMC_IS_USE = #{smcIsUse}
+			ORDER BY
+				SMC_ORDER ASC
+		]]>
+	</select>
+	
+	<select id="findOneBySmcCategoryAndSmcUrlLike" parameterType="com.soroweb.board.dto.SubMenuConfigDto" resultType="com.soroweb.board.dto.SubMenuConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				SUB_MENU_CONFIG
+			WHERE
+				SMC_CATEGORY = #{smcCategory}
+				AND SMC_URL LIKE CONCAT( #{smcUrl}, '%' )
+				AND SMC_LANG = #{smcLang}
+			LIMIT 1
+		]]>
+	</select>
+	
+	<select id="findListBySmcCategory" parameterType="com.soroweb.board.dto.SubMenuConfigDto" resultType="com.soroweb.board.dto.SubMenuConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				SUB_MENU_CONFIG
+			WHERE
+				SMC_CATEGORY = #{smcCategory}
+			ORDER BY SMC_LANG DESC, SMC_ORDER ASC
+		]]>
+	</select>
+	
+	<select id="findOneBySmcIdx" parameterType="com.soroweb.board.dto.SubMenuConfigDto" resultType="com.soroweb.board.dto.SubMenuConfigDto">
+		<![CDATA[
+			SELECT
+				SMC_IDX,
+				MC_IDX,
+				SMC_NAME,
+				SMC_CATEGORY,
+				SMC_URL,
+				IFNULL( SMC_ORDER, 0 ) SMC_ORDER,
+				IFNULL( SMC_IS_USE, 0 ) SMC_IS_USE,
+				SMC_LANG
+			FROM
+				SUB_MENU_CONFIG
+			WHERE
+				SMC_IDX = #{smcIdx}
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="com.soroweb.board.dto.SubMenuConfigDto">
+		<![CDATA[
+			INSERT INTO SUB_MENU_CONFIG( MC_IDX, SMC_NAME, SMC_CATEGORY, SMC_URL, SMC_ORDER, SMC_IS_USE, SMC_LANG )
+			VALUES( #{mcIdx}, #{smcName}, #{smcCategory}, #{smcUrl}, #{smcOrder}, #{smcIsUse}, #{smcLang} )
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.soroweb.board.dto.SubMenuConfigDto">
+		<![CDATA[
+			UPDATE SUB_MENU_CONFIG
+			SET
+				SMC_NAME = #{smcName},
+				SMC_CATEGORY = #{smcCategory},
+				SMC_URL = #{smcUrl},
+				SMC_ORDER = #{smcOrder},
+				SMC_IS_USE = #{smcIsUse},
+				SMC_LANG = #{smcLang}
+			WHERE
+				SMC_IDX = #{smcIdx}
+		]]>
+	</update>
+	
+	<delete id="deleteMenuConfig" parameterType="com.soroweb.board.dto.SubMenuConfigDto">
+		<![CDATA[
+			DELETE
+				FROM
+					SUB_MENU_CONFIG
+				WHERE
+					SMC_IDX = #{smcIdx}
+		]]>
+	</delete>
+</mapper>

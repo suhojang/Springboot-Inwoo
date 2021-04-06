@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<section layout:fragment="content">
+			<div class="sub-visual subv-1">
+				<h1>inwoo<br><span></span>company</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<div th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" th:utext="${sub.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							</div>				
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2 th:text="#{greeting.subtit}"></h2> 
+			</div>
+			
+			<div id="Greeting">
+				<div class="wrap" data-aos="fade-up" data-aos-duration="3000"> 
+					<div class="gr_tit" th:utext="#{greeting.grtit}"></div>
+					<div class="bg"><span></span></div>
+					<div class="s_txt" th:utext="#{greeting.stxt}">
+						
+					</div>	
+				</div>
+			</div> 
+			<script>
+				$(function() {
+					$('.tab-ul_1').click(function(){
+						$('.tab-ul_1 ul').slideToggle();
+					});
+					
+					$('.tab-ul_2').click(function(){
+						$('.tab-ul_2 ul').slideToggle();
+					});
+					
+					AOS.init();
+				});
+			</script>
+		</section>
+	</body>
+</html>

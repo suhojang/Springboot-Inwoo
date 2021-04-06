@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<head>
+		<title>BOARD LIST</title>
+		
+		<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+		
+		<style>
+			.ck-editor__editable {
+				min-height: 500px;
+				max-height: 700px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content">
+			<h3>게시판 이름</h3>
+			
+			<hr/>
+			
+			<form action="/board/write/proc" enctype="multipart/form-data" method="POST">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h4>Board</h4>
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-9">
+						<select id="dbname" name="bcDbname" th:class="form-control">
+							<option value="">게시판을 선택하세요</option>
+							<option th:each="board:${boardConfigList}" th:value="${board.bcDbname}" th:text="${board.bcBoardName}"></option>
+						</select>
+					</div>
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h4>Writer</h4>
+					</div>
+					<div class="col-lg-5 col-md-5 col-sm-9">
+						<p th:text="${member.mbName}"></p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h4>Title</h4>
+					</div>
+					<div class="col-lg-11 col-md-11 col-sm-9">
+						<input type="text" id="title" name="boTitle" class="form-control">	
+					</div>
+				</div>
+				
+				<hr/>
+				
+				<h4>Content</h4>
+				
+				<textarea name="boContent" id="editor">
+				</textarea>
+				
+				<hr/>
+				
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h4>Attachment</h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h5>File</h5>
+					</div>
+					<div class="col-lg-11 col-md-11 col-sm-9">
+						<input multiple="multiple" type="file" name="files" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-3">
+						<h5>File</h5>
+					</div>
+					<div class="col-lg-11 col-md-11 col-sm-9">
+						<input multiple="multiple" type="file" name="files" class="form-control">
+					</div>
+				</div>
+				
+				<hr/>
+				
+				<p style="text-align: right;">
+					<input type="submit" value="Submit">
+					<a th:href="@{/}"><button type="button">Cancel</button></a>
+				</p>
+			</form>
+			<script type="text/javascript">
+				$(function() {
+					
+					$("#dbname").select2();
+					
+					ClassicEditor
+						.create( document.querySelector( "#editor" ) )
+						.then( function( editor ) {
+							editor.plugins.get( "FileRepository" ).createUploadAdapter = function( loader ) {
+								return new CustomUploadAdapter( loader, "/images/board/press", function( result ) {
+									var fileSeq = isEmpty( result[0] ) ? "noimage" : result[0];
+									var imageUrl = window.location.protocol + "//" + window.location.host + "/images/" + fileSeq;
+									return {
+										"default": imageUrl
+									}
+								})
+							}
+						})
+						.catch( error => {
+							console.log( error );
+						})
+					;
+					
+					var CustomUploadAdapter = function( loader, path, fn_resolve ) {
+						this.constructor = function( loader ) {
+							this.loader = loader;
+							this.path = path;
+							this.fn_resolve;
+						};
+						
+						this.upload= function() {
+							return new Promise( function( resolve, reject ) {
+								this.xhr = ajax_file_upload({
+									loader: loader,
+									resolve: resolve,
+									reject: reject,
+									files: [loader.file],
+									path: path,
+									fn_progress: function(e) {
+										e.lengthComputable && (loader.uploadTotal = e.total, loader.uploaded = e.loaded)
+									},
+									fn_success: function(e) {
+										resolve(fn_resolve && fn_resolve(e));
+									},
+									fn_error: function(e) {
+										reject("upload fail => " + `${loader.file.name}.`)
+									},
+									fn_abort: reject
+								});
+							});
+						};
+						
+						this.abort = function() {
+							return this.xhr.abort && this.xhr.abort();
+						}
+					}
+					
+					function ajax_file_upload(p) {
+						if( !p.files || !p.loader || !p.path ) return new XMLHttpRequest;
+						
+						var formData = new FormData();
+						for( var idx in p.files ) {
+							formData.append( "uploadfile", p.files[idx] );
+						}
+						formData.append( "path", p.path );
+						
+						formData.append( '[[${_csrf.parameterName}]]', '[[${_csrf.token}]]' )
+						return $.ajax({
+							url: '/board/fileupload',
+							processData: false,
+							contentType: false,
+							data: formData,
+							type: 'POST',
+							onprogress: function(e) {
+								p.fn_progress && p.fn_progress(e);
+							},
+							success: function(e) {
+								p.fn_success && p.fn_success(e);
+							},
+							error: function(e) {
+								p.fn_error && p.fn_error;
+							},
+							abort: function(e) {
+								p.fn_abort && p.fn_abort(e);
+							}
+						});
+					}
+				});
+			</script>
+		</section>
+		<!-- FOOTER -->
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>

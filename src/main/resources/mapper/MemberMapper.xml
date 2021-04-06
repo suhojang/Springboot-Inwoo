@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.MemberRepository">
+	<resultMap type="com.soroweb.board.dto.MemberDto" id="memberMap">
+		<result column="MB_ID" property="mbId" />
+		<result column="MB_USER_ID" property="mbUserId" />
+		<result column="MB_USER_PW" property="mbUserPw" />
+		<result column="MB_NAME" property="mbName" />
+		<result column="MB_EMAIL" property="mbEmail" />
+		<result column="MB_TEL" property="mbTel" />
+		<result column="MB_ENROL_DT" property="mbEnrolDt" />
+		<result column="isaccountexpired" property="isaccountexpired" />
+		<result column="isaccountnonlocked" property="isaccountnonlocked" />
+		<result column="iscredentialsnonexpired" property="iscredentialsnonexpired" />
+		<result column="isenabled" property="isenabled" />
+	</resultMap>
+
+	<select id="findMemberOneByMbUserId" parameterType="com.soroweb.board.dto.MemberDto" resultType="com.soroweb.board.dto.MemberDto">
+		<![CDATA[
+			SELECT 
+				*
+			FROM
+				MEMBER
+			WHERE
+				MB_USER_ID = #{mbUserId}
+		]]>
+	</select>
+</mapper>

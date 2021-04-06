@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">ADMIN</title>
+    <!-- 공통 css, js, meta tag -->
+    <th:block th:replace="fragments/adminHead"></th:block>
+</head>
+<body>
+	<section id="container">
+		<header th:replace="fragments/adminHeader :: adminHeader"></header>
+		<aside th:replace="fragments/adminAside :: adminAside"></aside>
+	    <!-- page content body 구성 -->
+	    <th:block layout:fragment="content"></th:block>
+    </section>
+</body>
+</html>

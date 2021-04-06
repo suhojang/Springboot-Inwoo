@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<aside th:fragment="adminAside">
+		<div th:text="${boardList}"></div>
+		<div id="sidebar" class="nav-collapse ">
+			<!-- sidebar menu start-->
+			<ul class="sidebar-menu" id="nav-accordion">
+				<!-- 
+				<li class="mt">
+					<a class="active" href="index.html">
+						<i class="fa fa-dashboard"></i>
+						<span>Dashboard</span>
+					</a>
+				</li>
+				 -->
+				<li class="sub-menu">
+					<a href="javascript:;" th:with="uri=${#httpServletRequest.requestURI}" th:class="${#strings.indexOf(uri, '/admin/board')} >= 0 ? 'active'">
+						<i class="fa fa-desktop"></i>
+						<span>게시판 관리</span>
+					</a>
+					<ul class="sub">
+						<li th:each="board, b:${adminBoardMenuList}">
+							<a th:href="@{'/admin/board/list/' + ${board.bcDbname}}" th:text="${board.bcBoardName}"></a>
+						</li>
+					</ul>
+				</li>
+				<li class="sub-menu">
+					<a href="javascript:;" th:with="uri=${#httpServletRequest.requestURI}" th:class="${#strings.indexOf(uri, '/admin/product')} >= 0 ? 'active'">
+						<i class="fa fa-th"></i>
+						<span>상품관리</span>
+					</a>
+					<ul class="sub">
+						<li>
+							<a href="/admin/menuConfig">
+								<span>메뉴 설정</span>
+							</a>
+						</li>
+						<li th:each="product, p:${adminProductMenuList}">
+							<a th:href="@{ '/admin/product/list/' + ${product.bcDbname}}" th:text="${product.bcBoardName}"></a>
+						</li>
+					</ul>
+				</li>
+				<li class="sub-menu">
+					<a href="/admin/provider/list" th:with="uri=${#httpServletRequest.requestURI}" th:class="${#strings.indexOf(uri, '/admin/provider')} >= 0 ? 'active'">
+						<i class="fa fa-comments-o"></i>
+						<span>공급사관리</span>
+					</a>
+				</li>
+				<li class="sub-menu">
+					<a href="javascript:;" th:with="uri=${#httpServletRequest.requestURI}" th:class="${#strings.indexOf(uri, '/admin/privacy')} >= 0 ? 'active'">
+						<i class="fa fa-th"></i>
+						<span>홈페이지관리</span>
+					</a>
+					<ul class="sub">
+						<li>
+							<a href="/admin/privacy">
+								<span>개인정보처리방침 관리</span>
+							</a>
+						</li>
+					</ul>
+					
+				</li>
+				<!-- 
+				<li class="sub-menu">
+					<a href="javascript:;">
+						<i class="fa fa-book"></i>
+						<span>Extra Pages</span>
+					</a>
+					<ul class="sub">
+						<li><a href="blank.html">Blank Page</a></li>
+						<li><a href="login.html">Login</a></li>
+						<li><a href="lock_screen.html">Lock Screen</a></li>
+						<li><a href="profile.html">Profile</a></li>
+						<li><a href="invoice.html">Invoice</a></li>
+						<li><a href="pricing_table.html">Pricing Table</a></li>
+						<li><a href="faq.html">FAQ</a></li>
+						<li><a href="404.html">404 Error</a></li>
+						<li><a href="500.html">500 Error</a></li>
+					</ul>
+				</li>
+				 -->
+				 <!-- 
+				<li class="sub-menu">
+					<a href="javascript:;">
+						<i class="fa fa-cogs"></i>
+						<span>설정</span>
+					</a>
+					<ul class="sub">
+						<li><a href="grids.html">기본환경설정</a></li>
+						<li><a href="calendar.html">게시판설정</a></li>
+						<li><a href="gallery.html">상품설정</a></li>
+					</ul>
+				</li>
+				 -->
+			</ul>
+        <!-- sidebar menu end-->
+		</div>
+	</aside>
+</html>

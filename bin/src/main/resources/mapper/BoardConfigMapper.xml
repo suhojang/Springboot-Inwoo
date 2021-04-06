@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.BoardConfigRepository">
+	<resultMap id="boardConfigMap" type="com.soroweb.board.dto.BoardConfigDto">
+		<result column="BC_IDX" property="bcIdx" />
+		<result column="BC_DBNAME" property="bcDbname" />
+		<result column="BC_BOARD_NAME" property="bcDbname" />
+		<result column="BC_BOARD_TYPE" property="bcBoardType" />
+		<result column="BC_PAGE_ROWS" property="bcPageRows" />
+		<result column="BC_PAGE_BLOCK" property="bcPageBlock" />
+		<result column="BC_USE_SECRET" property="bcUseSecret" />
+		<result column="BC_USE_NOTICE" property="bcUseNotice" />
+		<result column="BC_USE_CATEGORY" property="bcUseCategory" />
+		<result column="BC_USE_PAGEABLE" property="bcUsePageable" />
+		<result column="BC_CT_ID" property="bcCtId" />
+		<result column="BC_IS_USE" property="bcIsUse" />
+		<result column="BC_ENROL_DT" property="bcEnrolDt" />
+		<result column="BC_MOD_DT" property="bcModDt" />
+		<association property="subMenuConfigDto">
+			<result column="SMC_IDX" property="smcIdx" />
+			<result column="MC_IDX" property="smcIdx" />
+			<result column="SMC_NAME" property="smcName" />
+			<result column="SMC_CATEGORY" property="smcCategory" />
+			<result column="SMC_URL" property="smcUrl" />
+			<result column="SMC_ORDER" property="smcOrder" />
+			<result column="SMC_IS_USE" property="smcIsUse" />
+			<result column="SMC_LANG" property="smcLang" />
+		</association>
+	</resultMap>
+	
+	<select id="findBoardConfigOneByBcDbname" parameterType="com.soroweb.board.dto.BoardConfigDto" resultType="com.soroweb.board.dto.BoardConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD_CONFIG
+			WHERE
+				UPPER( BC_DBNAME ) = UPPER( #{bcDbname} )
+		]]>
+	</select>
+	
+	<select id="findBoardConfigListByBcIsUse" parameterType="com.soroweb.board.dto.BoardConfigDto" resultType="com.soroweb.board.dto.BoardConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD_CONFIG
+			WHERE
+				UPPER( BC_IS_USE ) = UPPER( #{bcIsUse} )
+		]]>
+	</select>
+	
+	<select id="findBoardConfigListByBcBoardType" parameterType="com.soroweb.board.dto.BoardConfigDto" resultType="com.soroweb.board.dto.BoardConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD_CONFIG
+			WHERE
+				BC_BOARD_TYPE = #{bcBoardType}
+		]]>
+	</select>
+	
+	<select id="findBoardConfigOneByBcIdx" parameterType="com.soroweb.board.dto.BoardConfigDto" resultType="com.soroweb.board.dto.BoardConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD_CONFIG
+			WHERE
+				BC_IDX = #{bcIdx}
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="com.soroweb.board.dto.BoardConfigDto">
+		<![CDATA[
+			INSERT INTO BOARD_CONFIG(
+				BC_DBNAME,
+				BC_BOARD_NAME,
+				BC_BOARD_TYPE,
+				BC_PAGE_ROWS,
+				BC_PAGE_BLOCK,
+				BC_USE_SECRET,
+				BC_USE_REPLY,
+				BC_USE_NOTICE,
+				BC_USE_CATEGORY,
+				BC_USE_PAGEABLE,
+				BC_IS_USE,
+				BC_ENROL_DT,
+				BC_SKIN_NAME ) 
+			VALUES (
+				#{bcDbname},
+				#{bcBoardName},
+				#{bcBoardType},
+				#{bcPageRows},
+				#{bcPageBlock},
+				#{bcUseSecret},
+				#{bcUseReply},
+				#{bcUseNotice},
+				#{bcUseCategory},
+				#{bcUsePageable},
+				#{bcIsUse},
+				NOW(),
+				#{bcSkinName}
+			)	
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.soroweb.board.dto.BoardConfigDto">
+		<![CDATA[
+			UPDATE 
+				BOARD_CONFIG
+			SET
+				BC_DBNAME = #{bcDbname},
+				BC_BOARD_NAME = #{bcBoardName},
+				BC_BOARD_TYPE = #{bcBoardType},
+				BC_PAGE_ROWS = #{bcPageRows},
+				BC_PAGE_BLOCK = #{bcPageBlock},
+				BC_USE_SECRET = #{bcUseSecret},
+				BC_USE_REPLY = #{bcUseReply},
+				BC_USE_NOTICE = #{bcUseNotice},
+				BC_USE_CATEGORY = #{bcUseCategory},
+				BC_USE_PAGEABLE = #{bcUsePageable},
+				BC_IS_USE = #{bcIsUse},
+				BC_ENROL_DT = #{bcEnrolDt},
+				BC_MOD_DT = NOW(),
+				BC_SKIN_NAME = #{bcSkinName}
+			WHERE 
+				BC_IDX = #{bcIdx}
+		]]>
+	</update>
+	
+	<delete id="deleteByBcDbname" parameterType="com.soroweb.board.dto.BoardConfigDto">
+		<![CDATA[
+			DELETE
+				FROM
+					BOARD_CONFIG
+				WHERE
+					BC_DBNAME = #{bcDbname}
+		]]>
+	</delete>
+	
+	<select id="findBoardConfigListByBcBoardTypeWithSubMenuConfig" parameterType="com.soroweb.board.dto.BoardConfigDto" resultMap="boardConfigMap">
+		<![CDATA[
+			select * from SUB_MENU_CONFIG s, BOARD_CONFIG b WHERE b.BC_DBNAME = s.SMC_URL AND b.BC_BOARD_TYPE = #{bcBoardType}
+		]]>
+	</select>
+</mapper>

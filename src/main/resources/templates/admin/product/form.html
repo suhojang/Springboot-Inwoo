@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/adminLayout">
+	<body>
+		<section layout:fragment="content">
+			<section id="main-content">
+				<section class="wrapper">
+			        <h3 th:utext="'<i class=\'fa fa-angle-right\'></i> 상품관리'"></h3>
+			        <!-- BASIC FORM ELELEMNTS -->
+			        <div class="row mt">
+			          <div class="col-lg-12">
+			            <div class="form-panel">
+			              <h4 class="mb"><i class="fa fa-angle-right"></i> 상품설정</h4>
+			              <form class="form-horizontal style-form" id="form" enctype="multipart/form-data" method="POST" action="/admin/product/save">
+			              	<input type="hidden" name="pdIdx" th:value="${product} == null ? '' : ${product.pdIdx}">
+			              	<input type="hidden" name="bcDbname" th:value="${boardConfig.bcDbname}">
+			              	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">상품명</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" name="pdName" class="form-control" th:value="${product} == null ? '' : ${product.pdName}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">카테고리</label>
+			                  <div class="col-sm-10">
+			                    <select class="form-control" name="pcatIdx">
+			                    	<option th:each="category, c:${productCategoryList}" th:value="${category.pcatIdx}" th:text="${category.pcatName}"></option>
+			                    </select>
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">종류</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" class="form-control" name="pdCategory" th:value="${product} == null ? '' : ${product.pdCategory}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">제조사</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" class="form-control" name="pdManufacturer" th:value="${product} == null ? '' : ${product.pdManufacturer}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">기능 및 성분</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" class="form-control" name="pdD1" th:value="${product} == null ? '' : ${product.pdD1}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">담당자</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" class="form-control" name="pdD2" th:value="${product} == null ? '' : ${product.pdD2}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">연락처</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" class="form-control" name="pdTel" th:value="${product} == null ? '' : ${product.pdTel}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+					          <label class="col-sm-2 col-sm-2 control-label">정렬순서</label>
+					          <div class="col-sm-10">
+					        	<input type="number" class="form-control" name="pdOrder" th:value="${product} == null ? '1' : ${product.pdOrder}">
+					           </div>
+					        </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">언어선택</label>
+			                  <div class="col-sm-10">
+			                    <select name="pdLang" class="form-control">
+			                  		<option value="ko" th:selected="${product} != null and ${product.pdLang} == 'ko' ? 'true'">한글</option>
+			                  		<option value="en" th:selected="${product} != null and ${product.pdLang} == 'en' ? 'true'">영문</option>
+			                  	</select>
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">세부설명</label>
+			                  <div class="col-sm-10">
+			                    <textarea id="editor" name="pdDetail" class="form-control" th:text="${product} == null ? '' : ${product.pdDetail}"></textarea>
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">상품이미지(대표)</label>
+			                  <div class="col-sm-10">
+			                    <input type="file" class="form-control" name="pdImg1file" th:value="${product} == null ? '' : ${product.pdImg1}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">상품이미지(추가)</label>
+			                  <div class="col-sm-10">
+			                    <input type="file" class="form-control" name="pdImg2file" th:value="${product} == null ? '' : ${product.pdImg2}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">상품이미지(추가)</label>
+			                  <div class="col-sm-10">
+			                    <input type="file" class="form-control" name="pdImg3file" th:value="${product} == null ? '' : ${product.pdImg3}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">상품이미지(추가)</label>
+			                  <div class="col-sm-10">
+			                    <input type="file" class="form-control" name="pdImg4file" th:value="${product} == null ? '' : ${product.pdImg4}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">상품이미지(추가)</label>
+			                  <div class="col-sm-10">
+			                    <input type="file" class="form-control" name="pdImg5file" th:value="${product} == null ? '' : ${product.pdImg5}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">상품 게시여부</label>
+			                  <div class="col-sm-10">
+			                    <input class="form-control" type="checkbox" name="pdIsUse" data-toggle="switch" value="1" th:checked="${product} == null ? 'true' : ( ${product.pdIsUse} > 0 ? 'true' )">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                	<div class="col-lg-offset-2 col-lg-10">
+			                		<button class="btn btn-theme pull-right" type="button" id="saveBtn">저장</button>
+			                	</div>
+			                </div>
+			              </form>
+			            </div>
+			          </div>
+			          <!-- col-lg-12-->
+			        </div>
+			        
+			        <script type="text/javascript">
+			        	$("#editor").summernote({
+			        		height: 500,
+			        		maxHeight: 500,
+			        		callbacks: {
+			        			onImageUpload: function( files, editor, welEditable ) {
+			        				for( var i = files.length - 1; i>=0; i-- ) {
+			        					sendFile( files[i], this );
+			        				}
+			        			}
+			        		}
+			        	});
+			        	
+			        	function sendFile( file, el ) {
+			        		var form_data = new FormData();
+			        		form_data.append( 'file', file );
+			        		form_data.append( '[[${_csrf.parameterName}]]', '[[${_csrf.token}]]' )
+			        		$.ajax({
+			        			data: form_data,
+			        			type: 'POST',
+			        			url: '/admin/product/image',
+			        			cache: false,
+			        			contentType: false,
+			        			encType: 'multipart/form-data',
+			        			processData: false,
+			        			success: function( url ) {
+			        				$(el).summernote( 'editor.insertImage', url );
+			        				$( "#imageBoard > ul").append( "<li><img src='" + url + "' height='auto'/></li>" );
+			        			}
+			        		});
+			        	}
+			        	
+			        	$("#saveBtn").click(function() {
+			        		var f = $("#form").serializeObject();
+			        		
+			        		if( f.pdName == null || f.pdName.trim().length == 0 ) {
+			        			alert( '상품명을 입력해주세요.' );
+			        		} else {
+			        			
+			        			var form_data = new FormData( document.getElementById("form") );
+			        			form_data.append( '[[${_csrf.parameterName}]]', '[[${_csrf.token}]]' );
+			        			
+			        			$.ajax({
+			        				data: form_data,
+			        				type: 'POST',
+			        				url: '/admin/product/save',
+			        				cache: false,
+			        				contentType: false,
+			        				encType: 'multipart/form-data',
+			        				processData: false,
+			        				success: function(d) {
+			        					console.log(d);
+			        					alert(d.msg);
+				        				if( d.code == 200 ) {
+				        					location.href='/admin/product/list/' + '[[${boardConfig.bcDbname}]]';
+				        				}	
+			        				}
+			        			});
+			        		}
+			        	});
+			        </script>
+				</section>
+			</section>
+		</section>
+	</body>
+</html>

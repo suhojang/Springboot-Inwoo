@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<section layout:fragment="content">
+			<div class="sub-visual subv-5">
+				<h1>inwoo<br><span></span>cs center</h1> 		
+			</div>
+			<div class="sub-tit">
+				<h2 th:text="#{footer.privacy}"></h2> 
+			</div>
+			
+			<form id="form">
+				<div id="Inquiry"  class="b_common">
+					<div class="inquiry_box" style="margin-bottom: 100px;">
+						<div class="inquiry_cont" style="height: 450px; overflow-y: auto;" th:utext="${i18n} == 'ko' ? ${siteConfig.scPrivacyKo} : ${siteConfig.scPrivacyEn}"></div>
+					</div>
+				</div>
+			</form>
+			
+		</section>
+	</body>
+</html>

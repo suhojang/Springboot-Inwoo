@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.MenuConfigRepository">
+	<resultMap id="menuConfigMap" type="com.soroweb.board.dto.MenuConfigDto">
+		<result column="MC_IDX" property="mcIdx" />
+		<result column="MC_NAME" property="mcName" />
+		<result column="MC_CATEGORY" property="mcCategory" />
+		<result column="MC_URL" property="mcUrl" />
+		<result column="MC_ORDER" property="mcOrder" />
+		<result column="MC_IS_USE" property="mcIsUse" />
+		<result column="MC_LANG" property="mcLang" />
+	</resultMap>
+	
+	<select id="findMenuConfigListByMcIsUseOrderByMcOrderAsc" parameterType="com.soroweb.board.dto.MenuConfigDto" resultMap="menuConfigMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				MENU_CONFIG
+			WHERE
+				MC_IS_USE = #{mcIsUse}
+				AND MC_LANG = #{mcLang}
+			ORDER BY
+				MC_ORDER ASC
+		]]>
+	</select>
+	
+	<select id="findPageConfigOneByMcUrl" parameterType="com.soroweb.board.dto.MenuConfigDto" resultType="com.soroweb.board.dto.MenuConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				MENU_CONFIG
+			WHERE
+				UPPER( MC_URL ) = UPPER( #{mcUrl} )
+		]]>
+	</select>
+	
+	<select id="findOneByMcCategoryAndMcUrlLike" parameterType="com.soroweb.board.dto.MenuConfigDto" resultType="com.soroweb.board.dto.MenuConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				MENU_CONFIG
+			WHERE
+				MC_CATEGORY = #{mcCategory}
+				AND MC_URL LIKE CONCAT( #{mcUrl}, '%' )
+		]]>
+	</select>
+	
+	<select id="findOneByMcIdx" parameterType="com.soroweb.board.dto.MenuConfigDto" resultType="com.soroweb.board.dto.MenuConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				MENU_CONFIG
+			WHERE
+				MC_IDX = #{mcIdx}
+		]]>
+	</select>
+</mapper>

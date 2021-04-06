@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<section layout:fragment="content">
+			<div id="main_visual">
+				<div class="main_txt">
+			    	<div class="txt">
+			        	<img src="/static/images/main_logo.png" alt="메인로고">
+			            <p class="btxt" th:utext="#{main.btxt}"></p>
+			            <p class="stxt" th:utext="#{main.stxt}"></p>
+			        </div>
+			    </div>
+			    <ul id="slides">
+			        <li class="sli01" style="background-image: url('/static/images/main-visual-1.jpg'); background-position: center;">
+			        	<img src="/static/images/main-visual-1.jpg" style="display: none;">
+			        </li>
+			        <li class="sli02" style="background-image: url('/static/images/main-visual-2.jpg'); background-position: center;">
+			        	<img src="/static/images/main-visual-2.jpg" style="display: none;">
+			        </li>
+					<li class="sli03" style="background-image: url('/static/images/main-visual-3.jpg'); background-position: center;">
+						<img src="/static/images/main-visual-3.jpg" style="display: none;">
+					</li>
+			    </ul>
+				<div class="icon-scroll">
+					<div class="mouse">
+						<div class="wheel"></div>
+					</div>
+					<h1>SCROLL DOWN</h1>
+				</div>		
+			</div>
+			<!--메인비쥬얼끝-->
+			
+			<div id="Product" class="section-1">
+				<div class="section-1-title" th:utext="#{main.section-1-title}"></div>
+			
+				<div class="section-1-body">
+					<div class="section-1-slide">
+						<div class="section-1-box" th:each="provider, p:${providerList}">
+							<div class="img"><img th:src="'/image/' + ${provider.pvLogoImg}"></div>
+							<div class="section-1-text">
+								<p th:text="${provider.productCategoryDto.pcatName}" th:if="${i18n} == 'ko'"></p>
+								<p th:text="${provider.productCategoryDto.pcatNameEn}" th:if="${i18n} == 'en'"></p>
+								<a th:href="'/product/' + ${provider.productCategoryDto.bcDbname} + '/list?pcatIdx=' + ${provider.productCategoryDto.pcatIdx}"><span>MORE</span></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--프로덕트 끝-->
+			
+			<div id="Newsroom"> 
+				<div class="wrap"> 
+					<h2 th:utext="#{main.newsroom.h2}"></h2>
+					<div class="news_wrap">
+						<div class="news">
+							<div class="wrap">
+								<input id="tab1" type="radio" name="tabs" checked> <!--디폴트 메뉴-->
+								<label for="tab1" th:text="#{word.notice}"></label>
+								
+								<section id="content1">
+									<div>
+										<a th:each="notice, n:${boardNoticeList}" th:href="@{'/board/'+${boardNoticeName} + '/view'(boIdx=${notice.boIdx})}">
+											<dl>
+												<dt><span th:text="${#strings.substring(notice.boEnrolDt, 8, 10)}"></span><th:block th:text="${#strings.substring(notice.boEnrolDt, 0, 7)}"></th:block></dt>
+												<dd>
+													<span class="notice" th:text="#{word.noti}"></span>
+													<span class="tit" th:text="${notice.boTitle}"></span>
+													<!-- 
+													<p th:utext="${notice.boContent}">
+													  -->
+												</dd>
+											</dl>
+										</a>
+									</div>
+								</section>				
+							</div>
+						</div>
+						<div class="link"><a href="http://www.inwooeco.co.kr/" target="_blank"><img src="/static/images/link_icon.png" class="link_icon" alt="인우에코홈페이지"><p th:utext="#{main.inwooeco}"></p>
+						<img src="/static/images/arrow.png"  class="arr" alt="화살표"></a></div>
+					</div>
+				</div>
+			</div>
+			<!--뉴스룸-->
+			<div id="Recurit"> 
+				<div class="wrap"> 
+					<div class="recruit">
+						<h2 th:utext="#{main.recruit.h2}"></h2>
+						<ul class="latest">
+							<div th:each="recruit, r:${boardRecruitList}" th:remove="tag">
+								<li th:if="${r.index} < 2"><a th:href="@{/board/recruit/view(boIdx=${recruit.boIdx})}" th:utext="${recruit.boTitle} + ' <span>' + ${#strings.substring(recruit.boEnrolDt, 0, 10)} + '</span>'"></a></li>
+							</div>
+						</ul>
+						<ul class="recruit_btn">
+							<li><a href="/board/estimate/write" th:text="#{word.request.quotation}"></a></li>
+							<li><a href="/board/sample/write" th:text="#{word.request.sample}"></a></li>
+							<li><a href="/board/inquiry/write" th:text="#{word.qna}"></a></li>
+						</ul>
+					</div>
+					<div class="media">
+						<h2 th:utext="#{main.media.h2}"></h2>
+						<div class="play"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/F4umtOn9FuA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+					</div>
+				</div>
+			</div>
+			<!--리쿠르,미디어끝-->
+			<div id="Rnd"> 
+				<div class="wrap"> 
+					<h2 th:text="#{main.rnd.h2}"></h2>
+					<p class="s_tit" th:text="#{main.rnd.stit}"></p>
+					<ul>
+						<li>
+							<a href="/page/rnd/eco" class="tilter">
+								<div class="txt">
+									<div class="icon"><img src="/static/images/sec5_icon3.png" alt=""></div>
+									<p th:utext="#{main.rnd.eco.p}"></p>			
+								</div> 								
+			                 </a>                 
+							 <img src="/static/images/arrow.png" alt="버튼" class="rnd_btn">
+			            </li>
+						<li>
+							<a href="/page/rnd/institute" class="tilter">	
+								<div class="txt">
+									<div class="icon"><img src="/static/images/sec5_icon1.png" alt=""></div>
+									<p th:utext="#{main.rnd.institute.p}"></span></p>						
+								</div>                    			
+			                 </a>                 
+							 <img src="/static/images/arrow.png" alt="버튼" class="rnd_btn">
+			            </li>
+						<li>
+							<a href="/page/rnd/bio" class="tilter">
+								<div class="txt">
+									<div class="icon"><img src="/static/images/sec5_icon2.png" alt=""></div>
+									<p th:utext="#{main.rnd.bio.p}"></p>				
+								</div>								
+			                 </a>                     
+							 <img src="/static/images/arrow.png" alt="버튼" class="rnd_btn">
+			            </li>
+					</ul>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$('#slides').bxSlider({
+						mode: 'fade',
+						speed: 1200,
+						auto: true,
+						pause: 4000,
+						pager: true,
+						autoControls : true
+					});
+				});
+			</script>
+			<!--RND끝-->
+		</section>
+	</body>
+</html>

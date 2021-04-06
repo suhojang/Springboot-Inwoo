@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.BoardFileRepository">
+	<resultMap id="boardFileMap" type="com.soroweb.board.dto.BoardFileDto">
+		<result column="BF_IDX" property="bfIdx" />
+		<result column="BO_IDX" property="boIdx" />
+		<result column="BF_EXT" property="bfExt" />
+		<result column="BF_ENROL_DT" property="bfEnrolDt" />
+		<result column="BF_DOWNLOADABLE" property="bfDownloadable" />
+		<result column="BF_FILE_LOCATION" property="bfFileLocation" />
+		<result column="BF_FILE_NAME" property="bfFileName" />
+		<result column="BF_FILE_ORG_NAME" property="bfFileOrgName" />
+		<result column="BF_FILE_SIZE" property="bfFileSize" />
+	</resultMap>
+	
+	<select id="findFileBoardListByBoIdx" parameterType="com.soroweb.board.dto.BoardFileDto" resultType="com.soroweb.board.dto.BoardFileDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				BOARD_FILE
+			WHERE
+				BO_IDX = #{boIdx}
+				AND BF_DOWNLOADABLE > 0
+		]]>
+	</select>
+	
+	<update id="deleteBoardFileListByBoIdx" parameterType="com.soroweb.board.dto.BoardFileDto" useGeneratedKeys="true" keyProperty="bfIdx">
+		<![CDATA[
+			UPDATE
+				board_file
+			SET
+				bf_downloadable = 0
+			WHERE
+				bo_idx = #{boIdx}
+		]]>
+	</update>
+	
+	<insert id="insertBoardFileOne" parameterType="com.soroweb.board.dto.BoardFileDto" useGeneratedKeys="true" keyProperty="bfIdx">
+		<![CDATA[
+			
+		]]>
+	</insert>
+</mapper>

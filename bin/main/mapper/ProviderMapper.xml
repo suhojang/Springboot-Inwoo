@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.ProviderRepository">
+	<resultMap id="providerMap" type="com.soroweb.board.dto.ProviderDto">
+		<result column="PV_IDX" property="pvIdx" />
+		<result column="PV_NAME" property="pvName" />
+		<result column="PV_NAME_EN" property="pvNameEn" />
+		<result column="PV_LOGO_IMG" property="pvLogoImg" />
+		<result column="PV_DESC" property="pvDesc" />
+		<result column="PV_DESC_EN" property="pvDescEn" />
+		<result column="BC_DBNAME" property="bcDbname" />
+		<result column="PV_ENROL_DT" property="pvEnrolDt" />
+		<result column="PCAT_IDX" property="pcatIdx" />
+		<result column="PV_CONTINENT" property="pvContinent" />
+		<result column="PV_IS_USE" property="pvIsUse" />
+		<result column="PV_HOMEPAGE" property="pvHomepage" />
+		<result column="PV_PRODUCT" property="pvProduct" />
+		<result column="PV_PRODUCT_EN" property="pvProductEn" />
+		<result column="PV_LOCATION" property="pvLocation" />
+		<result column="PV_WORLD_PARTNER" property="pvWorldPartner" />
+		<result column="PV_LANG" property="pvLang" />
+		<result column="PV_ADDATIVE" property="pvAddative" />
+		<result column="PV_PROVIDE" property="pvProvide" />
+		<result column="PV_FOOTER" property="pvFooter" />
+		<association property="productCategoryDto" javaType="com.soroweb.board.dto.ProductCategoryDto">
+			<result column="PCAT_IDX" property="pcatIdx"/>
+			<result column="BC_DBNAME" property="bcDbname" />
+			<result column="PCAT_NAME" property="pcatName" />
+			<result column="PCAT_NAME_EN" property="pcatNameEn" />
+			<result column="PD_IDX" property="pdIdx" />
+			<result column="PCAT_ORDER" property="pcatOrder" />
+		</association>
+		<association property="boardConfigDto" javaType="com.soroweb.board.dto.BoardConfigDto">
+			<result column="BC_IDX" property="bcIdx" />
+			<result column="BC_DBNAME" property="bcDbname" />
+			<result column="BC_BOARD_NAME" property="bcBoardName" />
+			<result column="BC_BOARD_TYPE" property="bcBoardType" />
+			<result column="BC_PAGE_ROWS" property="bcPageRows" />
+			<result column="BC_PAGE_BLOCK" property="bcPageBlock" />
+			<result column="BC_USE_SECRET" property="bcUseSecret" />
+			<result column="BC_USE_NOTICE" property="bcUseNotice" />
+			<result column="BC_USE_CATEGORY" property="bcUseCategory" />
+			<result column="BC_USE_PAGEABLE" property="bcUsePageable" />
+			<result column="BC_CT_ID" property="bcCtId" />
+			<result column="BC_IS_USE" property="bcIsUse" />
+			<result column="BC_ENROL_DT" property="bcEnrolDt" />
+			<result column="BC_MOD_DT" property="bcModDt" />
+		</association>
+	</resultMap>
+	
+	<select id="findProviderListByBcDbnameAndPcatIdx" parameterType="com.soroweb.board.dto.ProviderDto" resultType="com.soroweb.board.dto.ProviderDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PROVIDER
+			WHERE
+				BC_DBNAME = #{bcDbname}
+				AND PCAT_IDX = #{pcatIdx}
+				AND PV_IS_USE > 0
+		]]>
+	</select>
+	
+	<select id="findAll" resultMap="providerMap">
+		<!-- 200721 이전 쿼리 
+		SELECT
+				*
+			FROM
+				PROVIDER PV,
+				PRODUCT_CATEGORY PC,
+				BOARD_CONFIG BC
+			WHERE
+				PV.BC_DBNAME = BC.BC_DBNAME
+				AND PV.PCAT_IDX = PC.PCAT_IDX
+				AND PV.PV_IS_USE > 0
+		-->
+		<![CDATA[
+			SELECT
+				PV.*,
+				PC.PCAT_NAME,
+				BC.BC_BOARD_NAME
+			FROM
+				PROVIDER PV
+			LEFT JOIN PRODUCT_CATEGORY PC ON PV.PCAT_IDX = PC.PCAT_IDX
+			LEFT JOIN BOARD_CONFIG BC ON PV.BC_DBNAME = BC.BC_DBNAME
+			WHERE
+				PV.PV_IS_USE > 0
+			ORDER BY
+				PV.PV_IDX;
+		]]>
+	</select>
+	
+	<select id="findAllByAdmin" resultMap="providerMap">
+		<![CDATA[
+			SELECT
+				PV.*,
+				PC.PCAT_NAME,
+				BC.BC_BOARD_NAME
+			FROM
+				PROVIDER PV
+			LEFT JOIN PRODUCT_CATEGORY PC ON PV.PCAT_IDX = PC.PCAT_IDX
+			LEFT JOIN BOARD_CONFIG BC ON PV.BC_DBNAME = BC.BC_DBNAME
+			ORDER BY
+				PV.PV_IDX;
+		]]>
+	</select>
+	
+	<select id="findOne" parameterType="com.soroweb.board.dto.ProviderDto" resultType="com.soroweb.board.dto.ProviderDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PROVIDER
+			WHERE
+				PV_IDX = #{pvIdx}
+				AND PV_IS_USE > 0
+		]]>
+	</select>
+	
+	<select id="findOneByAdmin" parameterType="com.soroweb.board.dto.ProviderDto" resultType="com.soroweb.board.dto.ProviderDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PROVIDER
+			WHERE
+				PV_IDX = #{pvIdx}
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="com.soroweb.board.dto.ProviderDto" useGeneratedKeys="true" keyProperty="pvIdx">
+		<![CDATA[
+			INSERT INTO
+				PROVIDER (
+					PV_NAME,
+					PV_NAME_EN,
+					PV_LOGO_IMG,
+					PV_DESC,
+					PV_DESC_EN,
+					BC_DBNAME,
+					PV_ENROL_DT,
+					PCAT_IDX,
+					PV_IS_USE,
+					PV_HOMEPAGE,
+					PV_PRODUCT,
+					PV_PRODUCT_EN,
+					PV_LOCATION,
+					PV_CONTINENT,
+					PV_WORLD_PARTNER,
+					PV_LANG,
+					PV_ADDATIVE,
+					PV_PROVIDE,
+					PV_FOOTER
+				) VALUES (
+					#{pvName},
+					#{pvNameEn},
+					#{pvLogoImg},
+					#{pvDesc},
+					#{pvDescEn},
+					#{bcDbname},
+					NOW(),
+					#{pcatIdx},
+					1,
+					#{pvHomepage},
+					#{pvProduct},
+					#{pvProductEn},
+					#{pvLocation},
+					#{pvContinent},
+					#{pvWorldPartner},
+					#{pvLang},
+					#{pvAddative},
+					#{pvProvide},
+					#{pvFooter}
+				)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.soroweb.board.dto.ProviderDto" useGeneratedKeys="true" keyProperty="pvIdx">
+		<![CDATA[
+			UPDATE
+				PROVIDER
+			SET
+				PV_NAME = #{pvName},
+				PV_NAME_EN = #{pvNameEn},
+				PV_LOGO_IMG = #{pvLogoImg},
+				PV_DESC = #{pvDesc},
+				PV_DESC_EN = #{pvDescEn},
+				BC_DBNAME = #{bcDbname},
+				PCAT_IDX = #{pcatIdx},
+				PV_CONTINENT = #{pvContinent},
+				PV_IS_USE = #{pvIsUse},
+				PV_HOMEPAGE = #{pvHomepage},
+				PV_PRODUCT = #{pvProduct},
+				PV_PRODUCT_EN = #{pvProductEn},
+				PV_LOCATION = #{pvLocation},
+				PV_WORLD_PARTNER = #{pvWorldPartner},
+				PV_LANG = #{pvLang},
+				PV_ADDATIVE = #{pvAddative},
+				PV_PROVIDE = #{pvProvide},
+				PV_FOOTER = #{pvFooter}
+			WHERE
+				PV_IDX = #{pvIdx}
+		]]>
+	</update>
+	
+	<select id="findListByBcIsUseAndBcContinent" parameterType="com.soroweb.board.dto.ProviderDto" resultType="com.soroweb.board.dto.ProviderDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PROVIDER
+			WHERE
+				PV_IS_USE > 0
+				AND PV_CONTINENT = #{pvContinent}
+				AND PV_WORLD_PARTNER > 0
+		]]>
+	</select>
+	
+	<select id="findWorldPartners" resultType="com.soroweb.board.dto.ProviderDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PROVIDER
+			WHERE
+				PV_IS_USE > 0
+				AND PV_WORLD_PARTNER > 0
+		]]>
+	</select>
+	
+	<select id="findAllByPvLang" parameterType="com.soroweb.board.dto.ProviderDto" resultMap="providerMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PROVIDER PV,
+				PRODUCT_CATEGORY PC,
+				BOARD_CONFIG BC
+			WHERE
+				PV.BC_DBNAME = BC.BC_DBNAME
+				AND PV.PCAT_IDX = PC.PCAT_IDX
+				AND PV.PV_IS_USE > 0
+				AND PV.PV_LANG = #{pvLang}
+		]]>
+	</select>
+	
+	<select id="findListForFooter" resultMap="providerMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PROVIDER PV
+			WHERE
+				PV.PV_IS_USE > 0
+				AND PV_FOOTER > 0
+		]]>
+	</select>
+	
+	<delete id="deleteByPvIdx" parameterType="com.soroweb.board.dto.ProviderDto">
+		<![CDATA[
+			DELETE FROM PROVIDER WHERE PV_IDX = #{pvIdx}
+		]]>
+	</delete>
+</mapper>

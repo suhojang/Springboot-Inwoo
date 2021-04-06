@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.ProductCategoryRepository">
+	<resultMap type="com.soroweb.board.dto.ProductCategoryDto" id="boardMap" autoMapping="true">
+		<result column="PCAT_IDX" property="pcatIdx" />
+		<result column="BC_DBNAME" property="bcDbname" />
+		<result column="PCAT_NAME" property="pcatName" />
+		<result column="PD_IDX" property="pdIdx" />
+		<result column="PCAT_ORDER" property="pcatOrder" />
+		<result column="PCAT_DESC" property="pcatDesc" />
+		<result column="PCAT_TYPE" property="pcatType" />
+		<result column="PCAT_ADDATIVE" property="pcatAddative" />
+	</resultMap>
+	
+	<select id="findProductCategoryListByBcDbname" parameterType="com.soroweb.board.dto.ProductCategoryDto" resultType="com.soroweb.board.dto.ProductCategoryDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PRODUCT_CATEGORY
+			WHERE
+				BC_DBNAME = #{bcDbname}
+			ORDER BY
+				PCAT_ORDER ASC
+		]]>
+	</select>
+	
+	<select id="findOneProductCategoryByPcatIdx" parameterType="com.soroweb.board.dto.ProductCategoryDto" resultType="com.soroweb.board.dto.ProductCategoryDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PRODUCT_CATEGORY
+			WHERE
+				PCAT_IDX = #{pcatIdx}
+		]]>
+	</select>
+	
+	<select id="findOneProductCategoryByBcDbnameAndPcatIdx" parameterType="com.soroweb.board.dto.ProductCategoryDto" resultType="com.soroweb.board.dto.ProductCategoryDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PRODUCT_CATEGORY
+			WHERE
+				BC_DBNAME = #{bcDbname}
+		]]>
+		<if test='pcatIdx != null and pcatIdx > 0'>
+			<![CDATA[
+				AND PCAT_IDX = #{pcatIdx}
+			]]>
+		</if>
+		<if test='pcatIdx == null or pcatIdx == 0'>
+			<![CDATA[
+				ORDER BY PCAT_ORDER ASC LIMIT 1
+			]]>
+		</if>
+	</select>
+	
+	<insert id="insert" parameterType="com.soroweb.board.dto.ProductCategoryDto">
+		<![CDATA[
+			INSERT INTO PRODUCT_CATEGORY( BC_DBNAME, PCAT_NAME, PCAT_NAME_EN, PCAT_ORDER, PD_IDX, PCAT_DESC, PCAT_TYPE, PCAT_ADDATIVE )
+			VALUES( #{bcDbname}, #{pcatName}, #{pcatNameEn}, #{pcatOrder}, #{pdIdx}, #{pcatDesc}, #{pcatType}, #{pcatAddative} )
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.soroweb.board.dto.ProductCategoryDto">
+		<![CDATA[
+			UPDATE
+				PRODUCT_CATEGORY
+			SET
+				BC_DBNAME = #{bcDbname},
+				PCAT_NAME = #{pcatName},
+				PCAT_NAME_EN = #{pcatNameEn},
+				PD_IDX = #{pdIdx},
+				PCAT_ORDER = #{pcatOrder},
+				PCAT_DESC = #{pcatDesc},
+				PCAT_TYPE = #{pcatType},
+				PCAT_ADDATIVE = #{pcatAddative}
+			WHERE
+				PCAT_IDX = #{pcatIdx}
+		]]>
+	</update>
+	
+	<delete id="deleteByPcatIdx" parameterType="com.soroweb.board.dto.ProductCategoryDto">
+		<![CDATA[
+			DELETE FROM PRODUCT_CATEGORY WHERE PCAT_IDX = #{pcatIdx}
+		]]>
+	</delete>
+	
+	<delete id="deleteByBcDbname" parameterType="com.soroweb.board.dto.ProductCategoryDto">
+		<![CDATA[
+			DELETE FROM PRODUCT_CATEGORY WHERE BC_DBNAME = #{bcDbname}
+		]]>
+	</delete>
+
+</mapper>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/adminLayout">
+	<body>
+		<section layout:fragment="content">
+			<section id="main-content">
+				<section class="wrapper">
+			        <h3 th:utext="'<i class=\'fa fa-angle-right\'></i> 공급사 관리'"></h3>
+			        <div class="row mt">
+			          <div class="col-lg-12">
+			            <div class="form-panel">
+			              <h4><i class="fa fa-angle-right"></i> 목록<a href="/admin/provider/add"><button class="btn btn-theme pull-right">추가</button></a></h4>
+			              <section id="unseen">
+			                <table class="table table-bordered table-striped table-condensed table-hover">
+			                  <thead>
+			                    <tr>
+			                    	<th>로고</th>
+			                      	<th>공급사명</th>
+			                      	<th>상품명</th>
+			                      	<th>상품카테고리명</th>
+			                      	<th>노출언어</th>
+			                    </tr>
+			                  </thead>
+			                  <tbody>
+			                    <tr th:if="${providerList} != null" th:each="provider, p:${providerList}" style="cursor: pointer;" th:onclick="modify([[${provider.pvIdx}]])">
+			                    	<td>
+			                    		<img th:if="${provider.pvLogoImg} != null" th:src="'/image/' + ${provider.pvLogoImg}" style="height: 30px;">
+			                    	</td>
+			                    	<td th:text="${provider.pvName}"></td>
+			                    	<td th:text="${provider.boardConfigDto.bcBoardName}"></td>
+			                    	<td th:text="${provider.productCategoryDto.pcatName}"></td>
+			                    	<td th:text="${provider.pvLang} == 'en' ? '영문' : '한글'"></td>
+			                    </tr>
+			                  </tbody>
+			                </table>
+			              </section>
+			            </div>
+			            <!-- /content-panel -->
+			          </div>
+			          <!-- /col-lg-4 -->
+			        </div>
+			        
+			        <script type="text/javascript">
+			        	function modify( pvIdx ) {
+			        		location.href = "/admin/provider/modify?pvIdx=" + pvIdx
+			        	}
+			        </script>
+				</section>
+			</section>
+		</section>
+	</body>
+</html>

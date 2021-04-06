@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<section layout:fragment="content">
+			<div class="sub-visual subv-1">
+				<h1>inwoo<br><span></span>company</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<div th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" th:utext="${sub.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							</div>				
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2 th:text="#{history.subtit}"></h2> 
+			</div>
+			
+			<div id="History">
+				<div class="dv-conts-wrap"> 
+					<div class="gr_cont">			
+						<ul class="tab">
+							<li><a href="#cont1" class="selected">2020's</a></li>
+							<li><a href="#cont2">1990's</a></li>
+						</ul>
+						
+						<ul class="panel">
+							<li id="cont1">
+								<div class="cont_wrap">
+									<img src="/static/images/sub/history_logo.png" alt="">
+									<span class="line"></span>
+									<div class="history_cont">
+										<dl class="right" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2013</dt>
+											<dd th:text="#{history.2013.1}"></dd>
+										</dl>
+										<dl class="left" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2011</dt>
+											<dd th:text="#{history.2011.1}"></dd>
+											<dd th:text="#{history.2011.2}"></dd>
+										</dl>
+										<dl class="right" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2010</dt>
+											<dd th:text="#{history.2010.1}"></dd>
+										</dl>
+										<dl class="left" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2009</dt>
+											<dd th:text="#{history.2009.1}"></dd>
+											<dd th:text="#{history.2009.2}"></dd>
+											<dd th:text="#{history.2009.3}"></dd>
+											<dd th:text="#{history.2009.4}"></dd>
+										</dl>
+										<dl class="right" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2008</dt>
+											<dd th:text="#{history.2008.1}"></dd>
+											<dd th:text="#{history.2008.2}"></dd>
+										</dl>
+										<dl class="left" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2007</dt>
+											<dd th:text="#{history.2007.1}"></dd>
+										</dl>
+										<dl class="right" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2006</dt>
+											<dd th:text="#{history.2006.1}"></dd>
+											<dd th:text="#{history.2006.2}"></dd>
+										</dl>
+										<dl class="left" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2005</dt>
+											<dd th:text="#{history.2005.1}"></dd>
+										</dl>
+										<dl class="right" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2003</dt>
+											<dd th:text="#{history.2003.1}"></dd>
+										</dl>
+										<dl class="left" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2002</dt>
+											<dd th:text="#{history.2002.1}"></dd>
+										</dl>
+										<dl class="right" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>2001</dt>
+											<dd th:text="#{history.2001.1}"></dd>
+											<dd th:text="#{history.2001.2}"></dd>
+										</dl>
+									</div>
+								</div>
+							</li>
+							<li id="cont2">
+								<div class="cont_wrap">
+									<img src="/static/images/sub/history_logo.png" alt="">
+									<span class="line"></span>
+									<div class="history_cont">
+										<dl class="right" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>1999</dt>
+											<dd th:text="#{history.1999.1}"></dd>
+											<dd th:text="#{history.1999.2}"></dd>
+										</dl>
+										<dl class="left" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>1996</dt>
+											<dd th:text="#{history.1996.1}"></dd>
+										</dl>
+										<dl class="right" data-aos="fade-left" data-aos-offset="300" data-aos-easing="ease-in-sine">
+											<dt>1993</dt>
+											<dd th:text="#{history.1993.1}"></dd>
+										</dl>				
+									</div>
+								</div>
+							</li>
+					</ul>
+					</div>
+				</div>
+			</div> 
+			<script>
+				$(function() {
+					$('.tab-ul_1').click(function(){
+						$('.tab-ul_1 ul').slideToggle();
+					});
+					
+					$('.tab-ul_2').click(function(){
+						$('.tab-ul_2 ul').slideToggle();
+					});
+					
+					AOS.init();
+				});
+			</script>
+		</section>
+	</body>
+</html>

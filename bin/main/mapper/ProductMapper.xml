@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.ProductRepository">
+	<resultMap id="productMap" type="com.soroweb.board.dto.ProductDto">
+		<result column="PD_IDX" property="pdIdx" />
+		<result column="PD_NAME" property="pdName" />
+		<result column="PD_CATEGORY" property="pdCategory" />
+		<result column="PD_TYPE" property="pdType" />
+		<result column="PD_MANUFACTURER" property="pdManufacturer" />
+		<result column="PD_LANG" property="pdLang" />
+		<result column="PD_ORDER" property="pdOrder" />
+		<result column="PD_D1" property="pdD1" />
+		<result column="PD_D2" property="pdD2" />
+		<result column="PD_D3" property="pdD3" />
+		<result column="PD_D4" property="pdD4" />
+		<result column="PD_D5" property="pdD5" />
+		<result column="PD_ENROL_DT" property="pdEnrolDt" />
+		<result column="PD_MOD_DT" property="pdModDt" />
+		<result column="PD_DETAIL" property="pdDetail" />
+		<result column="PD_IS_USE" property="pdIsUse" />
+		<result column="BC_DBNAME" property="bcDbname" />
+		<result column="PD_IMG1" property="pdImg1" />
+		<result column="PD_IMG2" property="pdImg2" />
+		<result column="PD_IMG3" property="pdImg3" />
+		<result column="PD_IMG4" property="pdImg4" />
+		<result column="PD_IMG5" property="pdImg5" />
+		<result column="PD_TEL" property="pdTel" />
+		<result column="PCAT_IDX" property="pcatIdx" />
+		<result column="BO_REPLY_REQ" property="boReplyReq" />
+		<association property="productCategoryDto" javaType="com.soroweb.board.dto.ProductCategoryDto">
+			<result column="PCAT_IDX" property="pcatIdx" />
+			<result column="BC_DBNAME" property="bcDbname" />
+			<result column="PCAT_NAME" property="pcatName" />
+			<result column="PD_IDX" property="pdIdx" />
+			<result column="PCAT_ORDER" property="pcatOrder" />
+		</association>
+	</resultMap>
+	
+	<select id="findPageProductListByBcDbname" parameterType="com.soroweb.board.dto.ProductDto" resultType="com.soroweb.board.dto.ProductDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PRODUCT P,
+				PRODUCT_CATEGORY PC
+			WHERE
+				P.PD_IS_USE > 0
+				AND P.BC_DBNAME = #{bcDbname}
+				AND P.PCAT_IDX = PC.PCAT_IDX
+		]]>
+		<if test='pdName != null and pdName != ""'>
+			<![CDATA[
+				AND P.PD_NAME LIKE CONCAT( '%', #{pdName}, '%' )
+			]]>
+		</if>
+		<if test='pcatIdx != null and pcatIdx != ""'>
+			<![CDATA[
+				AND PC.PCAT_IDX = #{pcatIdx}
+			]]>
+		</if>
+		<![CDATA[
+			ORDER BY 
+				PD_ORDER ASC,
+				PD_ENROL_DT DESC
+			LIMIT ${pageNumber * pageSize}, ${pageSize}
+		]]>
+	</select>
+	
+	<select id="findAllProductListByBcDbname" parameterType="com.soroweb.board.dto.ProductDto" resultMap="productMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PRODUCT P,
+				PRODUCT_CATEGORY PC
+			WHERE
+				P.PD_IS_USE > 0
+				AND P.BC_DBNAME = #{bcDbname}
+				AND P.PCAT_IDX = PC.PCAT_IDX
+		]]>
+		<if test='pdName != null and pdName != ""'>
+			<![CDATA[
+				AND P.PD_NAME LIKE CONCAT( '%', #{pdName}, '%' )
+			]]>
+		</if>
+		<if test='pcatIdx != null and pcatIdx != ""'>
+			<![CDATA[
+				AND PC.PCAT_IDX = #{pcatIdx}
+			]]>
+		</if>
+		<![CDATA[
+			ORDER BY 
+				P.PD_ORDER ASC,
+				P.PD_ENROL_DT DESC
+		]]>
+	</select>
+	
+	<select id="findAdminAllProductListByBcDbname" parameterType="com.soroweb.board.dto.ProductDto" resultMap="productMap">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PRODUCT P,
+				PRODUCT_CATEGORY PC
+			WHERE
+				P.BC_DBNAME = #{bcDbname}
+				AND P.PCAT_IDX = PC.PCAT_IDX
+		]]>
+		<if test='pdName != null and pdName != ""'>
+			<![CDATA[
+				AND P.PD_NAME LIKE CONCAT( '%', #{pdName}, '%' )
+			]]>
+		</if>
+		<if test='pcatIdx != null and pcatIdx != ""'>
+			<![CDATA[
+				AND PC.PCAT_IDX = #{pcatIdx}
+			]]>
+		</if>
+		<![CDATA[
+			ORDER BY
+				P.PD_ORDER ASC, 
+				P.PD_ENROL_DT DESC
+		]]>
+	</select>
+	
+	<select id="findPageProductListByBcDbnameCount" parameterType="com.soroweb.board.dto.ProductDto" resultType="java.lang.Integer">
+		<![CDATA[
+			SELECT
+				COUNT(*)
+			FROM
+				PRODUCT
+			WHERE
+				PD_IS_USE > 0
+				AND BC_DBNAME = #{bcDbname}
+		]]>
+		<if test='pdName != null and pdName != ""'>
+			<![CDATA[
+				AND PD_NAME LIKE CONCAT( '%', #{pdName}, '%' )
+			]]>
+		</if>
+		<if test='pcatIdx != null and pcatIdx != ""'>
+			<![CDATA[
+				AND PCAT_IDX = #{pcatIdx}
+			]]>
+		</if>
+		<if test='pdCategory != null and pdCategory != ""'>
+			<![CDATA[
+				AND PD_CATEGORY = #{pdCategory}
+			]]>
+		</if>
+	</select>
+	
+	<select id="findProductOne" parameterType="com.soroweb.board.dto.ProductDto" resultType="com.soroweb.board.dto.ProductDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PRODUCT
+			WHERE
+				PD_IDX = #{pdIdx}
+		]]>
+	</select>
+	
+	<delete id="deleteByBcDbnameAndPcatIdx" parameterType="com.soroweb.board.dto.ProductDto">
+		<![CDATA[
+			DELETE FROM PRODUCT
+			WHERE BC_DBNAME = #{bcDbname} AND PCAT_IDX = #{pcatIdx}
+		]]>
+	</delete>
+	
+	<insert id="insert" parameterType="com.soroweb.board.dto.ProductDto">
+		<![CDATA[
+			INSERT INTO
+				PRODUCT(
+					PD_NAME,
+					PD_CATEGORY,
+					PD_TYPE,
+					PD_MANUFACTURER,
+					PD_LANG,
+					PD_ORDER,
+					PD_D1,
+					PD_D2,
+					PD_D3,
+					PD_D4,
+					PD_D5,
+					PD_ENROL_DT,
+					PD_DETAIL,
+					PD_IS_USE,
+					BC_DBNAME,
+					PD_IMG1,
+					PD_IMG2,
+					PD_IMG3,
+					PD_IMG4,
+					PD_IMG5,
+					PD_TEL,
+					PCAT_IDX
+				) VALUES (
+					#{pdName},
+					#{pdCategory},
+					#{pdType},
+					#{pdManufacturer},
+					#{pdLang},
+					#{pdOrder},
+					#{pdD1},
+					#{pdD2},
+					#{pdD3},
+					#{pdD4},
+					#{pdD5},
+					NOW(),
+					#{pdDetail},
+					#{pdIsUse},
+					#{bcDbname},
+					#{pdImg1},
+					#{pdImg2},
+					#{pdImg3},
+					#{pdImg4},
+					#{pdImg5},
+					#{pdTel},
+					#{pcatIdx}
+				)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.soroweb.board.dto.ProductDto">
+		<![CDATA[
+			UPDATE
+				PRODUCT
+			SET
+				PD_NAME = #{pdName},
+				PD_CATEGORY = #{pdCategory},
+				PD_TYPE = #{pdType},
+				PD_MANUFACTURER = #{pdManufacturer},
+				PD_LANG = #{pdLang},
+				PD_ORDER = #{pdOrder},
+				PD_D1 = #{pdD1},
+				PD_D2 = #{pdD2},
+				PD_D3 = #{pdD3},
+				PD_D4 = #{pdD4},
+				PD_D5 = #{pdD5},
+				PD_MOD_DT = NOW(),
+				PD_DETAIL = #{pdDetail},
+				PD_IS_USE = #{pdIsUse},
+				BC_DBNAME = #{bcDbname},
+				PD_IMG1 = #{pdImg1},
+				PD_IMG2 = #{pdImg2},
+				PD_IMG3 = #{pdImg3},
+				PD_IMG4 = #{pdImg4},
+				PD_IMG5 = #{pdImg5},
+				PD_TEL = #{pdTel},
+				PCAT_IDX = #{pcatIdx}
+			WHERE
+				PD_IDX = #{pdIdx}
+		]]>
+	</update>
+	
+	<select id="findAllProductList" parameterType="com.soroweb.board.dto.ProductDto" resultMap="productMap">
+		<![CDATA[
+			SELECT 
+				*
+			FROM
+				PRODUCT
+			WHERE
+				1=1
+		]]>
+	</select>
+	
+	<select id="findAllProductListByPdLang" parameterType="com.soroweb.board.dto.ProductDto" resultMap="productMap">
+		<![CDATA[
+			SELECT 
+				*
+			FROM
+				PRODUCT p
+			LEFT JOIN 
+				BOARD_CONFIG bc ON p.BC_DBNAME = bc.BC_DBNAME
+			WHERE
+				1=1
+			AND
+				p.PD_LANG = #{pdLang}
+			AND 
+				bc.BC_DBNAME IS NOT NULL
+		]]>
+	</select>
+	
+	<delete id="deleteByPdIdx" parameterType="com.soroweb.board.dto.ProductDto">
+		<![CDATA[
+			DELETE FROM PRODUCT WHERE PD_IDX = #{pdIdx}
+		]]>
+	</delete>
+</mapper>

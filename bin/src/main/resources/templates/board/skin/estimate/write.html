@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<section layout:fragment="content">
+			<div class="sub-visual subv-5">
+				<h1>inwoo<br><span></span>cs center</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<a class="active" th:utext="${currentSubMenuOne.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2 th:text="#{board.title.estimate}"></h2> 
+			</div>
+			
+			<form id="form">
+				<input type="hidden" name="bcDbname" th:value="${boardConfig.bcDbname}">
+				<input type="hidden" name="boTitle" value="견적문의">
+				<input type="hidden" name="boVisible" value="1">
+				<div id="Estimate"  class="b_common">
+					<div class="inquiry_box">
+						<h4 th:text="#{board.agree.title}"></h4>
+						<div class="inquiry_cont" th:utext="${i18n} == 'ko' ? ${siteConfig.scPrivacyKo} : ${siteConfig.scPrivacyEn}"></div>
+						<div class="check">
+							<label><input type="checkbox" name="privacyChk" value="1"><em></em><span th:text="#{board.agree.checkbox}"></span></label>
+						</div>
+					</div>
+				
+					<div class="write_box">
+						<p class="essential" th:text="#{board.require.text}"></p>
+						<table>
+							<colgroup>
+								<col style="width:15%;">
+								<col style="width: auto;">
+							</colgroup>
+							<tr>
+								<th scope="row"><span class="esse">*</span><label for="name" th:text="#{board.name}"></label></th>
+								<td><input type="text" name="boD1" id="name" value="" th:placeholder="#{board.name.placeholder}" ></td>
+							</tr>
+							<tr>
+								<th scope="row"><span class="esse">*</span><label for="title" th:text="#{board.compname}"></label></th>
+								<td><input type="text" name="boD2" id="title" value="" th:placeholder="#{board.compname.placeholder}"></td>
+							</tr>
+							<tr class="product_maker">
+								<th scope="row"><label for="product" th:text="#{board.relproduct}"></label></th>
+								<td>
+									<input type="text" name="boD4" id="maker" value="" th:placeholder="#{board.maker.placeholder}" style="width:20%;">
+									<input type="text" name="boD4" id="product" value="" th:placeholder="#{board.product.placeholder}" >
+									<!-- 
+									<select id="maker" name="maker">
+										<option value="" th:text="#{board.choice}"></option>
+									</select>
+									<select name="pdIdx" id="pdIdx">
+										<option value="" th:text="#{board.choice}"></option>
+									</select>
+									 -->
+									<script type="text/javascript">
+										$(function() {
+											send('/ajax/providerList', {}, function(d){
+												for( var i=0; i<d.length; i++ ) {
+													var html = "";
+													var lang = "[[${i18n}]]";
+													
+													html += "<option value='" + d[i].pvIdx + "'>";
+													if (lang == "en") {
+														html += d[i].pvNameEn;
+													} else {
+														html += d[i].pvName;
+													}
+													html += "</option>";
+													$("#maker").append(html);
+												}
+											});
+											/*
+											$("#maker").change(function() {
+												var lang = "[[${i18n}]]";
+												
+												if ($("#maker").val() != "") {
+													send( '/ajax/productListByProvider', {
+														'pvIdx': $("#maker").val()
+													}, function(d) {
+														$("#pdIdx").children().remove();
+														if (lang == "en") {
+															$("#pdIdx").append( "<option value=''>Choice</option>" );	
+														} else {
+															$("#pdIdx").append( "<option value=''>선택하세요</option>" );
+														}
+														for( var i=0; i<d.length; i++ ) {
+															$("#pdIdx").append( "<option value='" + d[i].pdIdx + "'>" + d[i].pdName + "</option>" );
+														}
+													});	
+												} else {
+													if (lang == "en") {
+														$("#pdIdx").html( "<option value=''>Choice</option>" );	
+													} else {
+														$("#pdIdx").html( "<option value=''>선택하세요</option>" );
+													}
+												}
+											});
+											*/
+										});
+									</script>
+								</td>
+							</tr>
+							<tr>
+								<th th:text="#{board.amount}"></th>
+								<td colspan="3">
+									<input type="number" id="amount" name="number" class="bowrite_in" style="width:10%;"/>
+									<select id="amountType" class="bowrite_select">
+										<option value="g">g</option>
+										<option value="Kg">Kg</option>
+										<option value="LB">LB</option>
+									</select>
+									<input type="hidden" name="boD3" id="boD3">
+									<script type="text/javascript">
+										$("#amount").on('keyup',function() {
+											$("#boD3").val( $("#amount").val() + "" + $("#amountType").val() ) 
+										});
+										
+										$("#amountType").change(function() {
+											$("#boD3").val( $("#amount").val() + "" + $("#amountType").val() )
+										});
+									</script>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><span class="esse">*</span><label for="title" th:text="#{board.contact}"></label></th>
+								<td>
+									<input type="text" id="boTel" name="boTel" maxlength="14">
+									<script>
+									$("#boTel").on('keyup', function() {
+										if( Number( $(this).val() ).toString() == NaN.toString() ) {
+											$(this).val( $(this).val().substring(0, $(this).val().length - 1 ) );
+										}
+									});
+									</script>
+									<!-- 
+									<select id="txtMobile1">
+										<option value="010">010</option>
+										<option value="011">011</option>
+										<option value="016">016</option>
+										<option value="017">017</option>
+										<option value="019">019</option>						
+									</select>
+									<input type="text" id="txtMobile2" maxlength="4" />
+									<input type="text" id="txtMobile3" maxlength="4" />
+									<input type="hidden" id="boTel" name="boTel">
+									<script type="text/javascript">
+										$("#txtMobile1").change(function() {
+											$("#boTel").val( $("#txtMobile1").val() + "" + $("#txtMobile2").val() + "" + $("#txtMobile3").val() );
+										});
+										
+										$("#txtMobile2").on('keyup', function() {
+											$("#boTel").val( $("#txtMobile1").val() + "" + $("#txtMobile2").val() + "" + $("#txtMobile3").val() );
+										});
+										
+										$("#txtMobile3").on('keyup', function() {
+											$("#boTel").val( $("#txtMobile1").val() + "" + $("#txtMobile2").val() + "" + $("#txtMobile3").val() );
+										});
+										
+										$("#txtMobile2").on('keyup', function() {
+											if( Number( $(this).val() ).toString() == NaN.toString() ) {
+												$(this).val( $(this).val().substring(0, $(this).val().length - 1 ) );
+											}
+										});
+										
+										$("#txtMobile3").on('keyup', function() {
+											if( Number( $(this).val() ).toString() == NaN.toString() ) {
+												$(this).val( $(this).val().substring(0, $(this).val().length - 1 ) );
+											}
+										});
+									</script>
+									 -->
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><span class="esse">*</span><label for="email" th:text="#{board.email}"></label></th>
+								<td>
+									<input type="text" name="str_email01" id="str_email01"> @ 
+									<input type="text" name="str_email02" id="str_email02" value=""> 
+									<select style="margin-right:10px" name="selectEmail" id="selectEmail"> 
+											<option value="" th:text="#{board.choice}"></option> 
+											<option value="naver.com">naver.com</option>
+											<option value="hanmail.net">hanmail.net</option>
+											<option value="hotmail.com">hotmail.com</option>
+											<option value="nate.com">nate.com</option>
+											<option value="yahoo.co.kr">yahoo.co.kr</option> 
+											<option value="empas.com">empas.com</option>
+											<option value="dreamwiz.com">dreamwiz.com</option>
+											<option value="freechal.com">freechal.com</option>
+											<option value="lycos.co.kr">lycos.co.kr</option>
+											<option value="korea.com">korea.com</option>
+											<option value="gmail.com">gmail.com</option>
+											<option value="hanmir.com">hanmir.com</option>
+											<option value="paran.com">paran.com</option>
+									</select>
+									<input type="hidden" id="boEmail" name="boEmail">	
+									<label class="email_ch"><input type="checkbox" name="boReplyReq" value="1"><em></em><span th:text="#{board.email.checkbox}"></span></label>
+									<script type="text/javascript">
+										$("#str_email01").on('keyup', function() {
+											$("#boEmail").val( $("#str_email01").val() + "@" + ( $("#selectEmail").val() == "" ? $("#str_email02").val() : $("#selectEmail").val() ) );
+										});
+										
+										$("#str_email02").on('keyup', function() {
+											$("#boEmail").val( $("#str_email01").val() + "@" + ( $("#selectEmail").val() == "" ? $("#str_email02").val() : $("#selectEmail").val() ) );
+										});
+										
+										$("#selectEmail").change(function() {
+											if( $(this).val() == "" ) {
+												$("#str_email02").removeAttr( "readonly" );
+												$("#str_email02").css("display", "");
+											} else {
+												$("#str_email02").attr("readonly", true );
+												$("#str_email02").css("display", "none");
+											}
+											$("#boEmail").val( $("#str_email01").val() + "@" + ( $("#selectEmail").val() == "" ? $("#str_email02").val() : $("#selectEmail").val() ) );
+										});
+									</script>
+								</td>		
+							</tr>
+							<tr>
+								<th scope="row"><label for="content" th:text="#{board.etcrequest}"></label></th>
+								<td><textarea name="boContent" style="width:100%; min-height:150px; max-height:400px; box-sizing:border-box; border-color:#d8d8d8; resize: none; padding-left: 10px;" resize="false"></textarea></td>
+							</tr>
+							<tr>
+								<th scope="row" th:text="#{board.attach}"></th>
+								<td>
+									<div class="file-upload">
+										<label>
+											<span id="text1"></span>
+											<div class="upload-btn">
+												<button type="button" class="findBtn" th:text="#{board.find}"></button>
+												<input type="file" name="boFile1file" id="find1" class="file">
+											</div>
+										</label>
+									</div>
+								</td>
+							</tr>
+							<script>
+							$(function(){
+								$('#find1').change(function(){
+								$('#text1').text($('#find1').val());
+								});
+							});
+							</script>
+							<!-- 
+							<tr>
+								<th scope="row"><span class="esse">*</span><label for="name" th:text="#{board.botcheck}"></label></th>
+								<td><p th:text="#{board.botcheck.text}"></p></td>			
+							</tr>
+							-->
+						</table>
+						<div class="btn_wrap">
+							<a href="javascript:check()" class="upload" th:text="#{board.enrol}"></a>
+						</div>
+					</div>
+				</div>
+			</form>
+			<script type="text/javascript">
+				function check() {
+	        		var f = $("#form").serializeObject();
+	        		if( !f.privacyChk ) {
+	        			alert( '개인정보수집 및 이용에 대한 동의해주세요.' );
+	        		} else if( f.boD1 == null || f.boD1.trim().length == 0 ) {
+	        			alert( '성명을 입력해주세요.' );
+	        		} else if( f.boD2 == null || f.boD2.trim().length == 0 ) {
+	        			alert( '업체명을 입력해주세요.' );
+	        		} else if( f.boTitle == null || f.boTitle.trim().length == 0 ) {
+	        			alert( '제목을 입력해주세요.' );
+	        		} else if( f.boTel == null || f.boTel.trim().length == 0 ) { 
+	        			alert( '연락처가 올바르지 않습니다.' );
+	        		} else if( f.boEmail == null || f.boEmail.trim().length == 0 ) {
+	        			alert( '이메일이 올바르지 않습니다.' );
+	        		} else {
+	        			var form_data = new FormData(document.getElementById("form"));
+	        			form_data.append( '[[${_csrf.parameterName}]]', '[[${_csrf.token}]]' );
+	        			$.ajax({
+	        				data: form_data,
+	        				type: 'POST',
+	        				url: '/board/write/proc.ajax',
+	        				cache: false,
+	        				contentType: false,
+	        				encType: 'multipart/form-data',
+	        				processData: false,
+	        				success: function( d ) {
+	        					alert( d.msg );
+	        					if( d.code == 200 ) {
+	        						location.href = '/board/' + '[[${boardConfig.bcDbname}]]' + '/write';
+	        					}
+	        				}
+	        			});
+	        		}
+	        	}
+				
+				$(function() {
+					$('.tab-ul_1').click(function(){
+						$('.tab-ul_1 ul').slideToggle();
+					});
+					
+					$('.tab-ul_2').click(function(){
+						$('.tab-ul_2 ul').slideToggle();
+					});
+					
+					AOS.init();
+				})
+			</script>
+		</section>
+	</body>
+</html>

@@ -1,0 +1,324 @@
+.slick-slider {
+    position: relative;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list {
+    position: relative;
+
+    display: block;
+    overflow: hidden;
+	height:100%;
+    margin: 0;
+    padding: 0;
+}
+
+.slick-list.dragging {
+    cursor: pointer;
+    cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+	height:100%;
+}
+
+
+.slick-loading .slick-track {
+    visibility: hidden;
+}
+
+.slick-slide {
+	outline: none;
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+    &:focus,
+    &:hover {
+        outline: 0;
+    }
+}
+
+[dir='rtl'] .slick-slide {
+    float: right;
+}
+
+.slick-slide img {
+    display: block;
+    height: auto;
+}
+
+.slick-slide.slick-loading img {
+    display: none;
+}
+
+.slick-slide.dragging img {
+    pointer-events: none;
+}
+
+.slick-initialized .slick-slide {
+    display: block;
+}
+
+.slick-loading .slick-slide {
+    visibility: hidden;
+}
+
+.slick-vertical .slick-slide {
+    display: block;
+
+    height: auto;
+}
+
+.slick-arrow.slick-hidden {
+   
+}
+
+/* Slider */
+.slick-loading .slick-list {
+    background: #fff url('./ajax-loader.gif') center center no-repeat;
+}
+
+/* Arrows */
+.slick-prev,
+.slick-next {
+    font-size: 0;
+    line-height: 0;
+
+    position: absolute;
+
+    display: block;
+
+    width: 16px;
+    height: 16px;
+    padding: 0;
+
+    cursor: pointer;
+
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus {
+    color: transparent;
+    outline: none;
+}
+
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before {
+    opacity: 1;
+}
+
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before {
+    opacity: .25;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-family: 'FontAwesome';
+    font-size: 40px;
+  font-weight: bold;
+    line-height: 1;
+
+    opacity: .75;
+    color: black;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  transition: opacity 0.25s;
+}
+
+.slick-prev {
+    z-index: 1;
+}
+
+[dir='rtl'] .slick-prev {
+    right: 0;
+    left: auto;
+}
+
+.slick-prev:before {
+    content: '';
+}
+
+[dir='rtl'] .slick-prev:before {
+    content: '\f105';
+}
+
+.slick-next {
+    z-index: 1;
+}
+
+[dir='rtl'] .slick-next {
+    
+    left: 0;
+}
+
+.slick-next:before {
+    content: '';
+}
+
+[dir='rtl'] .slick-next:before {
+    content: '\f104';
+}
+
+
+/* Dots */
+.slick-dotted.slick-slider {
+    margin-bottom: 0;
+}
+
+.slick-dots {
+    position: absolute;
+	top:50%;
+	left:50%;
+    display: block;
+
+    padding: 0;
+
+    list-style: none;
+
+    text-align: center;
+}
+
+.slick-dots li {
+    position: relative;
+
+    display: inline-block;
+
+    width: 9px;
+    height: 9px;
+    margin:0 7px;
+	float:left;
+    padding: 0;
+	opacity:1;
+    cursor: pointer;
+}
+
+.slick-dots li button {
+    font-size: 0;
+    line-height: 0;
+
+    display: block;
+
+    width: 9px;
+    height: 9px;
+	background:none;
+	border-radius:50%;
+
+    cursor: pointer;
+
+    color: transparent;
+    border: 0;
+    outline: none;
+}
+
+.slick-dots li button:hover,
+.slick-dots li button:focus {
+    outline: none;
+}
+
+.slick-dots li button:hover:before,
+.slick-dots li button:focus:before {
+    opacity: 1;
+}
+.slick-dots li.slick-active {opacity:1; width:18px; }
+.slick-dots li button:before {
+    font-family: 'FontAwesome';
+    font-size: 16px;
+    line-height: 1;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 9px;
+    height: 9px;
+
+    content: '';
+    text-align: center;
+	background:#fff;
+	border-radius:50%;
+    color: black;
+	opacity:0.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: opacity 0.25s;
+}
+
+.slick-dots li.slick-active button:before {
+    opacity: 1;
+    color: black;
+	 border-radius:50%;
+	background:#ffff;
+	width:18px;
+	height:18px;
+	margin-top:-4px;
+}
+/**
+ * Photo
+ */
+
+.photo {
+  background-size: cover;
+  background-position: center center;
+  min-height: 10em;
+  padding-bottom: 5%;
+  will-change: transform;
+  
+  &.is-animating {
+    animation: scale 5s ease-in-out forwards;
+  }
+  
+  &:before {
+    content: "";
+    display: block;
+  }
+  
+  * > {
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+  }
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1.0);
+    }
+    100% {
+        transform: scale(1.1) rotate(0.01deg); // Rotate fixes shaking animation in some browsers. http://stackoverflow.com/questions/28992549/internet-explorer-and-css-transform-value-of-scale-on-keyframes
+    }
+}

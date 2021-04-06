@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/adminLayout">
+	<body>
+		<section layout:fragment="content">
+			<section id="main-content">
+				<section class="wrapper">
+			        <h3 th:utext="'<i class=\'fa fa-angle-right\'></i> ' + ${boardConfig.bcBoardName}"></h3>
+			        <!-- BASIC FORM ELELEMNTS -->
+			        <div class="row mt">
+			          <div class="col-lg-12">
+			            <div class="form-panel">
+			              <h4 class="mb"><i class="fa fa-angle-right"></i> 기본설정</h4>
+			              <form class="form-horizontal style-form" id="form">
+			              	<input type="hidden" name="bcIdx" th:value="${boardConfig.bcIdx}">
+			              	<input type="hidden" name="bcDbname" th:value="${boardConfig.bcDbname}">
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">게시판 이름</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" name="bcBoardName" class="form-control" th:value="${boardConfig.bcBoardName}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">페이지당 게시물 수</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" class="form-control" name="bcPageRows" th:value="${boardConfig.bcPageRows}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label class="col-sm-2 col-sm-2 control-label">페이지 표시 개수</label>
+			                  <div class="col-sm-10">
+			                    <input type="text" class="form-control" name="bcPageBlock" th:value="${boardConfig.bcPageBlock}">
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                	<label class="col-sm-2 col-sm-2 control-label">게시판 사용여부</label>
+			                  <div class="col-sm-2">
+			                    <input class="form-control" type="checkbox" name="bcIsUse" data-toggle="switch" value="1" th:checked="${boardConfig.bcIsUse} > 0 ? 'true'">
+			                  </div>
+			                  <label class="col-sm-2 col-sm-2 control-label">공지 사용여부</label>
+			                  <div class="col-sm-2">
+			                    <input class="form-control" data-toggle="switch" type="checkbox" name="bcUseNotice" value="1" th:checked="${boardConfig.bcUseNotice} > 0 ? 'true'">
+			                  </div>
+			                  <label class="col-sm-2 col-sm-2 control-label">페이징 사용여부</label>
+			                  <div class="col-sm-2">
+			                    <input class="form-control" data-toggle="switch" type="checkbox" name="bcUsePageable" value="1" th:checked="${boardConfig.bcUsePageable} > 0 ? 'true'">
+			                  </div> 
+			                  <!-- 
+			                  <label class="col-sm-2 col-sm-2 control-label">비밀글 사용여부</label>
+			                  <div class="col-sm-2">
+			                    <input class="form-control" data-toggle="switch" type="checkbox" name="bcUseSecret" th:checked="${boardConfig.bcUseSecret} > 0 ? 'true'" disabled>
+			                  </div>
+			                  
+			                  <label class="col-sm-2 col-sm-2 control-label">댓글 사용여부</label>
+			                  <div class="col-sm-2">
+			                    <input class="form-control" data-toggle="switch" type="checkbox" name="bcUseReply" th:checked="${boardConfig.bcUseReply} > 0 ? 'true'" disabled>
+			                  </div>
+			                   -->
+			                </div>
+			                <!-- 
+			                <div class="form-group">
+			                	<label class="col-sm-2 col-sm-2 control-label">스킨 설정</label>
+								<div class="col-sm-10">
+									<input class="form-control" type="text" name="bcSkinName" th:value="${boardConfig.bcSkinName}" disabled>
+								</div>
+			                </div>
+			                 -->
+			                <input type="hidden" name="bcBoardType" value="board">
+			                <input type="hidden" name="bcSkinName" th:value="${boardConfig.bcSkinName}">
+			                <div class="form-group">
+			                	<div class="col-lg-offset-2 col-lg-10">
+			                		<a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/list'}"><button class="btn btn-theme pull-right" type="button">글목록</button></a>
+			                		<button class="btn btn-theme pull-right" type="button" id="saveBtn">저장</button>
+			                	</div>
+			                </div>
+			              </form>
+			            </div>
+			          </div>
+			          <!-- col-lg-12-->
+			        </div>
+			        <script type="text/javascript">
+		        		$("#saveBtn").click(function() {
+		        			send('/admin/board/save', $("#form").serializeObject(), function(d) {
+	        					alert( d.msg );
+	        					if( d.code == 200 ) {
+	        						location.reload();
+	        					}
+	        				});
+		        		});
+			        </script>
+				</section>
+			</section>
+		</section>
+	</body>
+</html>

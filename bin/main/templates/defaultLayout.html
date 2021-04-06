@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title layout:title-pattern="$LAYOUT_TITLE : $CONTENT_TITLE">Board</title>
+		<!-- COMMON RESOURCES -->
+		<!-- META TAGS -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<th:block th:replace="fragments/commonHead"></th:block>
+	</head>
+	<body>
+		<th:block layout:fragment="content"></th:block>
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<section layout:fragment="content">
+			<div class="sub-visual subv-1">
+				<h1>inwoo<br><span></span>company</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<div th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" th:utext="${sub.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							</div>				
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2>인재구인</h2> 
+			</div>
+			
+			<div id="Joboffer">
+				<ul class="tab">
+					<li style="width: 19.85%;"><a href="#tab1" class="selected">비전</a></li>
+					<li style="width: 19.85%;"><a href="#tab2">인재상</a></li>
+					<li style="width: 19.85%;"><a href="#tab3">복리후생</a></li>
+                    <li style="width: 19.85%;"><a href="#tab4">입사서식</a></li>
+                    <li style="width: 19.85%;"><a href="#tab5">채용공고</a></li>
+				</ul>
+			
+				<ul class="panel">
+					<li id="tab1">
+						<div class="vision common" data-aos="fade-up" data-aos-duration="3000">
+							<div class="txt">
+								<p class="e_tit">vision</p>
+								<p class="b_tit">제조 및 무역을 통한 21세기<br>화학 유통 분야의 선두기업</p>
+							</div>
+						</div>
+						<div class="vision_2">
+							<div class="div_wrap">
+								<div data-aos="flip-left">
+									<h4>과감한 연구투자</h4>
+									부설연구소의 자체적인 연구 개발은 물론 
+									한국과학기술원(KIST), 교려대학교 및 
+									한국 화학연구소와 연계하여 
+									과감한 연구 투자를 통한 보다 많은 
+									미래 소재와 화학원료 및 화학제품 개발
+								</div>
+								<div data-aos="flip-left">
+									<h4>전문인력 양성</h4>
+									직원들에 대한 전문적인 교육을 지속적으로
+									실시하여 고객들의 다양하고 차별화된 요구에 
+									신속히 부응할 수 있는 전문인력 양성
+								</div>
+								<div data-aos="flip-left">
+									<h4>파트너와 긴밀한 협조<br>및 유대강화</h4>
+									국내의 사업 파트너들과의 신속하고 긴밀한 
+									커뮤니케이션을 통해 고객들에게 
+									보다 나은 제품을 제공함으로써 
+									매출 증대 및 고객 만족 실현
+								</div>
+							</div>
+						</div>
+					</li>
+					<li id="tab2">
+						<div class="talent common">
+							<p class="e_tit">inwoo talent</p>
+							<p class="b_tit">인우코퍼레이션은 긍정적 사고, 높은 실천력,<br>뚜렷한 목표의식을 지향합니다.</p>
+							<img src="/static/images/sub/talent_img.jpg" alt="뚜렷한 목표의식">
+						</div>
+						
+						<div class="talent_wrap">
+							<div class="talent_list">
+								<img src="/static/images/sub/talent_list1.jpg">
+								<div class="txt">
+									<p class="num">01</p>
+									<p class="tit">긍정적 사고</p>
+									<p class="s_tit">어려운 상황이나 문제가 발생했을 때<br>긍정적인 사고를 가지고 있는 사람</p>
+									누구나 어려운 상황은 겪게 되고 일을 진행하다 보면 문제가 발생할 때가 있습니다. 그런 일들이 발생할 때 부정적인 사고 방식 보단 긍정적인 사고가 일의 해결과 상황의 돌파구를 만들어 냅니다. 쉽사리 포기하고 쉽사리 주저앉아 버리기 보단 문제해결에 관하여 긍정적인 사고로 상황에 대처하는 인재 인우코퍼레이션은 그런 긍정적 사고를 추구합니다.
+								</div>
+							</div>
+							<div class="talent_list right">
+								<img src="/static/images/sub/talent_list2.jpg">
+								<div class="txt">
+									<p class="num">02</p>
+									<p class="tit">높은 실천력</p>
+									<p class="s_tit">어려운 상황이나 문제가 발생했을 때<br>긍정적인 사고를 가지고 있는 사람</p>
+									모든 사람들이 좋은 생각을 합니다. 모든 사람들이 좋은 말은 합니다. 
+									하지만 좋은 말과 생각만으로 세상은 바뀌지 않습니다. 
+									세상을 바꾸기 위해서는 그런 좋은 생각들을 현실로 바꿔주는 능력 
+									그것이 바로 실천하는 힘입니다. 인우코퍼레이션은 좋은 생각과 
+									좋은 말을 현실로 만들어 줄 실천력을 추구합니다.
+								</div>
+							</div>
+							<div class="talent_list">
+								<img src="/static/images/sub/talent_list3.jpg">
+								<div class="txt">
+									<p class="num">03</p>
+									<p class="tit">뚜렷한 목표의식</p>
+									<p class="s_tit">삶의 뚜렷한 목표의식이 있는 사람 </p>
+									대부분의 사람들이 일년의 지나감을 아쉬워하지만 하루하루가 더해져서 일년이 되는 것은 생각하지않습니다. 하루하루의 목표를 위해서 노력하는 사람은 한 달의 목표를 위해서 노력을 할 수 있고 또 더 큰 목표를 위해서 노력을 할 수 있고 달성할 수 있습니다. 인우코퍼레이션은 그러한 삶의 목표와 열정을 추구합니다.
+								</div>
+							</div>
+						</div>
+					</li>
+					<li id="tab3">
+						<div class="benefit">
+							<div>
+								<div class="txt">
+									<p class="e_tit">welfare benefits</p>
+									<p class="b_tit">인우코퍼레이션은 다양한<br>자기 활동 및 자기계발<br>기회를 제공합니다.</p>									
+								</div>
+								<img src="/static/images/sub/benefit_img.jpg" alt="자기계발 기회 제공">
+							</div>
+						</div>
+						<div class="benefit_list">
+							<div>
+								<div class="img_box b1">
+									<img src="/static/images/sub/benefit_icon1.png" alt="동호회">
+									<p>동호회</p>
+								</div>
+								동호회 Friends활동을 통하여 임직원간의 의사소통을 강화하고 다양한 문화 활동과 독서 토론 등을 통하여 직원들의 다양성을 인정하고 화합을 도모하고 있습니다.
+							</div>
+							<div>
+								<div class="img_box b2">
+									<img src="/static/images/sub/benefit_icon2.png" alt="동호회">
+									<p>각종행사</p>
+								</div>
+								동호회 Friends활동을 통하여 임직원간의 의사소통을 강화하고 다양한 문화 활동과 독서 토론 등을 통하여 직원들의 다양성을 인정하고 화합을 도모하고 있습니다.
+							</div>
+							<div  class="last">
+								<div class="img_box b3">
+									<img src="/static/images/sub/benefit_icon3.png" alt="동호회">
+									<p>건강지원</p>
+								</div>
+								마라톤 대회, 사내 체육대회 진행하며 직원들 간의 체육활동도 활발하게 이루워 지고 있습니다.
+							</div>
+							<div>
+								<div class="img_box b4">
+									<img src="/static/images/sub/benefit_icon4.png" alt="동호회">
+									<p>정기적인 교육</p>
+								</div>
+								정기적인 사내교육과 년 1회 이상의 사외교육을 통하여 직원들의 새로운 기술의 교육과 자기계발의 기회를 제공 합니다.
+							</div>
+							<div>
+								<div class="img_box b5">
+									<img src="/static/images/sub/benefit_icon5.png" alt="동호회">
+									<p>자기계발 교육</p>
+								</div>
+								다음 봉사 카페인 ‘한바우’와 용산구의 ‘영낙보린원' 등의 사회봉사 단체와 결연하 여 정기적인 봉사활동과 정기적인 헌혈로 나눔을 실천합니다.
+							</div>
+							<div class="last">
+								<div class="img_box b6">
+									<img src="/static/images/sub/benefit_icon6.png" alt="동호회">
+									<p>경조사 지원</p>
+								</div>
+								구성원들의 조그마한 일이라도 기쁜 일, 슬픈 일을 함께 나누며 축하하고 위로합니다.
+							</div>
+						</div>
+					</li>
+					<li id="tab4">
+						<p class="b_tit">입사지원서는 반드시 본인 작성해야 합니다.</p>
+						<p class="txt">
+						채용 취소에 사유가 될 수 있습니다. 경력 및 자기 소개서는 가급적 상세하게 적어 주시길 바랍니다. 
+						입사여부 및 진행 여부를 바로 알려드릴 수 있는 전화 및 메일주소를 정확하게 기재 바랍니다.
+						제출하신 서류는 인비로 처리되며 일체 반납되지 않습니다.
+						</p>
+						<div class="img_wrap">
+							<div>
+								<p class="num">STEP 01</p>
+								<img src="/static/images/sub/step1.png" alt="지원자접수">
+								<p>지원자 접수</p>
+							</div>
+							<div>
+								<p class="num">STEP 02</p>
+								<img src="/static/images/sub/step2.png" alt="서류심사">
+								<p>서류심사</p>
+							</div>
+							<div>
+								<p class="num">STEP 03</p>
+								<img src="/static/images/sub/step3.png" alt="면접전형">
+								<p>면접전형</p>
+							</div>
+							<div>
+								<p class="num">STEP 04</p>
+								<img src="/static/images/sub/step4.png" alt="최종합격">
+								<p>최종합격</p>
+							</div>
+						</div>
+						<div class="img_wrap_m"><img src="/static/images/sub/job_img.png" alt=""></div>
+						<div class="img_wrap_m2"><img src="/static/images/sub/job_img2.png" alt=""></div>
+						<p class="s_txt">채용 관련 문의사항은 <span>인사담당자 관리부 박소현 부장</span>(shpark@inwoocop.co.kr, 02)2202-7028)으로 연락주시기 바랍니다. </p>
+						<a href="">입사지원서 다운로드</a>
+                    </li>
+                    <li id="tab5">
+                        <div id="Notice" class="b_common">
+                        	<!-- 
+                            <div class="search_wrap">
+                                <form name="search" action="/board/notice/list" autocomplete="off" class="form">
+                                    <div class="dv-select">
+                                        <select name="findType" id="eaddress" tabindex="1" class="customSelect">
+                                            <option value="">전체</option>
+                                            <option value="BO_TITLE">제목</option>
+                                            <option value="BO_CONTENT">내용</option>
+                                        </select>
+                                    </div>
+                                    <span class="input">
+                                        <input type="text" placeholder="검색어를 입력해주세요" name="findWord" value="" class="galInput">
+                                        <span class="search"><input type="submit" value="검색"></span>
+                                    </span>
+                                </form>		
+                            </div>
+                        	 -->
+                            <div class="board_wrap" id="board_wrap">
+                                <div class="board_tit board_box">
+                                    <ul>
+                                        <li class="num">번호</li>
+                                        <li class="tit" style="text-align: center;">제목</li>
+                                        <li class="wi">작성자</li>
+                                        <li class="date">등록일</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- 
+                            <div class="paging">
+                              <a href="/board/notice/list?page=0" class="btn_arr first"><span class="hide"><img src="/static/images/sub_pro/pre1.png" alt="처음으로"></span></a>            
+                              <a href="/board/notice/list?page=0" class="btn_arr prev"><span class="hide"><img src="/static/images/sub_pro/pre2.png" alt="이전페이지"></span></a>
+                              
+                                  <a href="/board/notice/list?page=0" 
+                                      class="on">1</a>
+                              
+                              
+                                  <a href="/board/notice/list?page=1">2</a>
+                              
+                              <a href="/board/notice/list?page=1" class="btn_arr next"><span class="hide"><img src="/static/images/sub_pro/next2.png" alt="다음페이지"></span></a>            
+                              <a href="/board/notice/list?page=1" class="btn_arr last"><span class="hide"><img src="/static/images/sub_pro/next1.png" alt="마지막페이지"></span></a>           
+                            </div>
+                             -->
+                            <div sec:authorize="hasAnyRole('ADMIN', 'DEVELOPER')" class="btn_wrap" style="text-align: center;">
+								<a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/write'}" class="upload">글쓰기</a>
+							</div>
+                        </div> 
+                    </li>
+				</ul>
+			</div> 
+			<script>
+				$(function() {
+					$('.tab-ul_1').click(function(){
+						$('.tab-ul_1 ul').slideToggle();
+					});
+					
+					$('.tab-ul_2').click(function(){
+						$('.tab-ul_2 ul').slideToggle();
+					});
+					
+					AOS.init();
+					
+					articleLoad( 'recruit', 0 );
+					
+				});
+				
+				function articleLoad( bcDbname, page ) {
+					send( "/board/" + bcDbname + "/list.ajax", {
+						'page': page
+					}, function(d) {
+						console.log( d );
+						for( var i=0; i<d.boardList.length; i++ ) {
+							var el = 
+								'<div class="board_box">'
+			                        + '<ul>'
+			                            + '<a href="/board/' + d.boardConfig.bcDbname + '/view?boIdx=' + d.boardList[i].boIdx + '">'
+			                                + '<li class="num">' + (i+1) + '</li>'
+			                                + '<li class="tit">'
+			                                +    '<b>' + d.boardList[i].boTitle + '</b>'
+			                                + '</li>'
+			                                + '<li class="wi">' + d.boardList[i].memberDto.mbName + '</li>'
+			                                + '<li class="date">' + d.boardList[i].boEnrolDt.substring(0,10) + '</li>'
+			                            + '</a>'
+			                        + '</ul>'
+			                    + '</div>';
+			                    
+			                $("#board_wrap").append( el );
+						}
+					}, 'POST');
+				}
+			</script>
+		</section>
+	</body>
+</html>

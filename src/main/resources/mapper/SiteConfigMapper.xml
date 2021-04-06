@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soroweb.board.repository.SiteConfigRepository">
+	<select id="findOne" resultType="com.soroweb.board.dto.SiteConfigDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				SITE_CONFIG
+		]]>
+	</select>
+	
+	<insert id="insert" parameterType="com.soroweb.board.dto.SiteConfigDto" useGeneratedKeys="true" keyProperty="scIdx">
+		<![CDATA[
+			INSERT INTO
+				SITE_CONFIG(
+					SC_ADMIN_MAIL,
+					SC_INQUIRY_TO_MAIL,
+					SC_PRIVACY_KO,
+					SC_PRIVACY_EN,
+					SC_SMTP_INQUIRY,
+					SC_SMTP_ESTIMATE,
+					SC_SMTP_SAMPLE
+				) VALUES (
+					#{scAdminMail},
+					#{scInquiryToMail},
+					#{scPrivacyKo},
+					#{scPrivacyEn},
+					#{scSmtpInquiry},
+					#{scSmtpEstimate},
+					#{scSmtpSample}
+				)
+		]]>
+	</insert>
+	
+	<update id="update" parameterType="com.soroweb.board.dto.SiteConfigDto" useGeneratedKeys="true" keyProperty="scIdx">
+		<![CDATA[
+			UPDATE
+				SITE_CONFIG
+			SET
+				SC_ADMIN_MAIL = #{scAdminMail},
+				SC_INQUIRY_TO_MAIL = #{scInquiryToMail},
+				SC_PRIVACY_KO = #{scPrivacyKo},
+				SC_PRIVACY_EN = #{scPrivacyEn},
+				SC_SMTP_INQUIRY = #{scSmtpInquiry},
+				SC_SMTP_ESTIMATE = #{scSmtpEstimate},
+				SC_SMTP_SAMPLE = #{scSmtpSample}
+			WHERE
+				SC_IDX = #{scIdx}
+		]]>
+	</update>
+</mapper>

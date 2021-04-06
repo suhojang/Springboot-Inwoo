@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content">
+			<div class="sub-visual subv-5">
+				<h1>inwoo<br><span></span>cs center</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<a class="active" th:utext="${currentSubMenuOne.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2 th:text="${boardConfig.bcBoardName}"></h2> 
+			</div>
+			
+			<div id="Notice" class="b_common">
+				<div class="search_wrap">
+					<form name="search" th:action="'/board/' + ${boardConfig.bcDbname} + '/list'" autocomplete="off" class="form">
+						<div class="dv-select">
+							<select name="findType" id="eaddress" tabindex="1" class="customSelect">
+								<option value="">전체</option>
+								<option value="BO_TITLE" th:selected="${#httpServletRequest.getParameter('findType')} == 'BO_TITLE' ? 'true'">제목</option>
+								<option value="BO_CONTENT" th:selected="${#httpServletRequest.getParameter('findType')} == 'BO_CONTENT' ? 'true'">내용</option>
+							</select>
+						</div>
+						<span class="input">
+							<input type="text" placeholder="검색어를 입력해주세요" name="findWord" th:value="${#httpServletRequest.getParameter('findWord')}" class="galInput">
+							<span class="search"><input type="submit" value="검색"></span>
+						</span>
+					</form>		
+				</div>
+			
+				<div class="board_wrap">
+					<div class="board_tit board_box">
+						<ul>
+							<li class="num">번호</li>
+							<li class="tit" style="text-align: center;">제목</li>
+							<li class="wi">작성자</li>
+							<li class="date">등록일</li>
+						</ul>
+					</div>
+					<div class="board_box" th:each="notice, n:${boardNoticeList}">
+						<ul>
+							<a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/view'(boIdx=${notice.boIdx},page=${pageable.get('number')})}">
+								<li class="num" th:utext="'<span>공지</span>'"></li>
+								<li class="tit">
+									<b th:text="${notice.boTitle}"></b>
+								</li>
+								<li class="wi" th:text="'관리자'"></li>
+								<li class="date" th:text="${#strings.substring(notice.boEnrolDt,0,10)}"></li>
+							</a>
+						</ul>
+					</div>
+					
+					<div class="board_box" th:each="board, b:${boardList}">
+						<ul>
+							<a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/view'(boIdx=${board.boIdx},page=${pageable.get('number')})}">
+								<li class="num" th:text="${boardCount} - ${b.index}"></li>
+								<li class="tit" th:text="${board.boTitle}"></li>
+								<li class="wi" th:text="'관리자'"></li>
+								<li class="date" th:text="${#strings.substring(board.boEnrolDt,0,10)}"></li>
+							</a>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="paging" th:if="${boardConfig.bcUsePageable} > 0">
+				  <a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/list'(page=0)}" class="btn_arr first"><span class="hide"><img src="/static/images/sub_pro/pre1.png" alt="처음으로"></span></a>            
+				  <a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/list'(page=${pageable.get('prevPage')})}" class="btn_arr prev"><span class="hide"><img src="/static/images/sub_pro/pre2.png" alt="이전페이지"></span></a>
+				  <div th:each="page : ${#numbers.sequence( pageable.get('sequenceStart'), pageable.get('sequenceEnd') ) }" th:remove="tag">
+				  	<a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/list'(page=${page})}" 
+				  		th:text="(${page}+1)"
+				  		th:class="${page} == ${pageable.get('number')} ? 'on'"></a>
+				  </div>
+				  <a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/list'(page=${pageable.get('nextPage')})}" class="btn_arr next"><span class="hide"><img src="/static/images/sub_pro/next2.png" alt="다음페이지"></span></a>            
+				  <a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/list'(page=${pageable.get('maxPage')})}" class="btn_arr last"><span class="hide"><img src="/static/images/sub_pro/next1.png" alt="마지막페이지"></span></a>           
+				</div>
+				
+				<div sec:authorize="hasAnyRole('ADMIN', 'DEVELOPER')" class="btn_wrap" style="text-align: center;">
+					<a th:href="@{'/board/' + ${boardConfig.bcDbname} + '/write'(page=${pageable.get('number')})}" class="upload">글쓰기</a>
+				</div>
+			</div>
+			
+			<script type="text/javascript">
+				$(function() {
+					$('.tab-ul_1').click(function(){
+						$('.tab-ul_1 ul').slideToggle();
+					});
+					
+					$('.tab-ul_2').click(function(){
+						$('.tab-ul_2 ul').slideToggle();
+					});
+				});
+			</script>
+		</section>		
+	</body>
+</html>

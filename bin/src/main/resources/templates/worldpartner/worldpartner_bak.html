@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<section layout:fragment="content">
+			<div class="sub-visual subv-2">
+				<h1>inwoo<br><span></span>World partner</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_off_arrow2.png" alt="화살표">
+							</div>
+							<div th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" th:utext="${sub.smcName} + '<img src=\'/static/images/sub/ic_off_arrow2.png\'>'"></a>
+							</div>				
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2>WORLD PARTNER</h2> 
+			</div>
+			
+			<div id="World">
+				<div class="tit_wrap">
+					<h3>
+						(주)인우코퍼레이션은 <span>다양한 네트워크 역량과</span>
+						<span>다양한 무역의 전통과 노하우</span>를 보유하고 있습니다.   
+					</h3>
+					(주)인우코퍼레이션은 현재 세계 16개국, 약 30여개의 글로벌 제조업체로부터<br>
+					국내외의 필요한 화학 원료를 수출입하고 있습니다.  
+				</div>
+				<div class="partner-1">
+					<div class="map-img">
+						<img src="/static/images/sub/partner-img-1.png">
+						<div class="partner-tab">
+							<li class="m-menu"><p class="m-title">유럽</p>
+								<ul class="tabs-2">
+									<li class="active mark-1" rel="country-1" id="go1"><a href="#open" class="aclick testtest"><p>유럽</p></a></li>
+									<li class="mark-2" rel="country-2" id="go1"><a href="#open" class="aclick testtest"><p>아시아</p></a></li>
+									<li class="mark-3" rel="country-3" id="go1"><a href="#open" class="aclick testtest"><p>북아메리카</p></a></li>
+									<li class="mark-4" rel="country-4" id="go1"><a href="#open" class="aclick testtest"><p>중동</p></a></li>
+									<li class="mark-5" rel="country-5" id="go1"><a href="#open" class="aclick testtest"><p>아프리카</p></a></li>
+									<li class="mark-6" rel="country-6" id="go1"><a href="#open" class="aclick testtest"><p>오세아니아</p></a></li>
+									<li class="mark-7" rel="country-7" id="go1"><a href="#open" class="aclick testtest"><p>남아메리카</p></a></li>
+								</ul>
+							</li>
+						</div>
+						<div id="go"></div>
+						<ul class="over-box">
+							<li class="active mark-1" rel="country-1"><a href="#open" id="aaa"  class="mark-1 testtest" ><p>유럽</p></a>
+							<div class="mark1-logo-box logo-boxc">
+								<a target="_blank" th:each="provider, i:${providers.get('EUROPE')}" th:href="${provider.pvHomepage}">
+									<img th:src="'/image/' + ${provider.pvLogoImg}">
+								</a>
+							</div>
+							</li>
+							
+							<li class="mark-2" rel="country-2"><a href="#open" class="mark-2 testtest"><p>아시아</p></a>
+							<div class="mark2-logo-box logo-boxc">
+								<a target="_blank" th:each="provider, i:${providers.get('ASIA')}" th:href="${provider.pvHomepage}">
+									<img th:src="'/image/' + ${provider.pvLogoImg}">
+								</a>
+							</div>
+							</li>
+							
+							<li class="mark-3" rel="country-3"><a href="#open" class="mark-3 testtest"><p>북아메리카</p></a>
+							<div class="mark3-logo-box logo-boxc">
+								<a target="_blank" th:each="provider, i:${providers.get('NAMERICA')}" th:href="${provider.pvHomepage}">
+									<img th:src="'/image/' + ${provider.pvLogoImg}">
+								</a>
+							</div>
+							</li>
+							
+							<li class="mark-4" rel="country-4"><a href="#open" class="mark-4 testtest"><p>중동</p></a>
+							<div class="mark4-logo-box logo-boxc">
+								<a target="_blank" th:each="provider, i:${providers.get('MIDEAST')}" th:href="${provider.pvHomepage}">
+									<img th:src="'/image/' + ${provider.pvLogoImg}">
+								</a>
+							</div>
+							</li>
+							
+							<li class="mark-5" rel="country-5"><a href="#open" class="mark-5 testtest"><p>아프리카</p></a>
+							<div class="mark5-logo-box logo-boxc">
+								<a target="_blank" th:each="provider, i:${providers.get('AFRICA')}" th:href="${provider.pvHomepage}">
+									<img th:src="'/image/' + ${provider.pvLogoImg}">
+								</a>
+							</div>
+							</li>
+							
+							<li class="mark-6" rel="country-6"><a href="#open" class="mark-6 testtest"><p>오세아니아</p></a>
+							<div class="mark6-logo-box logo-boxc">
+								<a target="_blank" th:each="provider, i:${providers.get('OCEANIA')}" th:href="${provider.pvHomepage}">
+									<img th:src="'/image/' + ${provider.pvLogoImg}">
+								</a>							
+							</div>
+							</li>
+							
+							<li class="mark-7" rel="country-7"><a href="#open" class="mark-7 testtest"><p>남아메리카</p></a>
+							<div class="mark7-logo-box logo-boxc">								
+								<a target="_blank" th:each="provider, i:${providers.get('SAMERICA')}" th:href="${provider.pvHomepage}">
+									<img th:src="'/image/' + ${provider.pvLogoImg}">
+								</a>							
+							</div>
+							</li>
+						</ul>						
+					</div>
+				</div>
+				<div class="partner-2" id="open">
+					<div class="country-cont" id="country-1">
+						<p class="pop_close"><a href="#close" class="close"></a></p>  
+						<h2 class="pop-title">유럽</h2>
+						<div class="country-tabs-body">
+							<div class="panel_wrap">
+								<ul class="panel">
+									<li id="tab1" style="display: block;">
+										<div th:each="provider, i:${providers.get('EUROPE')}" th:remove="tag">
+											<div th:if="${i.index} % 2 == 0" class="logo">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+											<div th:if="${i.index} % 2 == 1" class="logo last">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>							
+					</div>
+					
+					<div class="country-cont" id="country-2">
+						<p class="pop_close"><a href="#close" class="close"></a></p>  
+						<h2 class="pop-title">아시아</h2>
+						<div class="country-tabs-body">
+							<div class="panel_wrap">
+								<ul class="panel">
+									<li id="tab1">
+										<div th:each="provider, i:${providers.get('ASIA')}" th:remove="tag">
+											<div th:if="${i.index} % 2 == 0" class="logo">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+											<div th:if="${i.index} % 2 == 1" class="logo last">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>							
+					</div>
+			
+					<div class="country-cont" id="country-3">
+						<p class="pop_close"><a href="#close" class="close"></a></p>  
+						<h2 class="pop-title">북아메리카</h2>
+						<div class="country-tabs-body">
+							<div class="panel_wrap">
+								<ul class="panel">
+									<li id="tab1">
+										<div th:each="provider, i:${providers.get('NAMERICA')}" th:remove="tag">
+											<div th:if="${i.index} % 2 == 0" class="logo">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+											<div th:if="${i.index} % 2 == 1" class="logo last">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>							
+					</div>
+			
+					<div class="country-cont" id="country-4">
+						<p class="pop_close"><a href="#close" class="close"></a></p>  
+						<h2 class="pop-title">중동</h2>
+						<div class="country-tabs-body">
+							<div class="panel_wrap">
+								<ul class="panel">
+									<li id="tab1">
+										<div th:each="provider, i:${providers.get('MIDEAST')}" th:remove="tag">
+											<div th:if="${i.index} % 2 == 0" class="logo">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+											<div th:if="${i.index} % 2 == 1" class="logo last">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>							
+					</div>
+			
+					<div class="country-cont" id="country-5">
+						<p class="pop_close"><a href="#close" class="close"></a></p>  
+						<h2 class="pop-title">아프리카</h2>
+						<div class="country-tabs-body">
+							<div class="panel_wrap">
+								<ul class="panel">
+									<li id="tab1">
+										<div th:each="provider, i:${providers.get('AFRICA')}" th:remove="tag">
+											<div th:if="${i.index} % 2 == 0" class="logo">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+											<div th:if="${i.index} % 2 == 1" class="logo last">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>							
+					</div>
+			
+					<div class="country-cont" id="country-6">
+						<p class="pop_close"><a href="#close" class="close"></a></p>  
+						<h2 class="pop-title">오세아니아</h2>
+						<div class="country-tabs-body">
+							<div class="panel_wrap">
+								<ul class="panel">
+									<li id="tab1">
+										<div th:each="provider, i:${providers.get('OCEANIA')}" th:remove="tag">
+											<div th:if="${i.index} % 2 == 0" class="logo">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+											<div th:if="${i.index} % 2 == 1" class="logo last">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>							
+					</div>
+			
+					<div class="country-cont" id="country-7">
+						<p class="pop_close"><a href="#close" class="close"></a></p>  
+						<h2 class="pop-title">남아메리카</h2>
+						<div class="country-tabs-body">
+							<div class="panel_wrap">
+								<ul class="panel">
+									<li id="tab1">
+										<div th:each="provider, i:${providers.get('SAMERICA')}" th:remove="tag">
+											<div th:if="${i.index} % 2 == 0" class="logo">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+											<div th:if="${i.index} % 2 == 1" class="logo last">
+												<div class="img"><a th:href="${provider.pvHomepage}"><img th:src="'/image/' + ${provider.pvLogoImg}" alt=""></a></div>
+												<p><span th:utext="${provider.pvName} + '<br/>생산품 : ' + ${provider.pvProduct}"><th:block th:text="'생산품 : ' + ${provider.pvProduct}"></th:block></span></p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>							
+					</div>
+			
+				</div>	
+			</div>
+			<script type="text/javascript">
+				$(function() {
+					AOS.init();
+					
+					$(".mark-1, .mark-2, .mark-3, .mark-4, .mark-5, .mark-6, .mark-7").click(function() {
+						var rel = "";
+						if( $(this).attr('rel') ) {
+							rel = $(this).attr('rel');
+						} else {
+							rel = $(this).parent().attr('rel');
+						}
+						
+						$("#" + rel).find("#tab1").css("display", "block");
+					});
+				})
+			</script>
+			<script>
+				$(function() {
+					$('.tab-ul_1').click(function(){
+						$('.tab-ul_1 ul').slideToggle();
+					});
+					
+					$('.tab-ul_2').click(function(){
+						$('.tab-ul_2 ul').slideToggle();
+					});
+					
+					AOS.init();
+				});
+			</script>
+		</section>
+	</body>
+</html>

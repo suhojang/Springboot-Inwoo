@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/adminLayout">
+	<body>
+		<section layout:fragment="content">
+			<section id="main-content">
+				<section class="wrapper">
+			        <h3 th:utext="'<i class=\'fa fa-angle-right\'></i> 카테고리관리'"></h3>
+			        <!-- BASIC FORM ELELEMNTS -->
+			        <div class="row mt">
+			          <div class="col-lg-12">
+			            <div class="form-panel">
+			              <h4 class="mb"><i class="fa fa-angle-right"></i> 카테고리설정</h4>
+			              <form class="form-horizontal style-form" id="form" enctype="multipart/form-data" method="POST" action="/admin/category/save">
+			              	<div class="form-group">
+			              		<label class="col-sm-2 control-label">카테고리명</label>
+			              		<div class="col-sm-10">
+			              			<input type="text" name="pcatName" class="form-control" th:value="${data} != null ? ${data.pcatName} : ''">
+			              		</div>
+			              	</div>
+			              	<div class="form-group">
+			              		<label class="col-sm-2 control-label">카테고리명(영문)</label>
+			              		<div class="col-sm-10">
+			              			<input type="text" name="pcatNameEn" class="form-control" th:value="${data} != null ? ${data.pcatNameEn} : ''">
+			              		</div>
+			              	</div>
+			              	<div class="form-group">
+			              		<label class="col-sm-2 control-label">정렬순서</label>
+			              		<div class="col-sm-10">
+			              			<input type="text" name="pcatOrder" class="form-control" th:value="${data} != null ? ${data.pcatOrder} : ''">
+			              		</div>
+			              	</div>
+			              	<div class="form-group">
+			              		<label class="col-sm-2 control-label">설명<br/>(윤활유첨가제, 염료&식별제 용)</label>
+			              		<div class="col-sm-10">
+			              			<textarea name="pcatDesc" class="form-control" th:text="${data} != null ? ${data.pcatDesc} : ''" style="min-height: 250px; resize: none;"></textarea>
+			              		</div>
+			              	</div>
+			              	<div class="form-group">
+			              		<label class="col-sm-2 control-label">종류<br/>(윤활유첨가제, 염료&식별제 용)</label>
+			              		<div class="col-sm-10">
+			              			<input type="text" name="pcatType" class="form-control" th:value="${data} != null ? ${data.pcatType} : '' ">
+			              		</div>
+			              	</div>
+			              	<div class="form-group">
+			              		<label class="col-sm-2 control-label">적용<br/>(윤활유첨가제, 염료&식별제 용)</label>
+			              		<div class="col-sm-10">
+			              			<input type="text" name="pcatAddative" class="form-control" th:value="${data} != null ? ${data.pcatAddative} : ''">
+			              		</div>
+			              	</div>
+			              	<input type="hidden" name="pcatIdx" th:value="${data} == null ? '' : ${data.pcatIdx}">
+			              	<input type="hidden" name="bcDbname" th:value="${data} == null ? '' : ${data.bcDbname}">
+			              	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+			                <div class="form-group">
+			                	<div class="col-lg-offset-2 col-lg-10">
+			                		<button class="btn btn-theme pull-right" type="button" id="saveBtn">저장</button>
+			                	</div>
+			                </div>
+			              </form>
+			            </div>
+			          </div>
+			          <!-- col-lg-12-->
+			        </div>
+			        
+			        <script type="text/javascript">
+			        	$("#saveBtn").click(function() {
+			        		send( '/admin/product/category/save', $("#form").serializeObject(), function(d) {
+			        			alert(d.msg);
+			        			if( d.code == 200 ) {
+			        				location.href = '/admin/product/list/' + '[[${data.bcDbname}]]';
+			        			}
+			        		});
+			        	});
+			        </script>
+				</section>
+			</section>
+		</section>
+	</body>
+</html>

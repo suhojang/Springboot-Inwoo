@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<head>
+		<title>BOARD LIST</title>
+		
+		<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+	</head>
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content">
+			
+			<table id="table" data-toggle="table">
+				<thead>
+					<tr>
+						<th data-field="num">#</th>
+						<th data-field="bTitle">제목</th>
+						<th data-field="bWriter">작성자</th>
+						<th data-field="bEnrolDt">작성일</th>
+					</tr>
+				</thead>
+				<tbody th:if="${boardConfig.bcUsePageable} > 0">
+					<tr th:if="${board} != null" th:each="list, i:${board.list}" th:attr="data-idx=|${list.boIdx}|, data-dbname=|${list.bcDbname}|">
+						<td th:text="${i.index}+1"></td>
+						<td th:text="${list.boTitle}"></td>
+						<td th:text="${list.memberDto.mbName}"></td>
+						<td th:text="${#temporals.format( list.boEnrolDt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					</tr>
+				</tbody>
+				<tbody th:if="${boardConfig.bcUsePageable} == 0">
+					<tr th:if="${board} != null" th:each="list, i:${board}" th:attr="data-idx=|${list.boIdx}|, data-dbname=|${list.bcDbname}|">
+						<td th:text="${i.index}+1"></td>
+						<td th:text="${list.boTitle}"></td>
+						<td th:text="${list.memberDto.mbName}"></td>
+						<td th:text="${#temporals.format( list.boEnrolDt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div id="paging" th:if="${boardConfig.bcUsePageable} > 0">
+				<div th:text="${boardConfig}"></div>
+			</div>
+			
+			<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<a th:href="|/board/${boardConfig.bcDbname}/write|"><button>WRITE</button></a>
+			</div>
+			
+			<script type="text/javascript">
+				$(function() {
+					$("#table tbody tr").on( 'click', function() {
+						location.href = "/board/" + $(this).attr("data-dbname") + "/view/" + $(this).attr("data-idx");
+					});
+					
+				});
+			</script>
+		</section>		
+		<!-- FOOTER -->
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>

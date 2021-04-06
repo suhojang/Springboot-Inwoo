@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<section layout:fragment="content">
+			<div class="sub-visual subv-4">
+				<h1>inwoo<br><span></span>R&D</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<a class="active" th:utext="${currentSubMenuOne.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2 th:text="#{rnd.bio.subtit}"></h2> 
+			</div>
+			
+			<div id="Rnd_bio" class="ta_common">
+				<div class="wrap" data-aos="fade-up" data-aos-duration="3000">		
+					<div class="txt">
+						<div class="dot"></div>
+						<h3 th:utext="#{rnd.bio.wrap.h3}"></h3>
+						<span class="line"></span>
+						<p th:utext="#{rnd.bio.wrap.p}"> 
+						</p>
+					</div>
+				</div>
+				<div class="wrap2">
+					<div data-aos="fade-up" data-aos-duration="3000">
+						<h4 th:utext="#{rnd.bio.wrap2.h4}"></h4>	
+						<table border="0" cellpadding="0" cellspacing="0">
+							<colgroup>
+								<col style="width: 8%;">
+								<col style="width: auto;">
+							</colgroup>
+							<tr>
+								<th th:utext="#{rnd.bio.wrap2.tbl.1.1}"></th>
+								<th th:utext="#{rnd.bio.wrap2.tbl.1.2}"></th>
+								<th th:utext="#{rnd.bio.wrap2.tbl.1.3}"></th>
+								<th th:utext="#{rnd.bio.wrap2.tbl.1.4}"></th>				
+							</tr>
+							<tr>				
+								<td>1</td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.2.2}"></td>				
+								<td th:utext="#{rnd.bio.wrap2.tbl.2.3}"></td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.2.4}"></td>
+							</tr>
+							<tr>				
+								<td>2</td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.3.2}"></td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.3.3}"></td>				
+								<td th:utext="#{rnd.bio.wrap2.tbl.3.4}"></td>
+							</tr>
+							<tr>				
+								<td>3</td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.4.2}"></td>				
+								<td th:utext="#{rnd.bio.wrap2.tbl.4.3}"></td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.4.4}"></td>
+							</tr>
+							<tr>				
+								<td>4</td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.5.2}"></td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.5.3}"></td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.5.4}"></td>				
+							</tr>
+							<tr>				
+								<td>5</td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.6.2}"></td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.6.3}"></td>
+								<td th:utext="#{rnd.bio.wrap2.tbl.6.4}"></td>				
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div id="propan" data-aos="fade-up" data-aos-duration="3000">
+					<div>
+						<ul class="tab">
+							<li><a href="#tab1" class="selected" th:utext="#{rnd.bio.propan.tab1}"></a></li>
+							<li><a href="#tab2" th:utext="#{rnd.bio.propan.tab2}"></a></li>			
+						</ul>
+						<ul class="panel">
+							<li id="tab1">
+								<p class="tit" th:utext="#{rnd.bio.propan.tab1.tit}"></p>
+								<p th:utext="#{rnd.bio.propan.tab1.p}"></p>
+								<div class="box_wrap box_wrap1">
+									<div th:utext="#{rnd.bio.propan.tab1.div1}"></div>
+									<div class="last" style="margin-right: 0;" th:utext="#{rnd.bio.propan.tab1.div2}"></div>
+								</div>
+							</li>	
+							<li id="tab2">
+								<p class="tit" th:utext="#{rnd.bio.propan.tab2.tit}"></p>
+								<p></p>
+								<div class="box_wrap">
+									<div class="box box1" data-aos="fade-up" data-aos-duration="3000">
+										<img src="/static/images/sub/10Htdroxy.png" alt="천연수화지방산">
+										<p class="s_txt" th:utext="#{rnd.bio.propan.tab2.box1.stxt}"></p>
+									</div>
+									<div class="box fadein">
+										<p class="tit" th:utext="#{rnd.bio.propan.tab2.box2.tit}"></p>
+										<table>
+											<colgroup>
+												<col style="width: 20%;">
+												<col style="width: 30%;">
+												<col style="width: 20%;">
+												<col style="width: 30%;">
+											</colgroup>
+											<tr>
+												<th th:utext="#{rnd.bio.propan.tbl.1.1}"></th>
+												<td th:utext="#{rnd.bio.propan.tbl.1.2}"></td>
+												<th th:utext="#{rnd.bio.propan.tbl.1.3}"></th>
+												<td th:utext="#{rnd.bio.propan.tbl.1.4}"></td>
+											</tr>
+											<tr>
+												<th th:utext="#{rnd.bio.propan.tbl.2.1}"></th>
+												<td><img src="/static/images/sub/bio_table_img.jpg" alt="분자구조"></td>
+												<th th:utext="#{rnd.bio.propan.tbl.2.3}"></th>
+												<td th:utext="#{rnd.bio.propan.tbl.2.4}"></td>
+											</tr>
+											<tr>
+												<th th:utext="#{rnd.bio.propan.tbl.3.1}"></th>
+												<td th:utext="#{rnd.bio.propan.tbl.3.2}"></td>
+												<th th:utext="#{rnd.bio.propan.tbl.3.3}"></th>
+												<td th:utext="#{rnd.bio.propan.tbl.3.4}"></td>
+											</tr>
+											<tr>
+												<th th:utext="#{rnd.bio.propan.tbl.4.1}"></th>
+												<td th:utext="#{rnd.bio.propan.tbl.4.2}"></td>
+												<th th:utext="#{rnd.bio.propan.tbl.4.3}"></th>
+												<td th:utext="#{rnd.bio.propan.tbl.4.4}"></td>
+											</tr>
+											<tr>
+												<th th:utext="#{rnd.bio.propan.tbl.5.1}"></th>
+												<td th:utext="#{rnd.bio.propan.tbl.5.2}"></td>
+												<th th:utext="#{rnd.bio.propan.tbl.5.3}"></th>
+												<td th:utext="#{rnd.bio.propan.tbl.5.4}"></td>
+											</tr>
+										</table>
+									</div>
+									<div class="box" data-aos="fade-up" data-aos-duration="3000">
+										<p class="tit" th:utext="#{rnd.bio.product.tit}"></p>
+										<p class="s_txt" th:utext="#{rnd.bio.product.stxt}"></p>
+										<div class="img_wrap">
+											<div><img src="/static/images/sub/bio_use1.jpg" alt="코스메틱"><p th:text="#{rnd.bio.product.cosmetic}"></p></div>
+											<div class="last"><img src="/static/images/sub/bio_use2.jpg" alt="스킨토너"><p th:text="#{rnd.bio.product.skintoner}"></p></div>
+											<div class="ma"><img src="/static/images/sub/bio_use3.jpg" alt="로션"><p th:text="#{rnd.bio.product.lotion}"></p></div>
+											<div class="ma last"><img src="/static/images/sub/bio_use4.jpg" alt="클렌징폼크림"><p th:text="#{rnd.bio.product.cleansing}"></p></div>
+										</div>
+									</div>
+									<div class="box">
+										<p class="tit" th:utext="#{rnd.bio.package.tit}"></p>
+										<p class="s_txt" style="padding:0" th:utext="#{rnd.bio.package.stxt}">
+										</p>
+									</div>
+								</div>
+							</li>	
+						</ul>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				$(function() {
+					$('.tab-ul_1').click(function(){
+						$('.tab-ul_1 ul').slideToggle();
+					});
+					
+					$('.tab-ul_2').click(function(){
+						$('.tab-ul_2 ul').slideToggle();
+					});
+					
+					AOS.init();
+				})
+			</script>
+		</section>
+	</body>
+</html>

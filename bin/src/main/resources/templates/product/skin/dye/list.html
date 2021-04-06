@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content">
+			<div class="sub-visual subv-3">
+				<h1>inwoo<br><span></span>product</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active" style="color: #fff;"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<a class="active" th:utext="${currentSubMenuOne.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+			<div class="sub-tit">
+				<h2 th:text="${boardConfig.bcBoardName}"></h2> 
+			</div>
+			
+			<div id="Product_list" class="dye">
+			
+<!-- 				<div class="page_wrap"> -->
+<!-- 					<div th:each="category, c:${productCategoryList}"> -->
+<!-- 						<a th:href="@{'/product/' + ${category.bcDbname} + '/list'(pcatIdx=${category.pcatIdx})}" th:class="${category.pcatIdx} == ${productCategory.pcatIdx} ? 'active'" th:text="${category.pcatName}"></a> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+				<div class="title tit4" style="margin-top: 0px;padding-top:0">
+<!-- 					<h3 th:if="${productCategory} != null" th:text="${productCategory.pcatName} == null ? '' : ${productCategory.pcatName}"></h3> -->
+<!-- 					<h3 th:unless="${productCategory} != null"></h3> -->
+					<div class="s_tit">
+<!-- 						<div th:each="logo, l:${providerList}" th:remove="tag"> -->
+<!-- 							<img th:if="${logo.pvLogoImg} != null" th:src="'/image/' + ${logo.pvLogoImg}"> -->
+<!-- 						</div> -->
+<!-- 						<div th:each="provider, p:${providerList}" th:remove="tag"> -->
+<!-- 							<p th:utext="${i18n} == 'en' ? ${provider.pvDescEn} : ${provider.pvDesc}"></p> -->
+<!-- 						</div> -->
+						<div class="addlub-txt">
+							<table>
+								<tr>
+									<th>설명</th>							
+								</tr>
+								<tr>
+									<td th:text="${productCategory.pcatDesc}" colspan="2"></td>
+								</tr>
+								<tr>
+									<th>종류</th>							
+								</tr>
+								<tr>
+									<td th:text="${productCategory.pcatType}" colspan="2"></td>
+								</tr>
+								<tr>
+									<th>적용</th>							
+								</tr>
+								<tr>
+									<td th:text="${productCategory.pcatAddative}" colspan="2"></td>
+								</tr>						
+								<tr>
+									<th>공급제품</th>							
+								</tr>
+								<tr class="supplied" th:each="provider, p:${providerList}">
+									<td class="logo"><a target="_blank" th:href="${provider.pvHomepage}"><img style="width: 160px;" th:src="'/image/' + ${provider.pvLogoImg}"></a></td>
+									<td th:text="${provider.pvProvide}">
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+<!-- 				<div class="product_img_list"> -->
+<!-- 					<div class="list_wrap"> -->
+<!-- 						<div class="img_table"> -->
+<!-- 							<div th:each="product, p:${productList}"> -->
+<!-- 								<a th:href="@{'/product/' + ${boardConfig.bcDbname} + '/view'(pdIdx=${product.pdIdx},pcatIdx=${productCategory.pcatIdx},page=${pageable.get('number')})}"> -->
+<!-- 									<img th:src="${product.pdImg1} == null ? '/static/images/no-image.jpg' : '/image/' + ${product.pdImg1}"> -->
+<!-- 									<h5 th:text="${product.pdName}"></h5> -->
+<!-- 									<p th:text="${product.pdD1}"></p> -->
+<!-- 								</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="paging" th:if="${boardConfig.bcUsePageable} > 0"> -->
+<!-- 					  <a th:href="@{'/product/' + ${boardConfig.bcDbname} + '/list'(page=0,pcatIdx=${productCategory.pcatIdx})}" class="btn_arr first"><span class="hide"><img src="/static/images/sub_pro/pre1.png" alt="처음으로"></span></a>             -->
+<!-- 					  <a th:href="@{'/product/' + ${boardConfig.bcDbname} + '/list'(page=${pageable.get('prevPage')},pcatIdx=${productCategory.pcatIdx})}" class="btn_arr prev"><span class="hide"><img src="/static/images/sub_pro/pre2.png" alt="이전페이지"></span></a> -->
+<!-- 					  <div th:each="page : ${#numbers.sequence( pageable.get('sequenceStart'), pageable.get('sequenceEnd') ) }" th:remove="tag"> -->
+<!-- 					  	<a th:href="@{'/product/' + ${boardConfig.bcDbname} + '/list'(page=${page},pcatIdx=${productCategory.pcatIdx})}"  -->
+<!-- 					  		th:text="(${page}+1)" -->
+<!-- 					  		th:class="${page} == ${pageable.get('number')} ? 'on'"></a> -->
+<!-- 					  </div> -->
+<!-- 					  <a th:href="@{'/product/' + ${boardConfig.bcDbname} + '/list'(page=${pageable.get('nextPage')},pcatIdx=${productCategory.pcatIdx})}" class="btn_arr next"><span class="hide"><img src="/static/images/sub_pro/next2.png" alt="다음페이지"></span></a>             -->
+<!-- 					  <a th:href="@{'/product/' + ${boardConfig.bcDbname} + '/list'(page=${pageable.get('maxPage')},pcatIdx=${productCategory.pcatIdx})}" class="btn_arr last"><span class="hide"><img src="/static/images/sub_pro/next1.png" alt="마지막페이지"></span></a>            -->
+<!-- 					</div> -->
+<!-- 					<div class="search_wrap"> -->
+<!-- 						<form name="search" th:action="'/product/' + ${boardConfig.bcDbname} + '/list'" autocomplete="off" class="form"> -->
+<!-- 							<input type="hidden" name="mode" value=""> -->
+<!-- 							<input type="hidden" name="page" th:value="${#httpServletRequest.getParameter('page')} == null ? 0 : ${#httpServletRequest.getParameter('page')}"> -->
+																		
+<!-- 							<div class="dv-select"> -->
+<!-- 								<select name="findType" id="eaddress" tabindex="1" class="customSelect"> -->
+<!-- 									<option value="">전체</option> -->
+<!-- 									<option value="name">제목</option> -->
+<!-- 									<option value="content">내용</option> -->
+<!-- 								</select> -->
+<!-- 							</div> -->
+<!-- 							<span class="input"> -->
+<!-- 								<input type="text" placeholder="검색어를 입력해주세요" name="findWord" value="" class="galInput"> -->
+<!-- 								<span class="search"><input type="submit" value="검색"></span> -->
+<!-- 							</span> -->
+<!-- 						</form>		 -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+			</div> 
+			<script type="text/javascript">
+				$(function() {
+					$('.tab-ul_1').click(function(){
+						$('.tab-ul_1 ul').slideToggle();
+					});
+					
+					$('.tab-ul_2').click(function(){
+						$('.tab-ul_2 ul').slideToggle();
+					});
+				});
+			</script>
+		</section>		
+		<!-- FOOTER -->
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>

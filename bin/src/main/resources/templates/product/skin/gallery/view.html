@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	layout:decorator="layout/defaultLayout">
+	<body>
+		<!-- HEADER -->
+		<section layout:fragment="content">
+			<div class="sub-visual subv-3">
+				<h1>inwoo<br><span></span>product</h1> 		
+			</div>
+			<div class="sub-tabs">
+				<div class="tabs-wr"> 
+					<a href="/" class="home"><img src="/static/images/sub/ic_home.png" alt="홈">HOME</a>
+					<ul class="m-none tab-ul_1">
+						<li>
+							<a class="active"><th:block th:text="${currentMenu.mcName}"></th:block><img src="/static/images/sub/ic_arrow.png" alt="화살표">
+							<ul>
+								<li th:each="main, i:${menu.mainMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:if="${currentMenu.mcIdx} != ${main.mcIdx}" th:href="@{'/' + ${main.mcCategory} + '/' + ${main.mcUrl}}" th:text="${main.mcName}"></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="tab-ul_2">
+						<li>
+							<div th:with="uri=${#httpServletRequest.requestURI}" th:each="sub, i:${subMenu}" th:remove="tag">
+								<a th:if="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" class="active" style="color:#222"><th:block th:text="${sub.smcName}"></th:block><img src="/static/images/sub/ic_b_arrow.png" alt="화살표">
+							</div>
+							<a class="active" th:utext="${currentSubMenuOne.smcName} + '<img src=\'/static/images/sub/ic_arrow.png\'>'"></a>
+							<ul>
+								<li th:each="sub, i:${currentSubMenu}" th:with="uri=${#httpServletRequest.requestURI}">
+									<a th:unless="${#strings.indexOf(uri, sub.smcCategory + '/' + sub.smcUrl)} >= 0" th:href="@{'/' + ${sub.smcCategory} + '/' + ${sub.smcUrl}}" th:text="${sub.smcName}"></a>
+								</li>		
+							</ul>
+						</li> 
+					</ul>
+				</div>
+			</div>  
+		
+			<div id="Product_view">
+				<div class="tit_wrap">
+					<p class="s_tit" th:text="${productCategory.pcatName}"></p>
+					<h3 th:text="${product.pdName}"></h3>
+					<p th:text="${product.pdD1}"></p>
+				</div>
+				<div class="slider view-slider">
+				<th:block th:if="(${product.pdImg2} != null and ${product.pdImg3} != null) or ${product.pdImg3} != null">
+				  	<div th:if="${product.pdImg1} != null" th:style="'max-width: 550px; height: 550px; max-height: 550px; background-position: center; background-image:url(/image/' + ${product.pdImg1} + '); background-repeat: no-repeat;'"></div>
+				  	<div th:if="${product.pdImg2} != null" th:style="'max-width: 550px; height: 550px; max-height: 550px; background-position: center; background-image:url(/image/' + ${product.pdImg2} + '); background-repeat: no-repeat;'"></div>
+				  	<div th:if="${product.pdImg3} != null" th:style="'max-width: 550px; height: 550px; max-height: 550px; background-position: center; background-image:url(/image/' + ${product.pdImg3} + '); background-repeat: no-repeat;'"></div>
+				  	<div th:if="${product.pdImg4} != null" th:style="'max-width: 550px; height: 550px; max-height: 550px; background-position: center; background-image:url(/image/' + ${product.pdImg4} + '); background-repeat: no-repeat;'"></div>
+				  	<div th:if="${product.pdImg5} != null" th:style="'max-width: 550px; height: 550px; max-height: 550px; background-position: center; background-image:url(/image/' + ${product.pdImg5} + '); background-repeat: no-repeat;'"></div>
+			  	</th:block>
+			  	<th:block th:unless="(${product.pdImg2} != null and ${product.pdImg3} != null) or ${product.pdImg3} != null">
+				  	<div th:if="1" th:style="'max-width: 550px; height: 550px; max-height: 550px; background-position: center; background-repeat: no-repeat;'"></div>
+				  	<div th:if="1" th:style="'max-width: 550px; height: 550px; max-height: 550px; background-position: center; background-image:url(/image/' + ${product.pdImg1} + '); background-repeat: no-repeat;'"></div>
+				  	<div th:if="1" th:style="'max-width: 550px; height: 550px; max-height: 550px; background-position: center; background-repeat: no-repeat;'"></div>
+			  	</th:block>
+				</div>
+				<div class="detail_wrap">
+					<div>
+						<table>
+							<colgroup>
+								<col style="width:20%;">
+								<col style="width: auto;">
+							</colgroup>
+							<tr>
+								<th th:text="#{board.manufacturer}">제조사</th>
+								<td th:text="${product.pdManufacturer}"></td>
+							</tr>
+							<tr>
+								<th th:text="#{board.category}">종류</th>
+								<td th:text="${product.pdCategory}"></td>
+							</tr>
+							<tr>
+								<th th:text="#{board.function}">기능 및 성분</th>
+								<td th:text="${product.pdD1}"></td>
+							</tr>
+							<tr>
+								<th th:text="#{board.managercontact}">담당자 연락처</th>
+								<td th:text="${product.pdTel}"></td>
+							</tr>
+							<tr>
+								<th th:text="#{board.detail}">세부설명</th>
+								<td th:utext="${product.pdDetail}"></td>
+							</tr>
+						</table>
+						<a th:href="@{ '/product/' + ${product.bcDbname} + '/list'(pcatIdx=${productCategory.pcatIdx}, page=${#httpServletRequest.getParameter('page')}) }" class="btn" th:text="#{board.list}">목록으로</a>
+					</div>
+				</div>
+			</div>
+			<script>
+				$('.tab-ul_1').click(function(){
+					$('.tab-ul_1 ul').slideToggle();
+				});
+				
+				$('.tab-ul_2').click(function(){
+					$('.tab-ul_2 ul').slideToggle();
+				});
+				
+				var slider = $('.slider').slick({
+			        dots: false,
+			        infinite: true,
+			        speed: 500,
+			        slidesToShow: 3,
+			        slidesToScroll: 1,
+			        autoplay: true,
+			        autoplaySpeed: 2000,
+			        arrows: true,
+			        centerMode: true,
+			        responsive: [{
+			          breakpoint: 600,
+			          settings: {
+			            slidesToShow: 2,
+			            slidesToScroll: 1
+			          }
+			        },
+			        {
+			           breakpoint: 400,
+			           settings: {
+			              arrows: false,
+			              slidesToShow: 1,
+			              slidesToScroll: 1
+			           }
+			        }]
+			    }).on('beforeChange', function( slick, currentSlide, nextSlide ){
+			    	$(".slider img").css("opacity", ".5");
+					$(".slider").find( "img[data-slick-index=" + ( $(".slider").slick( 'slickCurrentSlide' ) + 2 ) % 5 + "]" ).css("opacity", 1);
+				});
+				
+				$(".slider").find( "img[data-slick-index=" + ( $(".slider").slick( 'slickCurrentSlide' ) + 1 ) % 5 + "]" ).css("opacity", 1);
+			</script>
+		</section>		
+		<!-- FOOTER -->
+		<footer th:replace="fragments/commonFooter :: commonFooter"></footer>
+	</body>
+</html>
