@@ -18,6 +18,8 @@
 > 시스템 아키텍처 설계
 > 
 > 데이터베이스 설계
+> 
+> Linux 서버 배포 및 관리
 ```
 git clone https://github.com/suhojang/Springboot-Inwoo.git
 ```
